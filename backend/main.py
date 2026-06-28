@@ -12,6 +12,9 @@ from langchain_classic.retrievers.multi_query import MultiQueryRetriever
 from langgraph.graph import StateGraph, START, END
 from utils.state import RAGState 
 
+import logging
+logging.basicConfig(level=logging.INFO)
+logging.getLogger("langchain.retrievers.multi_query").setLevel(logging.INFO)
 
 # ===================== SETUP =====================
 load_dotenv()
@@ -39,60 +42,156 @@ VECTOR_DB = Chroma(
 
 # ===================== NODES =====================
 
-def rag_node(state: RAGState):
-    """Load PDF, chunk it, embed it, retrieve relevant docs via MultiQueryRetriever."""
+# def rag_node(state: RAGState):
+#     """Load PDF, chunk it, embed it, retrieve relevant docs via MultiQueryRetriever."""
 
-    # 1. Load + chunk PDF
+#     # 1. Load + chunk PDF
+#     loader = PyPDFLoader(state.pdf_path)
+#     docs = loader.load()
+
+#     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
+#     chunks = splitter.split_documents(docs)
+
+#     # 2. Ingest into vector DB
+#     VECTOR_DB.add_documents(chunks)
+
+#     # 3. MultiQueryRetriever: LLM generates query variants to improve recall
+#     base_retriever = VECTOR_DB.as_retriever(search_kwargs={"k": 3})
+#     mqr = MultiQueryRetriever.from_llm(
+#         retriever=base_retriever,
+#         llm=llm
+#     )
+
+#     # 4. Retrieve — MQR internally expands the query using the LLM
+#     retrieved_docs = mqr.invoke(state.query)
+
+#     # 5. Pack context as List[dict] to match RAGState schema
+#     context = [
+#         {"content": doc.page_content, "metadata": doc.metadata}
+#         for doc in retrieved_docs
+#     ]
+
+#     return {
+#         "context": context,
+#         "expanded_query": state.query  # MQR doesn't expose the expansions; keep original
+#     }
+
+
+# def generate_node(state: RAGState):
+#     """Generate a grounded answer from compressed context."""
+
+#     query = state.expanded_query or state.query
+#     context_text = "\n\n".join(c["content"] for c in state.context) if state.context else "No context found."
+
+#     prompt = f"""You are a helpful assistant. Answer the question using ONLY the context below.
+#                     If the context does not contain enough information, say so honestly.
+
+#                     Context:
+#                     {context_text}
+
+#                     Question: {query}
+
+#                     Answer:
+#                 """
+
+#     response = llm.invoke(prompt)
+#     return {"answer": response.content.strip()}
+
+
+import hashlib
+def get_pdf_hash(pdf_path: str) -> str:
+    """Stable ID based on file content — same file = same hash, different file = different hash."""
+    with open(pdf_path, "rb") as f:
+        return hashlib.md5(f.read()).hexdigest()[:12]
+def rag_node(state: RAGState):
+
+    print("\n" + "="*60)
+    print("🔵 [RAG NODE] Starting...")
+    print(f"   Query    : {state.query}")
+    print(f"   PDF Path : {state.pdf_path}")
+
+    # 1. Load + chunk
     loader = PyPDFLoader(state.pdf_path)
     docs = loader.load()
-
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
     chunks = splitter.split_documents(docs)
+    print(f"\n📄 {len(docs)} pages → {len(chunks)} chunks")
 
-    # 2. Ingest into vector DB
-    VECTOR_DB.add_documents(chunks)
+    # 2. Hash-based dedup ingestion
+    pdf_hash = get_pdf_hash(state.pdf_path)
+    print(f"🔑 PDF hash: {pdf_hash}")
 
-    # 3. MultiQueryRetriever: LLM generates query variants to improve recall
-    base_retriever = VECTOR_DB.as_retriever(search_kwargs={"k": 3})
-    mqr = MultiQueryRetriever.from_llm(
-        retriever=base_retriever,
-        llm=llm
+    existing = VECTOR_DB.get(where={"pdf_id": pdf_hash})
+    if existing["ids"]:
+        print(f"💾 Already ingested ({len(existing['ids'])} chunks) — skipping")
+    else:
+        for chunk in chunks:
+            chunk.metadata["pdf_id"] = pdf_hash
+        VECTOR_DB.add_documents(chunks)
+        print(f"💾 Ingested {len(chunks)} chunks with pdf_id={pdf_hash}")
+
+    # 3. Resolve active pdf_ids
+    active_pdf_ids = state.pdf_ids if state.pdf_ids else [pdf_hash]
+    print(f"\n🗂️  Searching across pdf_ids: {active_pdf_ids}")
+
+    # 4. MMR retriever — relevance + diversity in one shot, no query expansion needed
+    mmr_retriever = VECTOR_DB.as_retriever(
+        search_type="mmr",                        # Maximum Marginal Relevance
+        search_kwargs={
+            "k": 5,                               # final docs to return
+            "fetch_k": 20,                        # candidate pool to pick from
+            "lambda_mult": 0.9,                   # 1.0 = pure relevance, 0.0 = pure diversity
+            "filter": {"pdf_id": {"$in": active_pdf_ids}}
+        }
     )
 
-    # 4. Retrieve — MQR internally expands the query using the LLM
-    retrieved_docs = mqr.invoke(state.query)
+    retrieved_docs = mmr_retriever.invoke(state.query)
+    print(f"\n📚 {len(retrieved_docs)} diverse docs retrieved via MMR")
 
-    # 5. Pack context as List[dict] to match RAGState schema
+    for i, doc in enumerate(retrieved_docs, 1):
+        print(f"\n   [Doc {i}] page={doc.metadata.get('page','?')} pdf_id={doc.metadata.get('pdf_id','?')}")
+        print(f"            {doc.page_content[:120].strip()}...")
+
     context = [
         {"content": doc.page_content, "metadata": doc.metadata}
         for doc in retrieved_docs
     ]
 
+    print(f"\n✅ [RAG NODE] Done.")
+    print("="*60)
+
     return {
         "context": context,
-        "expanded_query": state.query  # MQR doesn't expose the expansions; keep original
+        "pdf_ids": active_pdf_ids
     }
 
-
 def generate_node(state: RAGState):
-    """Generate a grounded answer from compressed context."""
 
-    query = state.expanded_query or state.query
-    context_text = "\n\n".join(c["content"] for c in state.context) if state.context else "No context found."
+    print("\n" + "="*60)
+    print("🟢 [GENERATE NODE] Starting...")
+    print(f"   Query          : {state.query}")
+    print(f"   Context chunks : {len(state.context)}")
+
+    context_text = "\n\n".join(c["content"] for c in state.context)
 
     prompt = f"""You are a helpful assistant. Answer the question using ONLY the context below.
-                    If the context does not contain enough information, say so honestly.
+If the context does not contain enough information, say so honestly.
 
-                    Context:
-                    {context_text}
+Context:
+{context_text}
 
-                    Question: {query}
+Question: {state.query}
 
-                    Answer:
-                """
+Answer:"""
 
+    print(f"\n🤖 Sending to Gemini ({len(prompt)} chars)...")
     response = llm.invoke(prompt)
-    return {"answer": response.content.strip()}
+    answer = response.content.strip()
+
+    print(f"\n💬 Answer ({len(answer)} chars):\n   {answer[:300]}...")
+    print("="*60)
+
+    return {"answer": answer}
 
 
 # ===================== GRAPH =====================
@@ -113,7 +212,7 @@ def build_graph():
 langgraph_app = build_graph()
 
 initial_state = {
-    "query": "What is the Treaty of Versailles?",
+    "query": "what happened to Germany after WW1",  
     "expanded_query": "",
     "answer": "",
     "pdf_ids": None,
