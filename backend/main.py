@@ -103,6 +103,7 @@ def get_pdf_hash(pdf_path: str) -> str:
     """Stable ID based on file content — same file = same hash, different file = different hash."""
     with open(pdf_path, "rb") as f:
         return hashlib.md5(f.read()).hexdigest()[:12]
+    
 def rag_node(state: RAGState):
 
     print("\n" + "="*60)
@@ -226,7 +227,7 @@ print("=" * 60)
 print("QUERY:", result["query"])
 print("=" * 60)
 print("\nANSWER:\n", result["answer"])
-print("\nCONTEXT CHUNKS USED:")
+print("\nCONTEXT CHUNKS USED  HERE:")
 for i, chunk in enumerate(result["context"], 1):
     print(f"\n[Chunk {i}]")
     print("Content:", chunk["content"][:300], "...")
