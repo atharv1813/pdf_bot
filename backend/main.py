@@ -40,6 +40,64 @@ VECTOR_DB = Chroma(
 )
 
 
+# ===================== NODES =====================
+
+# def rag_node(state: RAGState):
+#     """Load PDF, chunk it, embed it, retrieve relevant docs via MultiQueryRetriever."""
+
+#     # 1. Load + chunk PDF
+#     loader = PyPDFLoader(state.pdf_path)
+#     docs = loader.load()
+
+#     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
+#     chunks = splitter.split_documents(docs)
+
+#     # 2. Ingest into vector DB
+#     VECTOR_DB.add_documents(chunks)
+
+#     # 3. MultiQueryRetriever: LLM generates query variants to improve recall
+#     base_retriever = VECTOR_DB.as_retriever(search_kwargs={"k": 3})
+#     mqr = MultiQueryRetriever.from_llm(
+#         retriever=base_retriever,
+#         llm=llm
+#     )
+
+#     # 4. Retrieve — MQR internally expands the query using the LLM
+#     retrieved_docs = mqr.invoke(state.query)
+
+#     # 5. Pack context as List[dict] to match RAGState schema
+#     context = [
+#         {"content": doc.page_content, "metadata": doc.metadata}
+#         for doc in retrieved_docs
+#     ]
+
+#     return {
+#         "context": context,
+#         "expanded_query": state.query  # MQR doesn't expose the expansions; keep original
+#     }
+
+
+# def generate_node(state: RAGState):
+#     """Generate a grounded answer from compressed context."""
+
+#     query = state.expanded_query or state.query
+#     context_text = "\n\n".join(c["content"] for c in state.context) if state.context else "No context found."
+
+#     prompt = f"""You are a helpful assistant. Answer the question using ONLY the context below.
+#                     If the context does not contain enough information, say so honestly.
+
+#                     Context:
+#                     {context_text}
+
+#                     Question: {query}
+
+#                     Answer:
+#                 """
+
+#     response = llm.invoke(prompt)
+#     return {"answer": response.content.strip()}
+
+
 import hashlib
 def get_pdf_hash(pdf_path: str) -> str:
     """Stable ID based on file content — same file = same hash, different file = different hash."""
@@ -54,18 +112,10 @@ def rag_node(state: RAGState):
     print(f"   PDF Path : {state.pdf_path}")
 
     # 1. Load + chunk
-
-    print("\n" + "="*60)
-    print("🔵 [RAG NODE] Starting...")
-    print(f"   Query    : {state.query}")
-    print(f"   PDF Path : {state.pdf_path}")
-
-    # 1. Load + chunk
     loader = PyPDFLoader(state.pdf_path)
     docs = loader.load()
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
     chunks = splitter.split_documents(docs)
-    print(f"\n📄 {len(docs)} pages → {len(chunks)} chunks")
     print(f"\n📄 {len(docs)} pages → {len(chunks)} chunks")
 
     # 2. Hash-based dedup ingestion
@@ -91,7 +141,7 @@ def rag_node(state: RAGState):
         search_kwargs={
             "k": 5,                               # final docs to return
             "fetch_k": 20,                        # candidate pool to pick from
-            "lambda_mult": 0.7,                   # 1.0 = pure relevance, 0.0 = pure diversity
+            "lambda_mult": 0.9,                   # 1.0 = pure relevance, 0.0 = pure diversity
             "filter": {"pdf_id": {"$in": active_pdf_ids}}
         }
     )
@@ -107,7 +157,6 @@ def rag_node(state: RAGState):
         {"content": doc.page_content, "metadata": doc.metadata}
         for doc in retrieved_docs
     ]
-
 
     print(f"\n✅ [RAG NODE] Done.")
     print("="*60)
@@ -126,8 +175,6 @@ def generate_node(state: RAGState):
 
     context_text = "\n\n".join(c["content"] for c in state.context)
 
-   
-
     prompt = f"""You are a helpful assistant. Answer the question using ONLY the context below.
 If the context does not contain enough information, say so honestly.
 
@@ -140,7 +187,6 @@ Answer:"""
 
     print(f"\n🤖 Sending to Gemini ({len(prompt)} chars)...")
     response = llm.invoke(prompt)
- 
     answer = response.content.strip()
 
     print(f"\n💬 Answer ({len(answer)} chars):\n   {answer[:300]}...")
@@ -181,9 +227,8 @@ print("=" * 60)
 print("QUERY:", result["query"])
 print("=" * 60)
 print("\nANSWER:\n", result["answer"])
-print("\nCONTEXT CHUNKS USED:")
+print("\nCONTEXT CHUNKS USED  HERE:")
 for i, chunk in enumerate(result["context"], 1):
     print(f"\n[Chunk {i}]")
     print("Content:", chunk["content"][:300], "...")
     print("Metadata:", chunk["metadata"])
-
