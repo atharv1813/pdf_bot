@@ -1,0 +1,135 @@
+from dotenv import load_dotenv
+import os
+from typing import List
+
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_chroma import Chroma
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_classic.retrievers.multi_query import MultiQueryRetriever
+
+from langgraph.graph import StateGraph, START, END
+from utils.state import RAGState 
+
+
+# ===================== SETUP =====================
+load_dotenv()
+
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash",
+    google_api_key=os.getenv("GEMINI_API_KEY")
+)
+
+
+# ===================== VECTOR DB =====================
+CHROMA_DIR = "./chroma_db"
+COLLECTION_NAME = "pdf_chunks"
+
+embeddings = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
+)
+
+VECTOR_DB = Chroma(
+    collection_name=COLLECTION_NAME,
+    embedding_function=embeddings,
+    persist_directory=CHROMA_DIR
+)
+
+
+# ===================== NODES =====================
+
+def rag_node(state: RAGState):
+    """Load PDF, chunk it, embed it, retrieve relevant docs via MultiQueryRetriever."""
+
+    # 1. Load + chunk PDF
+    loader = PyPDFLoader(state.pdf_path)
+    docs = loader.load()
+
+    splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
+    chunks = splitter.split_documents(docs)
+
+    # 2. Ingest into vector DB
+    VECTOR_DB.add_documents(chunks)
+
+    # 3. MultiQueryRetriever: LLM generates query variants to improve recall
+    base_retriever = VECTOR_DB.as_retriever(search_kwargs={"k": 3})
+    mqr = MultiQueryRetriever.from_llm(
+        retriever=base_retriever,
+        llm=llm
+    )
+
+    # 4. Retrieve — MQR internally expands the query using the LLM
+    retrieved_docs = mqr.invoke(state.query)
+
+    # 5. Pack context as List[dict] to match RAGState schema
+    context = [
+        {"content": doc.page_content, "metadata": doc.metadata}
+        for doc in retrieved_docs
+    ]
+
+    return {
+        "context": context,
+        "expanded_query": state.query  # MQR doesn't expose the expansions; keep original
+    }
+
+
+def generate_node(state: RAGState):
+    """Generate a grounded answer from compressed context."""
+
+    query = state.expanded_query or state.query
+    context_text = "\n\n".join(c["content"] for c in state.context) if state.context else "No context found."
+
+    prompt = f"""You are a helpful assistant. Answer the question using ONLY the context below.
+                    If the context does not contain enough information, say so honestly.
+
+                    Context:
+                    {context_text}
+
+                    Question: {query}
+
+                    Answer:
+                """
+
+    response = llm.invoke(prompt)
+    return {"answer": response.content.strip()}
+
+
+# ===================== GRAPH =====================
+
+def build_graph():
+    graph = StateGraph(RAGState)          # schema passed here
+
+    graph.add_node("rag", rag_node)
+    graph.add_node("generate", generate_node)
+
+    graph.add_edge(START, "rag")
+    graph.add_edge("rag", "generate")
+    graph.add_edge("generate", END)
+
+    return graph.compile()
+
+
+langgraph_app = build_graph()
+
+initial_state = {
+    "query": "What is the Treaty of Versailles?",
+    "expanded_query": "",
+    "answer": "",
+    "pdf_ids": None,
+    "pdf_path": "data/ww2.pdf",   # <-- your PDF
+    "context": []
+}
+
+result = langgraph_app.invoke(initial_state)
+
+print("=" * 60)
+print("QUERY:", result["query"])
+print("=" * 60)
+print("\nANSWER:\n", result["answer"])
+print("\nCONTEXT CHUNKS USED:")
+for i, chunk in enumerate(result["context"], 1):
+    print(f"\n[Chunk {i}]")
+    print("Content:", chunk["content"][:300], "...")
+    print("Metadata:", chunk["metadata"])
+
