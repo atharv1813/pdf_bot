@@ -12,6 +12,9 @@ from langchain_classic.retrievers.multi_query import MultiQueryRetriever
 from langgraph.graph import StateGraph, START, END
 from utils.state import RAGState 
 
+import logging
+logging.basicConfig(level=logging.INFO)
+logging.getLogger("langchain.retrievers.multi_query").setLevel(logging.INFO)
 
 # ===================== SETUP =====================
 load_dotenv()
@@ -36,15 +39,21 @@ VECTOR_DB = Chroma(
     persist_directory=CHROMA_DIR
 )
 
-import hashlib
 
+import hashlib
 def get_pdf_hash(pdf_path: str) -> str:
     """Stable ID based on file content — same file = same hash, different file = different hash."""
     with open(pdf_path, "rb") as f:
         return hashlib.md5(f.read()).hexdigest()[:12]
     
-# ===================== NODES =====================
 def rag_node(state: RAGState):
+
+    print("\n" + "="*60)
+    print("🔵 [RAG NODE] Starting...")
+    print(f"   Query    : {state.query}")
+    print(f"   PDF Path : {state.pdf_path}")
+
+    # 1. Load + chunk
 
     print("\n" + "="*60)
     print("🔵 [RAG NODE] Starting...")
@@ -56,6 +65,7 @@ def rag_node(state: RAGState):
     docs = loader.load()
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
     chunks = splitter.split_documents(docs)
+    print(f"\n📄 {len(docs)} pages → {len(chunks)} chunks")
     print(f"\n📄 {len(docs)} pages → {len(chunks)} chunks")
 
     # 2. Hash-based dedup ingestion
@@ -98,6 +108,7 @@ def rag_node(state: RAGState):
         for doc in retrieved_docs
     ]
 
+
     print(f"\n✅ [RAG NODE] Done.")
     print("="*60)
 
@@ -115,6 +126,8 @@ def generate_node(state: RAGState):
 
     context_text = "\n\n".join(c["content"] for c in state.context)
 
+   
+
     prompt = f"""You are a helpful assistant. Answer the question using ONLY the context below.
 If the context does not contain enough information, say so honestly.
 
@@ -127,6 +140,7 @@ Answer:"""
 
     print(f"\n🤖 Sending to Gemini ({len(prompt)} chars)...")
     response = llm.invoke(prompt)
+ 
     answer = response.content.strip()
 
     print(f"\n💬 Answer ({len(answer)} chars):\n   {answer[:300]}...")
@@ -153,7 +167,7 @@ def build_graph():
 langgraph_app = build_graph()
 
 initial_state = {
-    "query": "What is the Treaty of Versailles?",
+    "query": "what happened to Germany after WW1",  
     "expanded_query": "",
     "answer": "",
     "pdf_ids": None,
