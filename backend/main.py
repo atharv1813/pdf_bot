@@ -74,19 +74,18 @@ def rag_node(state: RAGState):
     active_pdf_ids = state.pdf_ids if state.pdf_ids else [pdf_hash]
     print(f"\n🗂️  Searching across pdf_ids: {active_pdf_ids}")
 
-    # 4. MMR retriever — relevance + diversity in one shot, no query expansion needed
-    mmr_retriever = VECTOR_DB.as_retriever(
-        search_type="mmr",                        # Maximum Marginal Relevance
+    # 4. Standard vector similarity search
+    vector_retriever = VECTOR_DB.as_retriever(
+        search_type="similarity",                 # plain cosine/L2 similarity search
         search_kwargs={
-            "k": 5,                               # final docs to return
-            "fetch_k": 20,                        # candidate pool to pick from
-            "lambda_mult": 0.9,                   # 1.0 = pure relevance, 0.0 = pure diversity
+            "k": 5,                               # top-k most similar chunks
             "filter": {"pdf_id": {"$in": active_pdf_ids}}
         }
     )
 
-    retrieved_docs = mmr_retriever.invoke(state.query)
-    print(f"\n📚 {len(retrieved_docs)} diverse docs retrieved via MMR")
+    retrieved_docs = vector_retriever.invoke(state.query)
+    print(f"\n📚 {len(retrieved_docs)} docs retrieved via similarity search")
+
 
     for i, doc in enumerate(retrieved_docs, 1):
         print(f"\n   [Doc {i}] page={doc.metadata.get('page','?')} pdf_id={doc.metadata.get('pdf_id','?')}")
