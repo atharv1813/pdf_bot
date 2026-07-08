@@ -42,6 +42,8 @@ def get_pdf_hash(pdf_path: str) -> str:
     with open(pdf_path, "rb") as f:
         return hashlib.md5(f.read()).hexdigest()[:12]
     
+
+   
 # ===================== NODES =====================
 def rag_node(state: RAGState):
 
