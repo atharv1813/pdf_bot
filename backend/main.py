@@ -44,8 +44,73 @@ def get_pdf_hash(pdf_path: str) -> str:
     
 
    
+# # ===================== NODES =====================
+# def rag_node(state: RAGState):
+
+#     print("\n" + "="*60)
+#     print("🔵 [RAG NODE] Starting...")
+#     print(f"   Query    : {state.query}")
+#     print(f"   PDF Path : {state.pdf_path}")
+
+#     # 1. Load + chunk
+#     loader = PyPDFLoader(state.pdf_path)
+#     docs = loader.load()
+#     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
+#     chunks = splitter.split_documents(docs)
+#     print(f"\n📄 {len(docs)} pages → {len(chunks)} chunks")
+
+#     # 2. Hash-based dedup ingestion
+#     pdf_hash = get_pdf_hash(state.pdf_path)
+#     print(f"🔑 PDF hash: {pdf_hash}")
+
+#     existing = VECTOR_DB.get(where={"pdf_id": pdf_hash})
+#     if existing["ids"]:
+#         print(f"💾 Already ingested ({len(existing['ids'])} chunks) — skipping")
+#     else:
+#         for chunk in chunks:
+#             chunk.metadata["pdf_id"] = pdf_hash
+#         VECTOR_DB.add_documents(chunks)
+#         print(f"💾 Ingested {len(chunks)} chunks with pdf_id={pdf_hash}")
+
+#     # 3. Resolve active pdf_ids
+#     active_pdf_ids = state.pdf_ids if state.pdf_ids else [pdf_hash]
+#     print(f"\n🗂️  Searching across pdf_ids: {active_pdf_ids}")
+
+#     # 4. MMR retriever — relevance + diversity in one shot, no query expansion needed
+#     mmr_retriever = VECTOR_DB.as_retriever(
+#         search_type="mmr",                        # Maximum Marginal Relevance
+#         search_kwargs={
+#             "k": 5,                               # final docs to return
+#             "fetch_k": 20,                        # candidate pool to pick from
+#             "lambda_mult": 0.9,                   # 1.0 = pure relevance, 0.0 = pure diversity
+#             "filter": {"pdf_id": {"$in": active_pdf_ids}}
+#         }
+#     )
+
+#     retrieved_docs = mmr_retriever.invoke(state.query)
+#     print(f"\n📚 {len(retrieved_docs)} diverse docs retrieved via MMR")
+
+#     for i, doc in enumerate(retrieved_docs, 1):
+#         print(f"\n   [Doc {i}] page={doc.metadata.get('page','?')} pdf_id={doc.metadata.get('pdf_id','?')}")
+#         print(f"            {doc.page_content[:120].strip()}...")
+
+#     context = [
+#         {"content": doc.page_content, "metadata": doc.metadata}
+#         for doc in retrieved_docs
+#     ]
+
+#     print(f"\n✅ [RAG NODE] Done.")
+#     print("="*60)
+
+#     return {
+#         "context": context,
+#         "pdf_ids": active_pdf_ids
+#     }
+
+
+  
 # ===================== NODES =====================
-def rag_node(state: RAGState):
+def rag_node_hybrid(state: RAGState):
 
     print("\n" + "="*60)
     print("🔵 [RAG NODE] Starting...")
@@ -75,20 +140,18 @@ def rag_node(state: RAGState):
     # 3. Resolve active pdf_ids
     active_pdf_ids = state.pdf_ids if state.pdf_ids else [pdf_hash]
     print(f"\n🗂️  Searching across pdf_ids: {active_pdf_ids}")
-
-    # 4. MMR retriever — relevance + diversity in one shot, no query expansion needed
-    mmr_retriever = VECTOR_DB.as_retriever(
-        search_type="mmr",                        # Maximum Marginal Relevance
+    
+    # 4. Standard vector similarity search
+    vector_retriever = VECTOR_DB.as_retriever(
+        search_type="similarity",                 # plain cosine/L2 similarity search
         search_kwargs={
-            "k": 5,                               # final docs to return
-            "fetch_k": 20,                        # candidate pool to pick from
-            "lambda_mult": 0.9,                   # 1.0 = pure relevance, 0.0 = pure diversity
+            "k": 5,                               # top-k most similar chunks
             "filter": {"pdf_id": {"$in": active_pdf_ids}}
         }
     )
 
-    retrieved_docs = mmr_retriever.invoke(state.query)
-    print(f"\n📚 {len(retrieved_docs)} diverse docs retrieved via MMR")
+    retrieved_docs = vector_retriever.invoke(state.query)
+    print(f"\n📚 {len(retrieved_docs)} docs retrieved via similarity search")
 
     for i, doc in enumerate(retrieved_docs, 1):
         print(f"\n   [Doc {i}] page={doc.metadata.get('page','?')} pdf_id={doc.metadata.get('pdf_id','?')}")
@@ -141,7 +204,7 @@ Answer:"""
 def build_graph():
     graph = StateGraph(RAGState)          # schema passed here
 
-    graph.add_node("rag", rag_node)
+    graph.add_node("rag", rag_node_hybrid)
     graph.add_node("generate", generate_node)
 
     graph.add_edge(START, "rag")
