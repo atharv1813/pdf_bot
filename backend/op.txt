@@ -8,115 +8,16 @@
 INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
 INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
 INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+config.json: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 794/794 [00:00<00:00, 3.54MB/s]
+model.safetensors: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 90.9M/90.9M [00:14<00:00, 6.41MB/s]
+tokenizer_config.json: 1.33kB [00:00, 3.67MB/s]
+vocab.txt: 232kB [00:00, 12.4MB/s]
+tokenizer.json: 711kB [00:00, 42.4MB/s]
+special_tokens_map.json: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 132/132 [00:00<00:00, 623kB/s]
+README.md: 3.67kB [00:00, 10.3MB/s]
+INFO:sentence_transformers.cross_encoder.CrossEncoder:Use pytorch device: cpu
 
-============================================================
-🔵 [RAG NODE] Starting...
-   Query    : what happened to Germany after WW1
-   PDF Path : data/ww2.pdf
 
-📄 7 pages → 17 chunks
-🔑 PDF hash: ae0cb316180e
-💾 Ingested 17 chunks with pdf_id=ae0cb316180e
-
-🗂️  Searching across pdf_ids: ['ae0cb316180e']
-
-📚 5 diverse docs retrieved via MMR
-
-   [Doc 1] page=2 pdf_id=ae0cb316180e
-            Britain and France allowed Germany to annex areas in Czechoslovakia where German-speakers
-lived.
-Germany agreed not to i...
-
-   [Doc 2] page=5 pdf_id=ae0cb316180e
-            However, the establishment of the UN was agreed, much before the end of World War II under
-the Atlantic Charter.
-Start o...
-
-   [Doc 3] page=1 pdf_id=ae0cb316180e
-            The major causes of World War II were numerous. They include the 
-impact of the Treaty of
-Versailles following WWI, the...
-
-   [Doc 4] page=2 pdf_id=ae0cb316180e
-            Hitler promised to overturn the Versailles Treaty, restore German wealth & glory and secure
-additional Lebensraum (“livi...
-
-   [Doc 5] page=3 pdf_id=ae0cb316180e
-            Further, Russia followed Germany into Poland in September and Poland was carved up between
-the two invaders before the e...
-
-✅ [RAG NODE] Done.
-============================================================
-
-============================================================
-🟢 [GENERATE NODE] Starting...
-   Query          : what happened to Germany after WW1
-   Context chunks : 5
-
-🤖 Sending to Gemini (4999 chars)...
-
-💬 Answer (352 chars):
-   Following World War I, Germany was forced to sign the Treaty of Versailles. Under this treaty, Germany had to accept guilt for the war and to pay reparations. Germany also lost territory and was prohibited from having a large military. The humiliation faced by Germany under this treaty paved the way...
-============================================================
-============================================================
-QUERY: what happened to Germany after WW1
-============================================================
-
-ANSWER:
- Following World War I, Germany was forced to sign the Treaty of Versailles. Under this treaty, Germany had to accept guilt for the war and to pay reparations. Germany also lost territory and was prohibited from having a large military. The humiliation faced by Germany under this treaty paved the way for the spread of Ultra-Nationalism in the country.
-
-CONTEXT CHUNKS USED  HERE:
-
-[Chunk 1]
-Content: Britain and France allowed Germany to annex areas in Czechoslovakia where German-speakers
-lived.
-Germany agreed not to invade the rest of Czechoslovakia or any other country. However, in
-March 1939, Germany broke its promise and invaded the rest of Czechoslovakia.
-Even then, neither Britain nor Fran ...
-Metadata: {'pdf_id': 'ae0cb316180e', 'producer': 'Qt 4.8.6', 'source': 'data/ww2.pdf', 'total_pages': 7, 'page': 2, 'title': 'World War II', 'creationdate': '2020-07-10T12:12:34+00:00', 'page_label': '3', 'creator': 'wkhtmltopdf 0.12.2.1'}
-
-[Chunk 2]
-Content: However, the establishment of the UN was agreed, much before the end of World War II under
-the Atlantic Charter.
-Start of Cold War
-After the end of the war, a conference was held in Potsdam, Germany, to set up peace treaties.
-The countries that fought with Hitler lost territory and had to pay repara ...
-Metadata: {'page_label': '6', 'producer': 'Qt 4.8.6', 'creator': 'wkhtmltopdf 0.12.2.1', 'page': 5, 'creationdate': '2020-07-10T12:12:34+00:00', 'source': 'data/ww2.pdf', 'pdf_id': 'ae0cb316180e', 'title': 'World War II', 'total_pages': 7}
-
-[Chunk 3]
-Content: The major causes of World War II were numerous. They include the 
-impact of the Treaty of
-Versailles following WWI, the worldwide economic depression, failure of appeasement,
-the rise of militarism in Germany and Japan, and the failure of the League of Nations.
-Treaty of Versailles
-Following World W ...
-Metadata: {'page_label': '2', 'creator': 'wkhtmltopdf 0.12.2.1', 'producer': 'Qt 4.8.6', 'source': 'data/ww2.pdf', 'creationdate': '2020-07-10T12:12:34+00:00', 'page': 1, 'title': 'World War II', 'pdf_id': 'ae0cb316180e', 'total_pages': 7}
-
-[Chunk 4]
-Content: Hitler promised to overturn the Versailles Treaty, restore German wealth & glory and secure
-additional Lebensraum (“living space”) for the German people, who he contended deserve more
-as members of a superior race.
-In 1933 Hitler became the German Chancellor, and in a series of subsequent moves esta ...
-Metadata: {'creationdate': '2020-07-10T12:12:34+00:00', 'total_pages': 7, 'source': 'data/ww2.pdf', 'page_label': '3', 'creator': 'wkhtmltopdf 0.12.2.1', 'producer': 'Qt 4.8.6', 'title': 'World War II', 'page': 2, 'pdf_id': 'ae0cb316180e'}
-
-[Chunk 5]
-Content: Further, Russia followed Germany into Poland in September and Poland was carved up between
-the two invaders before the end of the year.
-Winter War 1940
-The 'winter war' between Russia and Finland concluded in March, and in the following month
-Germany invaded Denmark and Norway.
-Denmark surrendered i ...
-Metadata: {'page': 3, 'pdf_id': 'ae0cb316180e', 'source': 'data/ww2.pdf', 'producer': 'Qt 4.8.6', 'creator': 'wkhtmltopdf 0.12.2.1', 'page_label': '4', 'creationdate': '2020-07-10T12:12:34+00:00', 'total_pages': 7, 'title': 'World War II'}
-(genenv) atharv@atharv-Latitude-3450:~/GenAI/study_vedya/langgraph/projects/chat_pdf/backend$ python main.py 
-/home/atharv/GenAI/genenv/lib/python3.10/site-packages/google/api_core/_python_version_support.py:266: FutureWarning: You are using a Python version (3.10.12) which Google will stop supporting in new releases of google.api_core once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.api_core past that date.
-  warnings.warn(message, FutureWarning)
-/home/atharv/GenAI/genenv/lib/python3.10/site-packages/google/api_core/_python_version_support.py:266: FutureWarning: You are using a Python version (3.10.12) which Google will stop supporting in new releases of google.ai.generativelanguage_v1beta once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.ai.generativelanguage_v1beta past that date.
-  warnings.warn(message, FutureWarning)
-/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.
-  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
-INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
-INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
-INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
 
 ============================================================
 🔵 [RAG NODE] Starting...
@@ -129,32 +30,134 @@ INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See       
 
 🗂️  Searching across pdf_ids: ['ae0cb316180e']
 
-📚 5 diverse docs retrieved via MMR
+📖 BM25 corpus built from 17 chunks (pdf_ids=['ae0cb316180e'])
+
+📚 17 candidate docs retrieved via hybrid (BM25 + vector)
 
    [Doc 1] page=2 pdf_id=ae0cb316180e
             Britain and France allowed Germany to annex areas in Czechoslovakia where German-speakers
 lived.
 Germany agreed not to i...
 
-   [Doc 2] page=5 pdf_id=ae0cb316180e
-            However, the establishment of the UN was agreed, much before the end of World War II under
-the Atlantic Charter.
-Start o...
-
-   [Doc 3] page=1 pdf_id=ae0cb316180e
+   [Doc 2] page=1 pdf_id=ae0cb316180e
             The major causes of World War II were numerous. They include the 
 impact of the Treaty of
 Versailles following WWI, the...
+
+   [Doc 3] page=5 pdf_id=ae0cb316180e
+            However, the establishment of the UN was agreed, much before the end of World War II under
+the Atlantic Charter.
+Start o...
 
    [Doc 4] page=2 pdf_id=ae0cb316180e
             Hitler promised to overturn the Versailles Treaty, restore German wealth & glory and secure
 additional Lebensraum (“livi...
 
-   [Doc 5] page=3 pdf_id=ae0cb316180e
+   [Doc 5] page=1 pdf_id=ae0cb316180e
+            countries, they could be settled by negotiation rather than by force.
+The League of Nations was a good idea, but ultimat...
+
+   [Doc 6] page=4 pdf_id=ae0cb316180e
+            As the Russian advance on the Eastern Front gathered pace, recapturing Kharkiv and Kiev from
+Germany. Moreover, Allied b...
+
+   [Doc 7] page=3 pdf_id=ae0cb316180e
+            for German Forces.
+In France an armistice was signed with Germany, with the puppet French Vichy government.
+Having conqu...
+
+   [Doc 8] page=4 pdf_id=ae0cb316180e
+            This ensured that global conflict commenced, with Germany declaring war on the US, a few days
+later.
+Also, within a week...
+
+   [Doc 9] page=1 pdf_id=ae0cb316180e
+            postwar Germany was made to adopt a democratic constitution, as did most of the other states
+restored or created after t...
+
+   [Doc 10] page=3 pdf_id=ae0cb316180e
             Further, Russia followed Germany into Poland in September and Poland was carved up between
 the two invaders before the e...
 
+   [Doc 11] page=2 pdf_id=ae0cb316180e
+            Phoney War
+The western Europe was very quiet during the first few months of the war.
+This period of war is known as 'pho...
+
+   [Doc 12] page=5 pdf_id=ae0cb316180e
+            Aftermath of World War II
+New Superpowers
+World War II brought about changes in the status of countries and continents....
+
+   [Doc 13] page=0 pdf_id=ae0cb316180e
+            World War II
+drishtiias.com
+/printpdf/world-war-ii
+Introduction
+World War II, also called Second World War, was a confli...
+
+   [Doc 14] page=4 pdf_id=ae0cb316180e
+            dropped on the Japanese city of Hiroshima.
+Three days later another was dropped on Nagasaki.
+No country could have withs...
+
+   [Doc 15] page=3 pdf_id=ae0cb316180e
+            Operation Barbarossa
+After facing defeat in Britain, Hitler broke the 
+Ribbentrop Pact
+ and invaded Russia in 1941.
+The...
+
+   [Doc 16] page=5 pdf_id=ae0cb316180e
+            meeting at Bretton Woods, New Hampshire (July 1–22, 1944), during World War II to make
+financial arrangements for the po...
+
+   [Doc 17] page=6 pdf_id=ae0cb316180e
+            World War II had taken an immense toll on the British Empire. Britain had lost a lot of capital
+and they were looking to...
+
 ✅ [RAG NODE] Done.
+============================================================
+
+============================================================
+🟠 [RERANK NODE] Starting...
+   Query           : what happened to Germany after WW1
+   Candidates in   : 17
+Batches: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  2.28it/s]
+
+📊 Reranked scores (all candidates):
+   ✅ [ 1] score=5.7216  page=1  The major causes of World War II were numerous. They include the 
+impact of the...
+   ✅ [ 2] score=4.0387  page=2  Britain and France allowed Germany to annex areas in Czechoslovakia where German...
+   ✅ [ 3] score=3.8712  page=5  However, the establishment of the UN was agreed, much before the end of World Wa...
+   ✅ [ 4] score=3.7355  page=4  As the Russian advance on the Eastern Front gathered pace, recapturing Kharkiv a...
+   ✅ [ 5] score=3.6218  page=3  Further, Russia followed Germany into Poland in September and Poland was carved...
+      [ 6] score=3.1061  page=3  for German Forces.
+In France an armistice was signed with Germany, with the pupp...
+      [ 7] score=2.7979  page=4  This ensured that global conflict commenced, with Germany declaring war on the U...
+      [ 8] score=1.9121  page=6  World War II had taken an immense toll on the British Empire. Britain had lost a...
+      [ 9] score=1.4859  page=2  Hitler promised to overturn the Versailles Treaty, restore German wealth & glory...
+      [10] score=1.3519  page=2  Phoney War
+The western Europe was very quiet during the first few months of the...
+      [11] score=1.3220  page=0  World War II
+drishtiias.com
+/printpdf/world-war-ii
+Introduction
+World War II, al...
+      [12] score=0.5745  page=3  Operation Barbarossa
+After facing defeat in Britain, Hitler broke the 
+Ribbentro...
+      [13] score=0.1346  page=5  meeting at Bretton Woods, New Hampshire (July 1–22, 1944), during World War II t...
+      [14] score=0.0408  page=5  Aftermath of World War II
+New Superpowers
+World War II brought about changes in...
+      [15] score=-0.3309  page=1  postwar Germany was made to adopt a democratic constitution, as did most of the...
+      [16] score=-0.6558  page=1  countries, they could be settled by negotiation rather than by force.
+The League...
+      [17] score=-5.9601  page=4  dropped on the Japanese city of Hiroshima.
+Three days later another was dropped...
+
+✅ [RERANK NODE] Kept top 5 of 17
 ============================================================
 
 ============================================================
@@ -162,51 +165,57 @@ the two invaders before the e...
    Query          : what happened to Germany after WW1
    Context chunks : 5
 
-🤖 Sending to Gemini (4999 chars)...
+🤖 Sending to Gemini (5007 chars)...
 
-💬 Answer (296 chars):
-   Following World War I, Germany was forced to sign the Treaty of Versailles. Under this treaty, Germany had to accept guilt for the war, pay reparations, lost territory, and was prohibited from having a large military. This humiliation paved the way for the spread of Ultra-Nationalism in Germany....
+💬 Answer (336 chars):
+   After World War I, Germany was forced to sign the Treaty of Versailles. Under this treaty, Germany had to accept guilt for the war and pay reparations. Germany lost territory and was prohibited from having a large military. The humiliation faced by Germany under this treaty paved the way for the spr...
 ============================================================
 ============================================================
 QUERY: what happened to Germany after WW1
 ============================================================
 
 ANSWER:
- Following World War I, Germany was forced to sign the Treaty of Versailles. Under this treaty, Germany had to accept guilt for the war, pay reparations, lost territory, and was prohibited from having a large military. This humiliation paved the way for the spread of Ultra-Nationalism in Germany.
+ After World War I, Germany was forced to sign the Treaty of Versailles. Under this treaty, Germany had to accept guilt for the war and pay reparations. Germany lost territory and was prohibited from having a large military. The humiliation faced by Germany under this treaty paved the way for the spread of Ultra-Nationalism in Germany.
 
-CONTEXT CHUNKS USED  HERE:
+CONTEXT CHUNKS USED HERE:
 
 [Chunk 1]
-Content: Britain and France allowed Germany to annex areas in Czechoslovakia where German-speakers
-lived.
-Germany agreed not to invade the rest of Czechoslovakia or any other country. However, in
-March 1939, Germany broke its promise and invaded the rest of Czechoslovakia.
-Even then, neither Britain nor Fran ...
-Metadata: {'title': 'World War II', 'page': 2, 'total_pages': 7, 'pdf_id': 'ae0cb316180e', 'creator': 'wkhtmltopdf 0.12.2.1', 'producer': 'Qt 4.8.6', 'page_label': '3', 'creationdate': '2020-07-10T12:12:34+00:00', 'source': 'data/ww2.pdf'}
-
-[Chunk 2]
-Content: However, the establishment of the UN was agreed, much before the end of World War II under
-the Atlantic Charter.
-Start of Cold War
-After the end of the war, a conference was held in Potsdam, Germany, to set up peace treaties.
-The countries that fought with Hitler lost territory and had to pay repara ...
-Metadata: {'pdf_id': 'ae0cb316180e', 'page_label': '6', 'creationdate': '2020-07-10T12:12:34+00:00', 'creator': 'wkhtmltopdf 0.12.2.1', 'source': 'data/ww2.pdf', 'producer': 'Qt 4.8.6', 'page': 5, 'total_pages': 7, 'title': 'World War II'}
-
-[Chunk 3]
 Content: The major causes of World War II were numerous. They include the 
 impact of the Treaty of
 Versailles following WWI, the worldwide economic depression, failure of appeasement,
 the rise of militarism in Germany and Japan, and the failure of the League of Nations.
 Treaty of Versailles
 Following World W ...
-Metadata: {'producer': 'Qt 4.8.6', 'creator': 'wkhtmltopdf 0.12.2.1', 'total_pages': 7, 'title': 'World War II', 'creationdate': '2020-07-10T12:12:34+00:00', 'pdf_id': 'ae0cb316180e', 'page': 1, 'page_label': '2', 'source': 'data/ww2.pdf'}
+Metadata: {'page_label': '2', 'pdf_id': 'ae0cb316180e', 'source': 'data/ww2.pdf', 'producer': 'Qt 4.8.6', 'title': 'World War II', 'creator': 'wkhtmltopdf 0.12.2.1', 'creationdate': '2020-07-10T12:12:34+00:00', 'page': 1, 'total_pages': 7}
+Rerank score: 5.721641540527344
+
+[Chunk 2]
+Content: Britain and France allowed Germany to annex areas in Czechoslovakia where German-speakers
+lived.
+Germany agreed not to invade the rest of Czechoslovakia or any other country. However, in
+March 1939, Germany broke its promise and invaded the rest of Czechoslovakia.
+Even then, neither Britain nor Fran ...
+Metadata: {'producer': 'Qt 4.8.6', 'page_label': '3', 'pdf_id': 'ae0cb316180e', 'source': 'data/ww2.pdf', 'page': 2, 'title': 'World War II', 'creationdate': '2020-07-10T12:12:34+00:00', 'total_pages': 7, 'creator': 'wkhtmltopdf 0.12.2.1'}
+Rerank score: 4.038730144500732
+
+[Chunk 3]
+Content: However, the establishment of the UN was agreed, much before the end of World War II under
+the Atlantic Charter.
+Start of Cold War
+After the end of the war, a conference was held in Potsdam, Germany, to set up peace treaties.
+The countries that fought with Hitler lost territory and had to pay repara ...
+Metadata: {'title': 'World War II', 'page': 5, 'page_label': '6', 'creationdate': '2020-07-10T12:12:34+00:00', 'creator': 'wkhtmltopdf 0.12.2.1', 'total_pages': 7, 'producer': 'Qt 4.8.6', 'source': 'data/ww2.pdf', 'pdf_id': 'ae0cb316180e'}
+Rerank score: 3.871209144592285
 
 [Chunk 4]
-Content: Hitler promised to overturn the Versailles Treaty, restore German wealth & glory and secure
-additional Lebensraum (“living space”) for the German people, who he contended deserve more
-as members of a superior race.
-In 1933 Hitler became the German Chancellor, and in a series of subsequent moves esta ...
-Metadata: {'producer': 'Qt 4.8.6', 'title': 'World War II', 'pdf_id': 'ae0cb316180e', 'creationdate': '2020-07-10T12:12:34+00:00', 'page_label': '3', 'page': 2, 'source': 'data/ww2.pdf', 'total_pages': 7, 'creator': 'wkhtmltopdf 0.12.2.1'}
+Content: As the Russian advance on the Eastern Front gathered pace, recapturing Kharkiv and Kiev from
+Germany. Moreover, Allied bombers began to attack German cities in enormous daylight air
+raids.
+The Russians reached Berlin (capital of Germany) on 21 April 1945. 
+Hitler killed himself on the 30
+, two days  ...
+Metadata: {'source': 'data/ww2.pdf', 'creator': 'wkhtmltopdf 0.12.2.1', 'pdf_id': 'ae0cb316180e', 'title': 'World War II', 'total_pages': 7, 'page': 4, 'creationdate': '2020-07-10T12:12:34+00:00', 'producer': 'Qt 4.8.6', 'page_label': '5'}
+Rerank score: 3.735450267791748
 
 [Chunk 5]
 Content: Further, Russia followed Germany into Poland in September and Poland was carved up between
@@ -215,5 +224,26 @@ Winter War 1940
 The 'winter war' between Russia and Finland concluded in March, and in the following month
 Germany invaded Denmark and Norway.
 Denmark surrendered i ...
-Metadata: {'creator': 'wkhtmltopdf 0.12.2.1', 'page_label': '4', 'creationdate': '2020-07-10T12:12:34+00:00', 'title': 'World War II', 'page': 3, 'pdf_id': 'ae0cb316180e', 'source': 'data/ww2.pdf', 'total_pages': 7, 'producer': 'Qt 4.8.6'}
-(genenv) atharv@atharv-Latitude-3450:~/GenAI/study_vedya/langgraph/projects/chat_pdf/backend$ 
+Metadata: {'pdf_id': 'ae0cb316180e', 'page_label': '4', 'title': 'World War II', 'source': 'data/ww2.pdf', 'producer': 'Qt 4.8.6', 'creator': 'wkhtmltopdf 0.12.2.1', 'page': 3, 'creationdate': '2020-07-10T12:12:34+00:00', 'total_pages': 7}
+Rerank score: 3.6217799186706543
+
+
+
+
+
+
+a second run on the same PDF should give you identical results, for a few reasons:
+
+Ingestion is skipped: your dedup check (existing["ids"]) will find the 17 chunks already in Chroma under pdf_id=ae0cb316180e and skip re-embedding entirely — you'll see the same 💾 Already ingested (17 chunks) — skipping line.
+BM25 corpus is rebuilt identically: even though BM25Retriever.from_documents(...) is rebuilt fresh every call (it's in-memory, not persisted), it's built from the exact same 17 chunks pulled from Chroma each time — same corpus, same term statistics, same scores.
+Vector search is deterministic: Chroma similarity search over the same embeddings for the same query returns the same nearest neighbors, in the same order.
+Reranking is deterministic: CrossEncoder.predict() is just a forward pass through a frozen model — no sampling, no randomness — so the same (query, chunk) pairs always get the same scores.
+Generation is the only place randomness could creep in — Gemini's temperature isn't set explicitly in your ChatGoogleGenerativeAI(...) call, so it's using the model's default (usually >0). That means the retrieved/reranked context will be identical, but the final LLM-generated wording could vary slightly run to run, even though it's grounded in the same 5 chunks.
+
+So: retrieval + reranking → same every time, final answer text → could vary slightly in phrasing unless you pin temperature=0 on the LLM.
+If you want fully reproducible answers too, add:
+pythonllm = ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash",
+    google_api_key=os.getenv("GEMINI_API_KEY"),
+    temperature=0
+)
