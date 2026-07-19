@@ -1,0 +1,11 @@
+* 44ee564 (HEAD -> version2, origin/version2) added explanation.md
+* 9d829e6 added hybrid search(bm25+vectorsearch) with cross encoder re-ranking
+* 1cb9b86 first commit to version2
+* a25ccbf (origin/version1, version1) version1 is mmr  now
+* 259b3ae version1 is for mmr now and version0 for vector searhc
+* 043fa74 added readme for version1
+* 23851cd (origin/main, main) added output for version0
+* 15c798e main version0 final commit
+* ef1b5ce aded mmr final
+* 08e0a46 added to main final chnages for versio0
+* 8cf51b4 Initial commit
