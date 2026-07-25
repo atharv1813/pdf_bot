@@ -79,7 +79,7 @@ def rag_node(state: RAGState):
         search_type="similarity",                 # plain cosine/L2 similarity search
         search_kwargs={
             "k": 5,                               # top-k most similar chunks
-            "filter": {"pdf_id": {"$in": active_pdf_ids}}
+            "filter": {"pdf_id": {"$in": active_pdf_ids}} #Restricts the search to the selected PDF(s),
         }
     )
 
