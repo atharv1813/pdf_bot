@@ -10,7 +10,7 @@ The naive idea: count how many query words appear in the document. But this imme
 
 So intuitively: **a word's usefulness for distinguishing relevant from irrelevant documents is inversely related to how common that word is across the corpus.** A word that appears everywhere carries near-zero information. A word that appears rarely carries a lot of information. This is a direct echo of an idea from information theory. Shannon entropy quantifies the average information content of a random variable as $H(X) = -\sum_i p(x_i)\log p(x_i)$, where each term's contribution is built from $-\log p(x_i)$ — the "surprise" or self-information of a single outcome, higher when that outcome is rarer. IDF is essentially reinventing this per-outcome piece, $-\log(P(\text{term appears in a doc}))$, applied to a single term rather than summed over a whole distribution.
 
-This is where **IDF (Inverse Document Frequency)** comes from:
+This is where **IDF (Inverse Document Frequency)** comes from — a measure of how rare, and therefore how informative, a term is across the whole corpus:
 
 $$IDF(t) = \log\left(\frac{N}{df(t)}\right)$$
 
@@ -25,7 +25,7 @@ Walk through *why* each piece is shaped this way:
 
 If a document mentions "retrieval" once versus twenty times, the twenty-mention document is probably more centrally *about* retrieval. So we want to reward higher raw counts. That gives us **raw term frequency**: $f(t,d)$ = count of term $t$ in document $d$.
 
-But raw counts alone are unfair to short documents. A one-sentence document that mentions "vector" once is arguably *more* about vectors than a 10,000-word document that happens to mention "vector" once amid everything else. So we normalize by document length:
+But raw counts alone are unfair to short documents. A one-sentence document that mentions "vector" once is arguably *more* about vectors than a 10,000-word document that happens to mention "vector" once amid everything else. So we normalize by document length, giving **TF (Term Frequency)** — a measure of how much a given document emphasizes a term, relative to its own length:
 
 $$TF(t,d) = \frac{f(t,d)}{|d|}$$
 
