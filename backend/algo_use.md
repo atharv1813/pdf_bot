@@ -1,6 +1,6 @@
 ## TF-IDF and its role in RAG retrieval
 
-In a RAG pipeline, before your LLM ever sees a chunk of text, you need to *find* the right chunks out of potentially thousands sitting in your vector store or a keyword index. TF-IDF (and its descendant BM25) is the classic lexical/sparse retrieval method — it scores every document in the corpus against the query based on **word overlap**, weighted so that rare, discriminative words matter more than common ones. This is exactly the "BM25 side" of your ensemble retrieval (BM25 + vector search → RRF → cross-encoder rerank). Vector search catches *semantic* similarity ("car" ≈ "automobile"), while BM25/TF-IDF catches *exact term* importance — that's why combining them via RRF gives you better recall than either alone.
+In a RAG pipeline, before your LLM ever sees a chunk of text, you need to *find* the right chunks out of potentially thousands sitting in your vector store or a keyword index. TF-IDF (and its descendant BM25) is the classic lexical/sparse retrieval method — it scores every document in the corpus against the query based on **word overlap**, weighted so that rare, discriminative words matter more than common ones. 
 
 The two components from your image:
 
