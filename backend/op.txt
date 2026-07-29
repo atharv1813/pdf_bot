@@ -8,16 +8,7 @@
 INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
 INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
 INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
-config.json: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 794/794 [00:00<00:00, 3.54MB/s]
-model.safetensors: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 90.9M/90.9M [00:14<00:00, 6.41MB/s]
-tokenizer_config.json: 1.33kB [00:00, 3.67MB/s]
-vocab.txt: 232kB [00:00, 12.4MB/s]
-tokenizer.json: 711kB [00:00, 42.4MB/s]
-special_tokens_map.json: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 132/132 [00:00<00:00, 623kB/s]
-README.md: 3.67kB [00:00, 10.3MB/s]
 INFO:sentence_transformers.cross_encoder.CrossEncoder:Use pytorch device: cpu
-
-
 
 ============================================================
 🔵 [RAG NODE] Starting...
@@ -26,7 +17,7 @@ INFO:sentence_transformers.cross_encoder.CrossEncoder:Use pytorch device: cpu
 
 📄 7 pages → 17 chunks
 🔑 PDF hash: ae0cb316180e
-💾 Already ingested (17 chunks) — skipping
+💾 Ingested 17 chunks with pdf_id=ae0cb316180e
 
 🗂️  Searching across pdf_ids: ['ae0cb316180e']
 
@@ -123,7 +114,7 @@ and they were looking to...
 🟠 [RERANK NODE] Starting...
    Query           : what happened to Germany after WW1
    Candidates in   : 17
-Batches: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  2.28it/s]
+Batches: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  1.84it/s]
 
 📊 Reranked scores (all candidates):
    ✅ [ 1] score=5.7216  page=1  The major causes of World War II were numerous. They include the 
@@ -167,15 +158,15 @@ Three days later another was dropped...
 
 🤖 Sending to Gemini (5007 chars)...
 
-💬 Answer (336 chars):
-   After World War I, Germany was forced to sign the Treaty of Versailles. Under this treaty, Germany had to accept guilt for the war and pay reparations. Germany lost territory and was prohibited from having a large military. The humiliation faced by Germany under this treaty paved the way for the spr...
+💬 Answer (292 chars):
+   After World War I, Germany was forced to sign the Treaty of Versailles. Under this treaty, Germany had to accept guilt for the war, pay reparations, lost territory, and was prohibited from having a large military. This humiliation paved the way for the spread of Ultra-Nationalism in Germany....
 ============================================================
 ============================================================
 QUERY: what happened to Germany after WW1
 ============================================================
 
 ANSWER:
- After World War I, Germany was forced to sign the Treaty of Versailles. Under this treaty, Germany had to accept guilt for the war and pay reparations. Germany lost territory and was prohibited from having a large military. The humiliation faced by Germany under this treaty paved the way for the spread of Ultra-Nationalism in Germany.
+ After World War I, Germany was forced to sign the Treaty of Versailles. Under this treaty, Germany had to accept guilt for the war, pay reparations, lost territory, and was prohibited from having a large military. This humiliation paved the way for the spread of Ultra-Nationalism in Germany.
 
 CONTEXT CHUNKS USED HERE:
 
@@ -186,7 +177,7 @@ Versailles following WWI, the worldwide economic depression, failure of appeasem
 the rise of militarism in Germany and Japan, and the failure of the League of Nations.
 Treaty of Versailles
 Following World W ...
-Metadata: {'page_label': '2', 'pdf_id': 'ae0cb316180e', 'source': 'data/ww2.pdf', 'producer': 'Qt 4.8.6', 'title': 'World War II', 'creator': 'wkhtmltopdf 0.12.2.1', 'creationdate': '2020-07-10T12:12:34+00:00', 'page': 1, 'total_pages': 7}
+Metadata: {'pdf_id': 'ae0cb316180e', 'source': 'data/ww2.pdf', 'producer': 'Qt 4.8.6', 'title': 'World War II', 'total_pages': 7, 'creator': 'wkhtmltopdf 0.12.2.1', 'creationdate': '2020-07-10T12:12:34+00:00', 'page_label': '2', 'page': 1}
 Rerank score: 5.721641540527344
 
 [Chunk 2]
@@ -195,7 +186,7 @@ lived.
 Germany agreed not to invade the rest of Czechoslovakia or any other country. However, in
 March 1939, Germany broke its promise and invaded the rest of Czechoslovakia.
 Even then, neither Britain nor Fran ...
-Metadata: {'producer': 'Qt 4.8.6', 'page_label': '3', 'pdf_id': 'ae0cb316180e', 'source': 'data/ww2.pdf', 'page': 2, 'title': 'World War II', 'creationdate': '2020-07-10T12:12:34+00:00', 'total_pages': 7, 'creator': 'wkhtmltopdf 0.12.2.1'}
+Metadata: {'page_label': '3', 'creationdate': '2020-07-10T12:12:34+00:00', 'pdf_id': 'ae0cb316180e', 'creator': 'wkhtmltopdf 0.12.2.1', 'source': 'data/ww2.pdf', 'page': 2, 'total_pages': 7, 'producer': 'Qt 4.8.6', 'title': 'World War II'}
 Rerank score: 4.038730144500732
 
 [Chunk 3]
@@ -204,7 +195,7 @@ the Atlantic Charter.
 Start of Cold War
 After the end of the war, a conference was held in Potsdam, Germany, to set up peace treaties.
 The countries that fought with Hitler lost territory and had to pay repara ...
-Metadata: {'title': 'World War II', 'page': 5, 'page_label': '6', 'creationdate': '2020-07-10T12:12:34+00:00', 'creator': 'wkhtmltopdf 0.12.2.1', 'total_pages': 7, 'producer': 'Qt 4.8.6', 'source': 'data/ww2.pdf', 'pdf_id': 'ae0cb316180e'}
+Metadata: {'title': 'World War II', 'creator': 'wkhtmltopdf 0.12.2.1', 'pdf_id': 'ae0cb316180e', 'page': 5, 'creationdate': '2020-07-10T12:12:34+00:00', 'source': 'data/ww2.pdf', 'page_label': '6', 'producer': 'Qt 4.8.6', 'total_pages': 7}
 Rerank score: 3.871209144592285
 
 [Chunk 4]
@@ -214,7 +205,7 @@ raids.
 The Russians reached Berlin (capital of Germany) on 21 April 1945. 
 Hitler killed himself on the 30
 , two days  ...
-Metadata: {'source': 'data/ww2.pdf', 'creator': 'wkhtmltopdf 0.12.2.1', 'pdf_id': 'ae0cb316180e', 'title': 'World War II', 'total_pages': 7, 'page': 4, 'creationdate': '2020-07-10T12:12:34+00:00', 'producer': 'Qt 4.8.6', 'page_label': '5'}
+Metadata: {'page_label': '5', 'creationdate': '2020-07-10T12:12:34+00:00', 'title': 'World War II', 'pdf_id': 'ae0cb316180e', 'page': 4, 'source': 'data/ww2.pdf', 'total_pages': 7, 'creator': 'wkhtmltopdf 0.12.2.1', 'producer': 'Qt 4.8.6'}
 Rerank score: 3.735450267791748
 
 [Chunk 5]
@@ -224,26 +215,5 @@ Winter War 1940
 The 'winter war' between Russia and Finland concluded in March, and in the following month
 Germany invaded Denmark and Norway.
 Denmark surrendered i ...
-Metadata: {'pdf_id': 'ae0cb316180e', 'page_label': '4', 'title': 'World War II', 'source': 'data/ww2.pdf', 'producer': 'Qt 4.8.6', 'creator': 'wkhtmltopdf 0.12.2.1', 'page': 3, 'creationdate': '2020-07-10T12:12:34+00:00', 'total_pages': 7}
+Metadata: {'page_label': '4', 'creator': 'wkhtmltopdf 0.12.2.1', 'pdf_id': 'ae0cb316180e', 'source': 'data/ww2.pdf', 'page': 3, 'producer': 'Qt 4.8.6', 'total_pages': 7, 'title': 'World War II', 'creationdate': '2020-07-10T12:12:34+00:00'}
 Rerank score: 3.6217799186706543
-
-
-
-
-
-
-a second run on the same PDF should give you identical results, for a few reasons:
-
-Ingestion is skipped: your dedup check (existing["ids"]) will find the 17 chunks already in Chroma under pdf_id=ae0cb316180e and skip re-embedding entirely — you'll see the same 💾 Already ingested (17 chunks) — skipping line.
-BM25 corpus is rebuilt identically: even though BM25Retriever.from_documents(...) is rebuilt fresh every call (it's in-memory, not persisted), it's built from the exact same 17 chunks pulled from Chroma each time — same corpus, same term statistics, same scores.
-Vector search is deterministic: Chroma similarity search over the same embeddings for the same query returns the same nearest neighbors, in the same order.
-Reranking is deterministic: CrossEncoder.predict() is just a forward pass through a frozen model — no sampling, no randomness — so the same (query, chunk) pairs always get the same scores.
-Generation is the only place randomness could creep in — Gemini's temperature isn't set explicitly in your ChatGoogleGenerativeAI(...) call, so it's using the model's default (usually >0). That means the retrieved/reranked context will be identical, but the final LLM-generated wording could vary slightly run to run, even though it's grounded in the same 5 chunks.
-
-So: retrieval + reranking → same every time, final answer text → could vary slightly in phrasing unless you pin temperature=0 on the LLM.
-If you want fully reproducible answers too, add:
-pythonllm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
-    google_api_key=os.getenv("GEMINI_API_KEY"),
-    temperature=0
-)
