@@ -1,0 +1,4 @@
+unstructured[all-docs]
+pillow
+lxml
+tiktoken

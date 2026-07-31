@@ -233,7 +233,7 @@ initial_state = {
     "expanded_query": "",
     "answer": "",
     "pdf_ids": None,
-    "pdf_path": "data/ww2.pdf",
+    "pdf_path": "data/attention_paper.pdf",
     "context": []
 }
 
