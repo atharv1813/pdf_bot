@@ -2,7 +2,7 @@
 from unstructured.partition.pdf import partition_pdf
 
 # Directory where the PDF is stored
-output_path = "../content/"
+output_path = "./content/"
 
 # Full path to the PDF file
 file_path = "/home/atharv/GenAI/study_vedya/langgraph/projects/chat_pdf/backend/data/attention_paper.pdf"
@@ -24,7 +24,7 @@ chunks = partition_pdf(
 
     # If you want images saved to a folder instead of returned in memory,
     # uncomment the line below.
-    # image_output_dir=output_path,
+    image_output_dir=output_path,
 
     # Store extracted images in the returned payload (Base64 encoded)
     # instead of saving them to disk.
