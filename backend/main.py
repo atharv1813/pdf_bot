@@ -49,6 +49,13 @@ def get_pdf_hash(pdf_path: str) -> str:
         return hashlib.md5(f.read()).hexdigest()[:12]
 
 
+
+from langchain_openai import ChatOpenAI
+from langchain_pymupdf4llm import PyMuPDF4LLMLoader
+from langchain_community.document_loaders.parsers import LLMImageBlobParser
+
+load_dotenv()
+
 # ===================== NODES =====================
 def rag_node_hybrid(state: RAGState):
     """Retrieval stage: loads/chunks PDF, ingests if new, then runs TRUE hybrid
@@ -61,8 +68,23 @@ def rag_node_hybrid(state: RAGState):
     print(f"   Query    : {state.query}")
     print(f"   PDF Path : {state.pdf_path}")
 
-    # 1. Load + chunk
-    loader = PyPDFLoader(state.pdf_path)
+    # 1. Load + chunk for multimoadl PDF(PDF with images tables etc) and ingest if new
+    llm = ChatOpenAI(
+        model="qwen/qwen3-vl-8b-instruct",
+        api_key=os.getenv("OPENROUTER_API_KEY"),
+        base_url="https://openrouter.ai/api/v1",
+    )
+
+    loader = PyMuPDF4LLMLoader(
+        state.pdf_path,
+        mode="page",
+        extract_images=True,
+        images_parser=LLMImageBlobParser(
+            model=llm,
+            prompt="Describe every figure in detail."
+        ),
+    )
+    
     docs = loader.load()
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
     chunks = splitter.split_documents(docs)
@@ -229,7 +251,7 @@ def build_graph():
 langgraph_app = build_graph()
 
 initial_state = {
-    "query": "what happened to Germany after WW1",
+    "query": "explain difference between scaled dot product attention and multi head attention using pdf images",
     "expanded_query": "",
     "answer": "",
     "pdf_ids": None,
