@@ -1,0 +1,187 @@
+The Emperor is a mind flayer who appears in Baldur's Gate 3. It[note 1] plays a key role in the main story, but its identity is intentionally obscured until later parts of the game, allowing the player to ultimately decide for themselves if they want to know more about it, and whether or not it is trustworthy.
+
+
+Contents
+Overview
+Identity
+Personal quest
+Recruitment
+Romance
+History
+Events of Baldur's Gate 3
+Act Two finale
+Act Three
+Elfsong Tavern
+The Wyrmway
+Endings
+List of interactions
+Conversation scenes
+Identity revealed
+Regarding Duke Stelmane
+On conclusion of Visit the Emperor's Old Hideout
+Romance
+Achievements
+Gallery
+Notes
+Footnotes
+References
+Overview
+Identity
+The Emperor plays a key role in the main story of Baldur's Gate 3, and as part of this role its identity and personal background are kept obfuscated for much of the game. It very carefully divulges information that it deems necessary, sometimes arguing that the player is not ready for the answer yet, or that it will reveal specific information in the future.
+
+During Acts One and Two, the Emperor only "meets" with the player as the Dream Guardian. At the beginning of Act Three, the player finally meets the Emperor face to face, an event which reveals that it is a mind flayer.
+
+Through all three Acts, the Emperor generally serves as a guide, and unlikely ally to the party, having the means to protect their minds from the influence of the Absolute, through the use of the prisoner within the Astral Prism.
+
+"Don't let my form deceive you. I am the one that's been protecting you. I am the one that came to you in your dreams. Help me.
+— The Emperor, during Act 3
+Personal quest
+After reaching the Elfsong Tavern in Act Three, the Emperor will initiate the quest Visit the Emperor's Old Hideout, in which the player can better get to know the Emperor. It discloses some of its past, during its time in the city and from before it became illithid.
+
+Recruitment
+The Emperor can appear in multiple combat encounters as a controllable ally, a neutral ally, or an enemy. It cannot, however, become a full member of the player's party or camp.
+
+Romance
+The Emperor can have a romance with the player during Act Three. See Romance.
+
+History
+Details about the Emperor's personal history are intentionally obfuscated during most of the game, but the player has the opportunity to learn more about it through conversations, interactions with other characters, reading books, and completing specific side quests.
+
+Ico knownSpells lvl 03.png Act 3 Spoilers! This section reveals details about the story of Baldur's Gate 3.
+
+
+An Adventurer, I came from Baldur's Gate, though I was never one to be constrained by circumstance. I longed for more.
+
+That longing brought me to Moonrise Towers on a search for treasure. To a colony of mind flayers who caught me and changed me.
+The Emperor was once Balduran, an adventurer who founded a coastal village called Grey Harbour. After securing enough money to fund the building of the Wall that led to Baldur's Gate being founded, he felt the call of the sea once more. On the voyage, and following a shipwreck, Balduran made his way to Moonrise Towers in search of fortune. There, he found a coven of mind flayers who infected him with an illithid tadpole. As a record of his interrogation by Enver Gortash during the planning phases of the Absolute Hoax states, he spent ten years under the thrall of the Moonrise Elder Brain.
+
+After Balduran was reborn as an illithid and broke free from the Elder Brain the Absolute, it returned to Baldur's Gate, living in the shadows and feeding on the brains of criminals. Initially struggling with its identity as a mind flayer, Balduran eventually embraced its new form.
+
+Balduran's new acceptance of its illithid form caused a wedge to form between it and its close companion, the dragon Ansur. Ansur attempted to kill Balduran as it slept, believing this would be a merciful death. The Emperor sensed the attempt, and in its struggle to protect itself from being murdered, it killed Ansur in self-defence. [1]
+
+After Ansur's death, Balduran came to be called the Emperor as it used its newfound psychic influence to rule Baldur's Gate from the shadows. For the next four centuries, it made its haven under the Elfsong tavern, keeping various sentimental knick knacks from its time as Balduran.
+
+
+I had the fortune of meeting Duke Stelmane. We formed a partnership
+During those four centuries, it also came to be associated with the Knights of the Shield, a lawful and neutral evil conglomerate of politicians and merchants manipulating events behind the scenes. Duke Stelmane was a major figure of this secret society, acting as the Emperor's envoy while it secretly kept her enthralled. [note 2]
+
+Sometime before the events of the game, Enver Gortash and the Dark Urge captured the Emperor, and brought it back under the thrall of the Moonrise Elder Brain, who was now wearing the Crown of Karsus and had become the Netherbrain masquerading as the Absolute. The Netherbrain, sought to have all three Chosen of the Dead Three killed, and specifically picked the Emperor, unbeknown to it, to lead a team of illithids on a nautiloid to search for and steal from the Githyanki the Astral Prism containing their prince, Orpheus.[2]
+Events of Baldur's Gate 3
+Act Two finale
+Main article: Help Your Protector
+On the way to Baldur's Gate, the party will be ambushed by a group of Gish'ra warriors while resting at Wyrm's Lookout. Entering the portal to the Astral Prism, the party will hear their Dream Guardian calling out for help. However, when the party reaches them, it is only to discover that the true identity of their visitor is the illithid known as the Emperor.
+
+After defending the Emperor, it will explain how it used the power of the Prism and Orpheus to protect the party from the Absolute, and recite to the party its history as an adventurer and finding freedom from the Absolute. The Emperor will offer the party an Astral Touched Tadpole, which causes the user to transform into a partial-illithid. It insists the path of the mind flayer is preferable, regardless of the player's view on them.
+
+Though this may seen contradictory to its previous promise as the Dream Guardian; to ensure the party do not become mind flayers, this promise refers to the player becoming a mind flayer unwillingly because of the Elder Brain. The Emperor is in favour of the player becoming a mind flayer of their own volition and without the influence of the Elder Brain.
+
+Act Three
+Elfsong Tavern
+Main article: Visit the Emperor's Old Hideout
+As the party nears the Elfsong, the Emperor will remark that the tavern is the location of its old hideout. The hideout proper is in the basement, past the Knights of the Shield's hideout. In it, the player will find various sentimental knick knacks from the Emperor's previous life, before becoming an illithid.
+
+Around the room is its old dog Rascal's collar, its favourite recipe (fiddlehead soup), its first adventuring sword, and part of a cutlery set from its mother; the butter knife having been lost during its last shipwreck on the Isle of Balduran, inside the wreck of the Wandering Eye ship.
+
+There are also some more illithid-adequate items such as chains for its preferred prey - allegedly criminals and lawbreakers - and jars for brains.
+
+The Wyrmway
+See also: Wyrmway and The Blade of Frontiers
+Once the party completes the Wyrmway trials, they will find the corpse of Ansur the Dragon. Interacting with his body will awaken Ansur's spirit, which briefly possesses the player in order to communicate. As Ansur's introduction concludes, he will detect the Emperor within the Astral Prism.
+
+Ico knownSpells lvl 03.png Act 3 Spoilers! This section reveals details about the story of Baldur's Gate 3.
+
+Ansur will reveal that the Emperor in fact was formerly Balduran, the founder of Baldur's Gate. Furthermore, he explains that while the Emperor initially did not want to become a mind flayer, it eventually fully embraced its new form, and its comfort with this caused a rift between the Emperor and Ansur. After "exhausting all possibility of reversing (the Emperor's) condition", Ansur was agonizing and the Emperor (as seen in the letter on Ansur's body) attempted to convince him to leave. Ansur then attempted to murder the Emperor during its sleep as a mercy killing, and the Emperor killed Ansur in self-defense.
+
+This development is somewhat foreshadowed when the player first meets The Emperor in their true form, as the song that plays during the encounter is a variation of The Elf Song, which prominently features Balduran in its lyrics.
+Endings
+Ico knownSpells lvl 03.png Act 3 Spoilers! This section reveals details about the story of Baldur's Gate 3.
+
+Let the Emperor use the Netherstones
+The Emperor unless convinced otherwise is mostly concerned with its survival and prosperity. Should the player allow it to wield the Netherstones, it will follow through on destroying the Elder Brain, at the cost of letting it "assimilate" with Orpheus.
+If the player suggests to the Emperor to take control of the Netherbrain, it will mention that the thought of becoming the Absolute did cross its mind. But unless otherwise persuaded, it will refuse, claiming that whoever becomes the leader of the Cult of the Absolute will be in an open war with the Githyanki, which is a war it is not certain it will survive. The Emperor will destroy the Netherbrain, and the parasites within its control in this ending.
+The Emperor controls the Netherbrain
+It is also possible, after suggesting it to take control of the Netherbrain, to persuade it. In this scenario, it does not free the player or their party, instead making them mindless thralls and assuming absolute control of them, continuing the Grand Design.
+Orpheus is freed
+If the player frees Orpheus, the Emperor will abandon the party, and side with the Netherbrain for the sake of its own survival, as it believes that Orpheus will kill it.
+Attack the Emperor
+The Emperor can be attacked and killed when it first reveals itself to be a mind flayer. This will result in the influence of the Netherbrain taking over control of the party, ending the game.
+List of interactions
+See Dream Guardian to read about its previous conversations with the player when it was in disguise.
+Charm Person Icon.png Romance Spoilers This section reveals details about romance and may contain mature themes.
+
+Players have a limited number of opportunities to interact with the Emperor, and as such, opportunities for conversation are much more limited compared to that of companions.
+
+Conversation scenes are available, but only occur during Act 3, after its "true" identity is revealed to the player, and all scenes require a long rest to trigger. The Emperor will occasionally also talk to the player as they walk through different locations in Baldur's Gate.
+
+Conversation scenes
+Known conversation opportunities with the Emperor currently include the following cases, but each scene appears to have multiple outcomes that affect the tone of all subsequent conversations.
+
+Depending on the player's choices, the Emperor's behaviour has many possible states. The more the player treats the Emperor like a "person", the more it will act as such, compared to other illithids. The more the player treats The Emperor like a monstrosity with hostile intent, the more it will respond to the player with threatening language and visions of it acting like a hostile illithid.
+
+Identity revealed
+During Help Your Protector at the start of Act 3, a conversation is automatically triggered when the player ventures far enough into the Astral Plane. A combat encounter in some form is inevitable from this conversation, and then another set of conversation options are available after the combat resolves. The Emperor will have nothing further to say when this conversation ends, even if the player tries to interact with it further.
+
+Regarding Duke Stelmane
+When the player first explores the Rivington area, being in proximity to certain characters or objects will "inform" the player about the recent death of Duke Belynne Stelmane. This will trigger a line of ambient commentary from The Emperor. The next time a Long Rest is triggered, the player may trigger a scene discussing The Emperor's reactions in more depth. Certain dialogue choices made during earlier conversations seem to disqualify the player from this scene. If the player does not long rest before completing the quest Visit the Emperor's Old Hideout, this scene will be skipped entirely.
+
+On conclusion of Visit the Emperor's Old Hideout
+This scene may be available to trigger (by long resting) after the player completes the quest Visit the Emperor's Old Hideout.
+
+Possible states for this scene appear to vary heavily depending on the player's choices in prior conversation scenes, with the general differentiating factor being the "attitude" the player appears to express towards illithids, and towards the Emperor, through their selected options in these prior scenes.
+
+If the player tried to kill the Emperor in Act One, by choosing the dialogue option "You do a great impression of a human. But you're not fooling me." , the Emperor offers to share memories through a vision. This vision shows Stelmane paralysed in pain, being brainwashed, and turning into the Emperor's puppet. Her face emotionless, and the Emperor puppeteering her gestures to get a sense of company. Such was its true relationship with Duke Stelmane. [note 2]
+
+The Emperor uses this memory to frighten the player. It gives them orders, and threatens to make them half-illithid even if they refuse.
+
+Romance
+In terms of game mechanics, it is technically possible to romance the Emperor. [note 3]
+
+If the player chooses to reject its advances, the Emperor's attitude in conversation will change in a way that appears to be reactively appropriate to the way it was treated. For example, if the option "Absolutely not, you freak!" is chosen at any opportunity, the Emperor's treatment of the player takes a much more hostile tone in all future interactions.
+
+Players have a limited number of opportunities to interact with the Emperor, and as such, opportunities for romantically-styled interactions are much more limited compared to the other primary companions.
+
+If the player visits Crèche Y'llek prior to the start of Act 3, killing the Dream Guardian will subsequently lock the player out of romancing the Emperor, and from interacting with it in general.
+
+There are many possible ways to interact with the Emperor in the available conversation scenes. It currently seems that the primary way to unlock "romantic" options is by choosing dialogue that generally treats the Emperor more like "any other person", and does not show explicit hostility towards its actions, or its illithid characteristics.
+
+The player does not need to accept the powers of the Astral-Touched Tadpole to unlock this option. The Emperor seems to take offence to destroying the tadpole, but more testing is needed to determine if this has any effect on the available scenes.
+
+The scene that occurs after completing Visit the Emperor's Old Hideout is generally regarded as the "primary" romantic scene. As long as the player is receptive to the Emperor's advances, conclusions to this scene will allow the player to engage in more intimate activities with it.
+
+Conversation options that acknowledge this romance (after the primary scene has concluded) appear to exist in a limited number of places. For example, it is possible to tell Raphael "I don't want any part of this — the Emperor is my lover." during a specific conversation, if initiated after the romance scene has happened.
+
+Engaging in the primary scene has no effect on other ongoing romances, even when romancing Lae'zel, who is generally hostile to illithids.
+
+Achievements
+A-Mind Blown.jpg
+Mind Blown
+Romance the Emperor.
+
+
+Gallery
+They called me The Emperor
+They called me The Emperor
+
+
+The Emperor feeding on criminals
+The Emperor feeding on criminals
+
+
+Character portrait by Edward Vanderghote
+Character portrait by Edward Vanderghote
+
+
+The Emperor's model
+The Emperor's model
+
+Notes
+The Emperor's existence confirms the Dream Guardian as being an illithid influence, albeit in a different way.
+In Early Access, the Dream Guardian (known then as Dream Visitor) was implied to be a mental manifestation of the player's tadpole, as it eased them towards using their powers more, as well as showing them a future of domination and control.
+In the Full Release, the Emperor plays a similar role, in the sense that it also encourages the player to expand their potential through using the tadpole's power, but it is much more passive. In addition, its interests seem to be aligned against the Absolute.
+Footnotes
+ The Emperor, like other mind flayers, is addressed using the "it" pronoun. It is incidentally referred to as "he" in-game, and "they" in the game's files, possibly due to an oversight, or characters conflating its current and previous identities.
+ The Emperor's vision of its control over Belynne Stelmane is corroborated by the 5e module,  Baldur's Gate: Descent into Avernus. In it, Stelmane is described as having a secret, mental battle against a mind flayer. This mind flayer is very likely the Emperor itself, and as a result, puts its entire "alliance" with Stelmane into question. It is very possible the Emperor and Stelmane did not have a proper alliance at all, and rather, the Emperor enthralled her for its needs. Whether this was always the case, or if they had a genuine alliance beforehand, isn't fully clear.
+ This romance behaves somewhat differently from that with companions, as the Emperor generally cannot be interacted with outside of cutscenes, and romantic progression is limited to the final act of the game.
+References
+ Dialogue with Ansur.
+ The Netherbrain's dialogue to the player at the Morphic Pool.

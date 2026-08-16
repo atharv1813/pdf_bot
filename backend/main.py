@@ -1,8 +1,3 @@
-from dotenv import load_dotenv
-import os
-from typing import List
-
-from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -10,14 +5,16 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_core.documents import Document
 from langgraph.graph import StateGraph, START, END
 from utils.state import RAGState
-from sentence_transformers import CrossEncoder
 
 
-# ===================== SETUP =====================
+from dotenv import load_dotenv
 load_dotenv()
-llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
-    google_api_key=os.getenv("GEMINI_API_KEY")
+
+from langchain_aws import ChatBedrockConverse
+
+llm = ChatBedrockConverse(
+    model="amazon.nova-lite-v1:0",
+    region_name="us-east-1"
 )
 
 # ===================== VECTOR DB =====================
@@ -42,7 +39,6 @@ def get_pdf_hash(pdf_path: str) -> str:
 
 
 if __name__ == "__main__":
-    # Example usage
     pdf_path = "example.pdf"
     pdf_hash = get_pdf_hash(pdf_path)
     print(f"PDF Hash: {pdf_hash}")

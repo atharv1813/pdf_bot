@@ -1,0 +1,202 @@
+[
+    {
+        "document_index": 0,
+        "question": "What do keybullet kin drop?",
+        "answer": "Keybullet kin drop a key upon death."
+    },
+    {
+        "document_index": 0,
+        "question": "What kind of gun does the bandana bullet kin use?",
+        "answer": "The bandana bullet kin wields a machine pistol."
+    },
+    {
+        "document_index": 1,
+        "question": "What do the giants look like?",
+        "answer": "One giant is burly, grey-skinned, and 20 feet tall. It wears heavy dark iron armour covered in metal torns. It is leaning against a chamber wall, carrying what looks to be two tower shields nearly as tall as itself, both bearing\nmenacing spikes.\n\nThe other giant  stands a tall giant in more mobile iron, clutching a dangerous-looking maul the size of Yasha, also leaning and looking disinterested."
+    },
+    {
+        "document_index": 1,
+        "question": "What happens on day 2?",
+        "answer": "After a few miles of winding tunnel, you emerge in a smaller grotto of stalactites and stalagmites dripping with condensation. Unsure if the same underground river, or another water source, is nearby, you can see quite a bit of ground water does funnel down into this area.\n\nYou encounter 2 ropers seeking the next burrowed entrance left by the Kryn."
+    },
+    {
+        "document_index": 2,
+        "question": "What were the requirements for the project?",
+        "answer": "The tool had the following requirements:\n- Chatbot that you can ask questions and get answers in response (conversational memory is not required).\n- Information is taken from an unstructured text file.\n- It must be able to tell me if it doesn\u2019t know the answer to my question.\n- Fast.\n- Efficient enough to run on my MacBook with other programs without any performance issues.\n- Locally run for privacy and to ensure it will always be free, runnable, and consistent."
+    },
+    {
+        "document_index": 2,
+        "question": "What data did was used to test the prototype?",
+        "answer": "Grace Hopper's Wikipedia page and Alan Turing's Wikipedia page were used to test the prototype."
+    },
+    {
+        "document_index": 3,
+        "question": "How do the data storage options compare?",
+        "answer": "For fast start: use SQLite3 and ChromaDB (File-based) out-of-the-box - no install required.\nFor speed + scale: use MongoDB (text collection) and Milvus (vector db) - install with Docker Compose\nFor postgres: use Postgres for both text collection and vector DB - install with Docker Compose\nFor mix-and-match: LLMWare supports 3 text collection databases (Mongo, Postgres, SQLite) and 10 vector databases (Milvus, PGVector-Postgres, Neo4j, Redis, Mongo-Atlas, Qdrant, Faiss, LanceDB, ChromaDB and Pinecone)."
+    },
+    {
+        "document_index": 3,
+        "question": "When was UTF-8 support added for European languages?",
+        "answer": "UTF-8 support was added for European languages on Wednesday 3rd April in the v0.2.7 Update."
+    },
+    {
+        "document_index": 4,
+        "question": "How do I make a button?",
+        "answer": "import marimo as mo\n\nbutton = mo.ui.run_button()\nbutton\n\nmo.stop(not button.value, \"Click 'run' to generate a random number\")\n\nimport random\nrandom.randint(0, 1000)."
+    },
+    {
+        "document_index": 4,
+        "question": "When might I use caching?",
+        "answer": "You might use caching when, for example, your notebook computes t-SNE, UMAP, or PyMDE embeddings."
+    },
+    {
+        "document_index": 5,
+        "question": "What are the key topics of this article?",
+        "answer": "The key topics of this article are: \"why prioritizing impact matters not just for managers, but also ICs\"; \"why focusing on impact is hard\"; \"how to maximize your impact\"; and \"how to overcome common challenges in driving real impact\"."
+    },
+    {
+        "document_index": 5,
+        "question": "Do I have to do something all by myself to be acknowledged for it?",
+        "answer": "You don\u2019t have to be solely responsible for something in order to take (partial) credit for it. If you provided the analysis that resulted in a pricing change that saved the company millions, then you deserve part of the credit for that impact."
+    },
+    {
+        "document_index": 6,
+        "question": "What kinds of models would need to be officially registered?",
+        "answer": "High-risk AI systems that are deployed by public authorities or entities acting on their behalf will have to be registered in a public EU database, unless those systems are used for law enforcement and migration. The latter will have to be registered in a non-public part of the database that will be only accessible to relevant supervisory authorities."
+    },
+    {
+        "document_index": 6,
+        "question": "What kinds of AI carry \"systematic risks\"?",
+        "answer": "For now, general purpose AI models that were trained using a total computing power of more than 10^25 FLOPs are considered to carry systemic risks, given that models trained with larger compute tend to be more powerful. The AI Office (established within the Commission) may update this threshold in light of technological advances, and may furthermore in specific cases designate other models as such based on further criteria (e.g. number of users, or the degree of autonomy of the model)."
+    },
+    {
+        "document_index": 7,
+        "question": "Which quest does the emperor give the player?",
+        "answer": "The emperor gives the player the \"Visit the Emperor's Old Hideout\" quest."
+    },
+    {
+        "document_index": 7,
+        "question": "Who ambushes the party at Wyrm's lookout?",
+        "answer": "On the way to Baldur's Gate, the party will be ambushed by a group of Gish'ra warriors while resting at Wyrm's Lookout."
+    },
+    {
+        "document_index": 8,
+        "question": "What did I drink at the pintxo bars?",
+        "answer": "You drank txakoli at the pintxo bars."
+    },
+    {
+        "document_index": 8,
+        "question": "Which part of the trip did I like the most?",
+        "answer": "Your favourite part of the trip was your four days on the Camino."
+    },
+    {
+        "document_index": 9,
+        "question": "What is the meaning behind the infrared scenes?",
+        "answer": "The significance of the use of infrared might be in stating how the Polish family cannot be themselves as soon as they step out of their house or into the open balcony as well. Although the girl takes on the dangerous responsibility of helping the prisoners, she still cannot express her true self in public, leading to her being shown in infrared. Another perspective is that the girl and her mother truly stand out in this horrific world solely because of their generous actions. Therefore, in a film like this, in which the Nazis and the enablers are the \u201cnormal\u201d people, anyone with any sense of humanity has to be visually differentiated from the Hoss family members."
+    },
+    {
+        "document_index": 9,
+        "question": "How do the people who commit atrocious acts and those that are complicit in these acts differ?",
+        "answer": "The Zone of Interest does not really differentiate between evil-doers and those supporting such evil."
+    },
+    {
+        "document_index": 10,
+        "question": "What is the policy on Tai Chi?",
+        "answer": "In order to calm down the passions and stresses currently exhibited in Parliament, the Loony Party would make all M.P\u2019s have half an hours compulsory Tai chi everyday."
+    },
+    {
+        "document_index": 10,
+        "question": "What is the proposed change for the British museum",
+        "answer": "The British Museum should have a Daddy\u2019s section alongside the current Mummy exhibition."
+    },
+    {
+        "document_index": 11,
+        "question": "How much faster is the Tesla A100 compared to the Tesla V100?",
+        "answer": "When measured on the SE-ResNeXt101 deep learning architecture, the Tesla A100 was 1.43x faster than the Tesla V100. When measured on the Masked-R-CNN deep learning architecture the Tesla A100 was 1.47x faster than the Tesla V100. When measured on the Transformer (12 layer, Machine Translation, WMT14 en-de) deep learning architecture, the Tesla A100 was 1.70x faster than the Tesla V100."
+    },
+    {
+        "document_index": 11,
+        "question": "For what work did I receive criticism for my reduction of FLOPS?",
+        "answer": "You received criticism for your research on sparse network training."
+    },
+    {
+        "document_index": 12,
+        "question": "How does function exporting differ between Gleam and Python?",
+        "answer": "In Python, top level functions are exported by default. There is no notion of private module-level functions. In Gleam, functions are private by default and need the pub keyword to be public."
+    },
+    {
+        "document_index": 12,
+        "question": "What is the syntax for pipe",
+        "answer": "The operator for Pipe in Gleam is '|>'."
+    },
+    {
+        "document_index": 13,
+        "question": "Why are the top-right values in the raw attention weights set to negative infinity?",
+        "answer": "A mask of negative infinity is applied to the upper right entries of the raw attention weights to ensure they will zero out after softmax."
+    },
+    {
+        "document_index": 13,
+        "question": "How can I freeze a variable during training in MLX?",
+        "answer": "To freeze an attribute during training, you can add '_' as a prefix to the attribute name, which signals to mlx that it is not a parameter and should not be updated during training."
+    },
+    {
+        "document_index": 14,
+        "question": "How is the narrator related to Perry",
+        "answer": "Perry is the narrator's brother."
+    },
+    {
+        "document_index": 14,
+        "question": "How long has the narrator been sober for?",
+        "answer": "The author had been sober for seven hundred and thirty days."
+    },
+    {
+        "document_index": 15,
+        "question": "What is the name of the space station?",
+        "answer": "The space station is called \"Babystation Beta\"."
+    },
+    {
+        "document_index": 15,
+        "question": "What languages do the people of Pacifico del Rio speak?",
+        "answer": "All of the humans speak a single language that is similar to Cantonese."
+    },
+    {
+        "document_index": 16,
+        "question": "In which patch was pet adoption added?",
+        "answer": "The ability to adopt pets from Marnie's shop from year two was added in patch 1.6.3."
+    },
+    {
+        "document_index": 16,
+        "question": "When did mushroom trees stop dropping wood?",
+        "answer": "Mushroom trees stopped dropping wood in patch 1.4.0."
+    },
+    {
+        "document_index": 17,
+        "question": "Where was Alan Wake 2 officially announced?",
+        "answer": "Alan Wake 2 was officially announced at The Game Awards 2021."
+    },
+    {
+        "document_index": 17,
+        "question": "When is this game set?",
+        "answer": "This game is set in 2023, thirteen years after the events of Alan Wake."
+    },
+    {
+        "document_index": 18,
+        "question": "Who wrote 'Divine Rivals'?",
+        "answer": "Rebecca Ross wrote 'Divine Rivals'."
+    },
+    {
+        "document_index": 18,
+        "question": "Who was resurrected with a group of other murder victims?",
+        "answer": "Lou was resurrected along with a handful of other women murdered by a single serial killer."
+    },
+    {
+        "document_index": 19,
+        "question": "What categories does this paper split the RAG technique paradigm into?",
+        "answer": "This paper organizes the RAG paradigm into four categories: pre-retrieval, retrieval, post-retrieval, and generation."
+    },
+    {
+        "document_index": 19,
+        "question": "In what way can including unrelated documents affect the RAG system?",
+        "answer": "Noise Power (Cuconasu et al., 2024) provide a comprehensive analysis of the impact of IR components on RAG systems, revealing that the inclusion of irrelevant documents can significantly improve accuracy."
+    }
+]
