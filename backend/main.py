@@ -1,9 +1,8 @@
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_core.documents import Document
 from langgraph.graph import StateGraph, START, END
-from utils.state import RAGState, Support_state, Usefulness_state
+from utils.state import Candidate_answer, RAGState, Support_state, Usefulness_state, Retrieved_docs
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -37,9 +36,6 @@ VECTOR_DB = Chroma(
     embedding_function=embeddings,
     persist_directory=CHROMA_DIR
 )
-
-
-
         
 # ===================== Docuemnt loader =====================
 loader = DirectoryLoader(
@@ -55,10 +51,12 @@ text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=20
 chunked_docs = text_splitter.split_documents(raw_docs)
     
     
-
-
-from typing import List, Optional, Literal
+    
+    
+    
+# ===================== GRAPH NODES and ROUTING FUNCTIONS =====================
 from pydantic import BaseModel, Field
+from typing import Literal 
 
 class Decision_retrieval(BaseModel):
     decision: bool = Field(description = "decide whether if query needs retriever or not? ")
@@ -67,16 +65,21 @@ class Decision_retrieval(BaseModel):
 def decide_retrieval_node(state: RAGState) -> RAGState:
     query = state.query
     prompt = f"""
-        Assume you are a professinal LLM redirecter and for given query you can decide whether this query needs external data before genrating an answer
+        Assume you are a professinal LLM redirecter and for given query you can decide whether this query needs external data before generating an answer
         query: {query}
     """
     decider_llm = llm.with_structured_output(Decision_retrieval)
     
-    state["query_retrieval_decision"] = decider_llm.invoke(prompt)
+    decision = decider_llm.invoke(prompt)
     
-    return state["query_retrieval_decision"]
+    return {"query_retrieval_decision" : decision}
 
-    
+def route_retrieval_decision(state:RAGState) -> Literal['retrive', 'dont_retrieve']:
+    decision = state.query_retrieval_decision
+    if (decision == 1):
+        return 'retrieve'
+    else:
+        return 'dont_retrieve'
     
 def retrieve_node(state: RAGState) -> RAGState:
     pdf_hash = get_pdf_hash(state.pdf_path)
@@ -107,8 +110,6 @@ def retrieve_node(state: RAGState) -> RAGState:
     return state 
     
     
-    
-    
 
 def generate_directly_node(state: RAGState) -> RAGState:
     query = state.query
@@ -117,9 +118,9 @@ def generate_directly_node(state: RAGState) -> RAGState:
         Given the query: {query}. Answer the following query.  
     """
     
-    state["final_answer"] = llm.invoke(prompt)
+    state.final_answer = llm.invoke(prompt)
     
-    return state["final_answer"]
+    return state
 
 class Is_relevant(BaseModel):
     is_relevant: bool = Field(description="is the docuemnt relevant to the query")
@@ -139,9 +140,16 @@ def is_relevant_node(state: RAGState) -> RAGState:
         if ans:
             state.relevant_context.append(context[i])
             
-    return state.relevant_context
+    return state
         
+def is_relevant_decision(state: RAGState) -> Literal['yes_rel', 'not_rel']:
+    decision = state.query_retrieval_decision
+    if(decision == 1):
+        return 'yes_rel'
+    else:
+        return 'not_rel'
     
+
 
 def generate_from_context_node(state: RAGState) -> RAGState:
     query = state.query
@@ -155,8 +163,7 @@ def generate_from_context_node(state: RAGState) -> RAGState:
     
     state.candidate_answer = llm.invoke(prompt)
     
-    return state.candidate_answer
-
+    return state
 
 def is_supported_node(state: RAGState) -> dict:
     query = state.query
@@ -174,11 +181,19 @@ def is_supported_node(state: RAGState) -> dict:
 
     result: Support_state = support_llm.invoke(prompt)   # ONE call, ONE object back
 
-    updated_answer = candidate_ans.model_copy(update={"support_state": result}) 
+    updated_answer = candidate_ans.model_copy(update={"Support_state": result}) 
     # because llm only return parts of level0 state key not entire so first update 
     # that key then return that key in a dict 
 
     return {"candidate_answer": updated_answer}   # return a dict, key = state field name
+
+def is_supported_decision(state:RAGState) -> Literal['fully', 'not_fully']:
+    decision = state.Support_state.is_supported
+    
+    if(decision == 'fully'):
+        return 'fully'
+    else:
+        return 'not_fully' # can be no or partially supported in both go to revise answer
 
 def revise_answer_node(state: RAGState) -> RAGState:
     query = state.query
@@ -196,10 +211,8 @@ def revise_answer_node(state: RAGState) -> RAGState:
     """
     
     state.candidate_answer = llm.invoke(prompt)
-    state.is_supported_feedback = None
-    state.is_supported = None
     
-    return {state.candidate_answer, state.is_supported_feedback, state.is_supported}
+    return state
   
     
 def is_useful_node(state: RAGState) -> RAGState:
@@ -218,10 +231,19 @@ def is_useful_node(state: RAGState) -> RAGState:
     
     usefulness_llm = llm.with_structured_output(Usefulness_state)
     
-    state["is_useful"], state["is_useful_feedback"] = usefulness_llm.invoke(prompt)
+    result: Usefulness_state = usefulness_llm.invoke(prompt)
     
-    return {state["is_useful"], state["is_useful_feedback"]}
+    updated_ans: Candidate_answer = state.candidate_answer.model_copy(update={"Usefulness_state": result})
     
+    
+    return {"Candidate_answer" : updated_ans}
+    
+def is_useful_decision(state: RAGState) -> Literal['yes_useful', 'not_useful']:
+    decision = state.Usefulness_state.is_useful
+    if(decision >= 4):
+        return 'yes_useful'
+    else:
+        return 'not_useful'
 
 def no_doc_useful_node(state: RAGState) -> RAGState:
     query = state.query
@@ -230,11 +252,13 @@ def no_doc_useful_node(state: RAGState) -> RAGState:
         we couldnt find any relevant context so can you reqrite the query or do you 
         want to call web search to get the results
     """
-    state["final_answer"] = llm.invoke(prompt)
+    state.final_answer = llm.invoke(prompt)
     
-    return state["final_answer"] 
+    return state 
 
 
+
+# ===================== FUNCTION BUILDING GRAPH AND ITS ROUTING PATTERNS =====================
     
 def build_graph():
     graph = StateGraph(RAGState)
@@ -249,28 +273,68 @@ def build_graph():
     graph.add_node("is_useful", is_useful_node)
     graph.add_node("no_doc_useful", no_doc_useful_node)
     
-    graph.add_edge(START, decide_retrieval_node)
-    graph.add_edge(is_useful_node, END)
+    graph.add_edge(START, "decide_retrieval")
+    graph.add_conditional_edges(
+        "decide_retrieval", 
+        route_retrieval_decision,
+        {
+            "retrieve": "retrieve",
+            "dont_retrieve": "generate_directly"
+        }
+        )
+    graph.add_edge("generate_directly", END)
+    graph.add_edge("retrieve", "is_relevant")
+    graph.add_conditional_edges(
+        "is_relevant",
+        is_relevant_decision,
+        {
+            "yes_rel": "generate_from_context",
+            "not_rel": "no_doc_useful"
+        }
+    )
+    graph.add_edge("generate_from_context", "is_supported")
+    graph.add_conditional_edges(
+        "is_supported",
+        is_supported_decision,
+        {
+            "fully": "is_useful",
+            "not_fully": "revise_answer"
+        }
+        )
+    graph.add_edge("revise_answer", "is_supported")
+    graph.add_conditional_edges(
+        "is_useful",
+        is_useful_decision,
+        {
+            "yes_useful": END,
+            "not_useful": "no_doc_useful"
+        }
+    )
+    graph.add_edge("is_useful", END)
     
     return graph
     
   
     
-# if __name__ == "__main__":
-#     pdf_path = "example.pdf"
-#     pdf_hash = get_pdf_hash(pdf_path)
-#     print(f"PDF Hash: {pdf_hash}")
+if __name__ == "__main__":
+    # pdf_path = "example.pdf"
+    # pdf_hash = get_pdf_hash(pdf_path)
+    # print(f"PDF Hash: {pdf_hash}")
     
-#     graph  = build_graph()
+    graph  = build_graph()
     
-#     graph = graph.compile()
+    graph = graph.compile()
     
-#     initial_state = {
-#         "query": "what is relativity? ",
-#         ""
-#     }
+    png_bytes = graph.get_graph().draw_mermaid_png()
+
+    with open("graph.png", "wb") as f:
+        f.write(png_bytes)
+    # initial_state = {
+    #     "query": "what is relativity? ",
+    #     "pdf_path" : "langgraph/projects/chat_pdf/data/documents/0.txt"
+    # }
     
-#     final_state = graph.invoke(initial_state)
+    # final_state = graph.invoke(initial_state)
     
     
     
