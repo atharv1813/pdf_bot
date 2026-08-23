@@ -1,0 +1,7 @@
+💾 Ingested 986 new chunks across 20 file(s)
+
+--- Query: What is relativity? ---
+Used retrieval: True
+Answer: You have to tell the user that for your query:What is relativity? and retriever DB. we couldnt find any relevant context so can you reqrite the query or do you want to call web search to get the results
+Support: no
+Usefulness: 1/5
