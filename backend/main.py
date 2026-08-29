@@ -392,6 +392,7 @@ if __name__ == "__main__":
         
     test_queries = [
         "What is relativity?",
+        "What do keybullet kin drop?"
     ]
 
     for q in test_queries:
