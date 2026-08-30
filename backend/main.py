@@ -14,9 +14,16 @@ from langchain_aws import ChatBedrockConverse
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 
 # ===========P LLM MODEL SETUP =====================
-llm = ChatBedrockConverse(
-    model="amazon.nova-lite-v1:0",
-    region_name="us-east-1"
+# llm = ChatBedrockConverse(
+#     model="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+#     region_name="us-east-1"
+# )
+
+from langchain_groq import ChatGroq
+
+llm = ChatGroq(
+    model="openai/gpt-oss-120b",   # good tool-calling support, solid quality
+    temperature=0
 )
 
 import hashlib 
@@ -200,7 +207,19 @@ def is_relevant_node(state: RAGState) -> dict:
     relevancy_llm = llm.with_structured_output(Is_relevant)
     relevant = []
     for doc in state.context:
-        ans = relevancy_llm.invoke(f"Query: {state.query}\nDoc: {doc.content}\nRelevant?")
+        ans = relevancy_llm.invoke(
+        f"""
+            Determine whether the document is relevant to answering the query.
+
+            Query:
+            {state.query}
+
+            Document:
+            {doc.content}
+
+            Return ONLY the structured field indicating whether the document is relevant.
+            """
+            )
         if ans.is_relevant:
             relevant.append(doc)
             

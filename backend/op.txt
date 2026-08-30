@@ -1,7 +1,56 @@
-💾 Ingested 986 new chunks across 20 file(s)
+/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.
+  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 10592.98it/s]
+/home/atharv/GenAI/study_vedya/langgraph/projects/chat_pdf/backend/eval.py:7: DeprecationWarning: Importing Faithfulness from 'ragas.metrics' is deprecated and will be removed in v1.0. Please use 'ragas.metrics.collections' instead. Example: from ragas.metrics.collections import Faithfulness
+  from ragas.metrics import (
+/home/atharv/GenAI/study_vedya/langgraph/projects/chat_pdf/backend/eval.py:7: DeprecationWarning: Importing AnswerRelevancy from 'ragas.metrics' is deprecated and will be removed in v1.0. Please use 'ragas.metrics.collections' instead. Example: from ragas.metrics.collections import AnswerRelevancy
+  from ragas.metrics import (
+/home/atharv/GenAI/study_vedya/langgraph/projects/chat_pdf/backend/eval.py:7: DeprecationWarning: Importing ContextPrecision from 'ragas.metrics' is deprecated and will be removed in v1.0. Please use 'ragas.metrics.collections' instead. Example: from ragas.metrics.collections import ContextPrecision
+  from ragas.metrics import (
+/home/atharv/GenAI/study_vedya/langgraph/projects/chat_pdf/backend/eval.py:7: DeprecationWarning: Importing ContextRecall from 'ragas.metrics' is deprecated and will be removed in v1.0. Please use 'ragas.metrics.collections' instead. Example: from ragas.metrics.collections import ContextRecall
+  from ragas.metrics import (
+💾 All files already ingested — skipping
 
---- Query: What is relativity? ---
-Used retrieval: True
-Answer: You have to tell the user that for your query:What is relativity? and retriever DB. we couldnt find any relevant context so can you reqrite the query or do you want to call web search to get the results
-Support: no
-Usefulness: 1/5
+=== Running single.json ===
+Traceback (most recent call last):
+  File "/home/atharv/GenAI/study_vedya/langgraph/projects/chat_pdf/backend/eval.py", line 112, in <module>
+    single_samples = build_eval_samples(single, has_reference=True)
+  File "/home/atharv/GenAI/study_vedya/langgraph/projects/chat_pdf/backend/eval.py", line 57, in build_eval_samples
+    sample = run_query_for_eval(item["question"])
+  File "/home/atharv/GenAI/study_vedya/langgraph/projects/chat_pdf/backend/eval.py", line 38, in run_query_for_eval
+    final_state  = compiled_graph.invoke(initial_state)
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langgraph/pregel/main.py", line 3050, in invoke
+    for chunk in self.stream(
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langgraph/pregel/main.py", line 2633, in stream
+    for _ in runner.tick(
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langgraph/pregel/_retry.py", line 42, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/home/atharv/GenAI/study_vedya/langgraph/projects/chat_pdf/backend/main.py", line 210, in is_relevant_node
+    ans = relevancy_llm.invoke(
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langchain_core/runnables/base.py", line 3442, in invoke
+    input_ = context.run(step.invoke, input_, config, **kwargs)
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langchain_core/runnables/base.py", line 6002, in invoke
+    return self.bound.invoke(
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langchain_core/language_models/chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langchain_core/language_models/chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langchain_core/language_models/chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langchain_core/language_models/chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langchain_groq/chat_models.py", line 544, in _generate
+    response = self.client.create(messages=message_dicts, **params)
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/groq/resources/chat/completions.py", line 464, in create
+    return self._post(
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/groq/_base_client.py", line 1242, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/atharv/GenAI/genenv/lib/python3.10/site-packages/groq/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.BadRequestError: Error code: 400 - {'error': {'message': "Tool call validation failed: tool call validation failed: attempted to call tool 'json' which was not in request.tools", 'type': 'invalid_request_error', 'code': 'tool_use_failed', 'failed_generation': '{"name": "json", "arguments": {\n  "is_relevant": false\n}}'}}
