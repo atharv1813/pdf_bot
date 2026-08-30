@@ -13,18 +13,18 @@ load_dotenv()
 from langchain_aws import ChatBedrockConverse
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 
-# ===========P LLM MODEL SETUP =====================
-# llm = ChatBedrockConverse(
-#     model="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
-#     region_name="us-east-1"
-# )
-
-from langchain_groq import ChatGroq
-
-llm = ChatGroq(
-    model="openai/gpt-oss-120b",   # good tool-calling support, solid quality
-    temperature=0
+#=========== LLM MODEL SETUP =====================
+llm = ChatBedrockConverse(
+    model="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    region_name="us-east-1"
 )
+
+# from langchain_groq import ChatGroq
+
+# llm = ChatGroq(
+#     model="openai/gpt-oss-120b",   # good tool-calling support, solid quality
+#     temperature=0
+# )
 
 import hashlib 
 # ===================== PER-FILE IDENTITY =====================
