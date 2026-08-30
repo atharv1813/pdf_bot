@@ -1,0 +1,16 @@
+/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.
+  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 13535.52it/s]
+💾 All files already ingested — skipping
+
+--- Query: What is relativity? ---
+Used retrieval: True
+Answer: You have to tell the user that for your query: What is relativity? and retriever DB. we couldnt find any relevant context so can you rewrite the query or do you want to call web search to get the results
+Support: no
+Usefulness: 4/5
+
+--- Query: What do keybullet kin drop? ---
+Used retrieval: True
+Answer: Keybullet Kin drop a key upon death. If they are jammed, they drop 2 keys.
+Support: fully
+Usefulness: 4/5
