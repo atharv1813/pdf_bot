@@ -1,0 +1,148 @@
+Alan Wake 2
+Why the hell did you kill Casey? What the hell were you thinking, man?
+This article or a section of this article will contain full, or partial plot spoilers of an Alan Wake game or any other piece of media related to the franchise.
+You have been warned...
+
+"This story... is a monster. And monsters wear many faces."
+― Alan Wake
+
+Alan Wake 2 (stylized as Alan Wake II) is a survival-horror video game that released on 27 October 2023 on digital storefronts for the PlayStation 5, Xbox Series X|S and PC through the Epic Games Store. It is the sequel to 2010's Alan Wake. The game had an expansion DLC released on June 8, 2024 called Night Springs and a second expansion DLC, The Lake House, is slated to be released sometime later. The game has four difficulties: Story, Normal, Hard, and Nightmare, the fourth of which is only available in "The Final Draft" mode. The Final Draft is a New Game Plus mode for Alan Wake 2, featuring new Manuscript pages, other new collectibles, a new expanded ending, and other changes to the game's story. "The Final Draft" was released on December 11, 2023.
+
+Patch notes for Alan Wake 2 updates can be found here.
+
+
+Contents
+1	Synopsis
+2	Plot
+3	Chapter List
+3.1	The Final Draft
+3.2	Expansion 1: Night Springs
+4	Gameplay
+5	Development
+5.1	Initial development
+5.2	Remedy Connected Universe
+5.3	Official development
+6	Reception
+7	Trivia
+8	Gallery
+8.1	Official Images
+8.2	Concept art
+8.3	Concept art (earlier iteration)
+9	Videos
+10	Sources
+Synopsis
+Quote1 A string of ritualistic murders threatens Bright Falls, a small-town community surrounded by Pacific Northwest wilderness. Saga Anderson, an accomplished FBI agent with a reputation for solving impossible cases arrives to investigate the murders. Anderson’s case spirals into a nightmare when she discovers pages of a horror story that starts to come true around her.
+
+Alan Wake, a lost writer trapped in a nightmare beyond our world, writes a dark story in an attempt to shape the reality around him and escape his prison. With a dark horror hunting him, Wake is trying to retain his sanity and beat the devil at his own game.
+
+Anderson and Wake are two heroes on two desperate journeys in two separate realities, connected at heart in ways neither of them can understand: reflecting each other, echoing each other, and affecting the worlds around them.
+
+Fueled by the horror story, supernatural darkness invades Bright Falls, corrupting the locals and threatening the loved ones of both Anderson and Wake. Light is their weapon—and their safe haven — against the darkness they face. Trapped in a sinister horror story where there are only victims and monsters, can they break out to be the heroes they need to be? Quote2
+― Epic Games Store page description
+Plot
+See also: Alan Wake, Alan Wake's American Nightmare, and Control
+In 2023, thirteen years after the events of Alan Wake, a naked man emerges from the dark shores of Cauldron Lake, experiencing visions of a man violently screaming before he is found and has his heart cut out by a group of men wearing deer masks.
+
+FBI Special Agent Saga Anderson and her partner Alex Casey are dispatched to the town of Bright Falls, Washington to investigate a series of ritualistic murders. They investigate the latest victim, the naked man, who is revealed as former FBI Agent Robert Nightingale. It is believed he was murdered by a group calling themselves the "Cult of the Tree". In addition to Nightingale's corpse, Saga finds a mysterious manuscript page that seems to predict the future. While in the town, they encounter Sheriff Tim Breaker, who promises to assist their investigation, as well as waitress Rose Marigold, who recognizes Saga and acts like Saga was a local of the area, despite this being her first visit to the town. She also claims Saga's daughter Logan drowned several years ago, despite being alive in Virginia with her father. At the morgue, Saga then performs an autopsy on Nightingale's corpse, but it suddenly reanimates, in search of the "Clicker", and escapes the morgue after Breaker mysteriously vanishes.
+
+As they pursue Nightingale to Cauldron Lake, Saga uses her psychic powers to investigate the scene. Casey reveals he had investigated a murder cult in New York City dedicated to bringing back the missing author Alan Wake by reenacting the murders described in his books, and that Nightingale came to Bright Falls to pursue Alan thirteen years prior. Saga encounters Nightingale, now converted into what the manuscript called a "Taken", and is forced to kill him. Saga then finds a very-shaken Alan Wake washed up on the shore of the lake and takes him into custody while also discovering evidence that an organization called the Federal Bureau of Control has a presence in Bright Falls. Saga and Casey take Alan back to the Elderwood Palace Lodge in their field office where he recounts how he escaped from a dream-like dimension called the Dark Place.
+
+While trapped in the Dark Place, Alan continually tried to find a way to escape. After appearing in a mysterious talk show called "In Between With Mr. Door", Alan found an Angel Lamp once belonging to Thomas Zane and connected to the Clicker that, in combination with his writing ability, allowed him to manipulate the Dark Place to better navigate it. Alan began navigating a dark, twisted version of New York City, following the trail of Alex Casey's investigation of the "Cult of the Word" led by Alan's evil doppelganger Scratch, who survived his erasure from existence, which brought him through the various scenes of the murders committed by the cult. Along the way, Alan also encountered Breaker, who was searching for the talk show host, Warlin Door, believing him to be responsible for trapping him in the Dark Place. Alan also occasionally made brief contact with Saga, the two of them trading vital information when they could. After believing he had killed Tom Zane, who had gone insane from his captivity inside the Dark Place, Alan was contacted by an alternative version of himself, explaining that his repeated attempts to escape the Dark Place are causing him to experience time loops.
+
+Back in the present, Alan explains that he wrote a new novel, "Return", that helped him escape the Dark Place. However, Scratch re-edited the manuscript into a horror story now taking effect in reality. Alan warns that Scratch is searching for the Clicker, which is the key he needs to free the malevolent Dark Presence completely, but also the key to permanently defeating it. When one of the manuscript pages mentioning the Cult of the Tree possesses the Clicker, Saga decides to follow its trail in Watery and realizes that "Return" has rewritten her past so that her daughter Logan drowned in an accident. Angered that Alan wrote her and Logan into his story, Saga recovers the Clicker, but before she can get it to Alan, agents from the FBC led by Agent Kiran Estevez arrive and apprehend him as well as the Cult leaders, revealed to be town entrepreneurs Ilmo and Jaakko Koskela.
+
+With no other options, Saga goes to the Valhalla Nursing Home and tracks down Odin and Tor Anderson, who know more about the Clicker. As she communicates with them and rescues Tor from a Taken Cynthia Weaver, she learns that Odin and Tor are actually her grand-uncle and grandfather, respectively, and she inherited their seer abilities, allowing her to discern the changes to reality "Return" is causing. Odin and Tor also explain that the Clicker does not do anything by itself, but instead dramatically enhances the creative power of the person using it, which is why it is important to Alan and Scratch. Saga then heads back to Bright Falls to get the Clicker to Alan, but finds out that the Alan who escaped Cauldron Lake was actually Scratch. With his identity now exposed, Scratch kills Jaakko and escapes from captivity, attempting to take the Clicker from Saga. He is temporarily thwarted and banished by the FBC.
+
+Ilmo reveals that he and Jakko formed the cult in order to scare townsfolk away from the dangers of the lake, while they perform their ritual killings on whatever Taken emerges from it, such as Nightingale. Realizing that Alan is still trapped in the Dark Place, Saga enlists the help of Casey, Odin, Tor, and Estevez to carry out a ritual to summon him to the real world. Meanwhile, Alan continues to try and find a way out of the Dark Place, eventually making his way to his old apartment. There, he discovers his wife Alice had been tormented with visions of Scratch, eventually leading to her apparent suicide. In anger, Alan kills who he believes is Scratch, but is actually a version of himself attempting to fix Scratch's ending of "Return", perpetuating the loop.
+
+Back in the real world, the summoning ritual fails to summon Alan in the current time and instead was responsible for his initial appearance earlier in the story. Both Saga and Alan come to the realization that Alan and Scratch were always the same person, with Scratch being Alan, who is possessed by the Dark Presence at the end of every loop, and thus indirectly responsible for Alice's death. Scratch arrives at the summoning site and Saga is able to banish him from Alan's body, only for Scratch to possess Casey instead, steal the Clicker, and throw Saga into the Dark Place.
+
+With Scratch in possession of the Clicker, Alan concludes that the only way to stop him now is to find the manuscript and write a completely new ending for "Return". He returns to his writing room and tries to work out how to write a perfect ending that saves everybody while staying consistent with the horror genre. Meanwhile, trapped in her mind place, Saga fights off the Dark Presence's attempt to overwhelm her with her own negative emotions and self-doubt. Now in the Dark Place proper, she reunites with Breaker, who remains there in his search for Door, heavily implied to be Saga's missing father. She then receives aid from an anonymous woman who directs her to the Clicker and a Bullet of Light. Saga takes the two items and escapes back to the real world by mimicking Door's actions on a manuscript page given to her by Breaker. With the Clicker, Alan is able to banish Scratch from Casey's body. Scratch returns to possessing Alan, and Saga shoots him with the Bullet of Light, seemingly killing him and Scratch. As Casey recovers from his possession, Saga tries to call Logan to confirm her safety, but the scene cuts short before any answer can be heard.
+
+In a post-credits scene, a recording left behind by Alice reveals that she had managed to fully regain her memories of what happened to Alan after consulting with the FBC at the Oldest House. She had tricked Alan into thinking she committed suicide by choosing to return the Dark Place as part of a plan to help him eventually escape, explaining that the only way he can escape the loops is through "ascension." Alan then revives from his gunshot wound and says, "It's not a loop, it's a spiral."
+
+In the "Final Draft" ending, Alan realizes that the Bullet of Light was meant to cleanse a part of himself the Dark Presence used to create Scratch, finally killing his doppelgänger for good while finishing the spiral and freeing Alan from the loop. Saga's call connects, confirming Logan's survival, and Alan revives soon after to the surprise of her and Casey, declaring himself the master of not just two worlds, but many.
+
+Chapter List
+The chapters/parts listed here are played in the following order:
+Prologue: The Cult
+Return 1: Invitation
+Return 2: The Heart
+Initiation 1: Late Night
+Initiation 2: Casey
+Initiation 3: Haunting
+Players have the choice to play the following of Alan and Saga's chronological chapters/parts in any order they wish:
+Return 3: Local Girl
+Return 4: No Chance
+Return 5: Old Gods
+Return 6: Scratch
+Initiation 4: We Sing
+Initiation 5: Room 665
+Initiation 6: Return
+Initiation 7: Masks
+Initiation 8: Zane's Film
+The chapters/parts listed here are past the point of no return and are played in the following order:
+Return 7: Summoning
+Initiation 9: Gone
+Return 8: Deerfest
+Return 9: Come Home
+The Final Draft
+Remedy released a New Game Plus update to the game on December 11th, 2023 named "The Final Draft".
+
+Expansion 1: Night Springs
+Set as "episodes" of the Night Springs TV show, these can be played in any order the player wishes.
+
+Number One Fan
+North Star
+Time Breaker
+Gameplay
+Similar to the original, the game is a third-person shooter, with players using light to burn away the darkness of the enemy and various weapons to fight against the dark forces as well as various cult members. Unlike the first game, which was an action-adventure game, Alan Wake 2 emphasizes survival-horror gameplay. Players have an inventory with limited space, where they will need to conserve their ammo and healing items. Health items themselves consist of med kits and painkillers, with Safe Havens only healing the player to take them out of a "critical state." Players also encounter various puzzles and locked boxes that they'll need to solve in order to obtain upgraded gear.
+
+The game features two distinct campaigns, one where you play as the titular Alan Wake, and one where you play a new protagonist, Saga Anderson. The two campaigns blend together, eventually allowing you to switch between the two at various points, using a dark puddle found in certain Break Rooms if the player wishes, with the two stories both foreshadowing and echoing each other. Eventually though, the player will be required to complete both stories before progressing past a point of no return.
+
+Saga’s story takes place in the Pacific Northwest, consisting of three hubs: the small town of Bright Falls, the stunning primordial forest surrounding the mysterious Cauldron Lake, and the run-down town of Watery. Alan's story takes place solely within the Dark Place in a warped version of New York City, with his reality shifting and looping. Similarly to the episodic nature of the original, the narrative is divided into chapters, which each having their own accompanying end song. Between chapters, players are returned to the hubs and are allowed to explore or move to the next chapter at their own pace.
+
+Whilst Saga's story involves a lot of talking to various townsfolk around the area in order to progress in her environment, Alan uses an Angel Lamp to allow him to change a scene by transferring light from one area of New York to another. Both characters have their own "mind palaces" to help progress their stories, with Alan having his Writer's Room to help change the story and Saga having her Mind Place to help her with her investigations, both of which can be accessed at the press of a button.
+
+Development
+Initial development
+Throughout 2011 and 2012, several hints had been dropped of a potential sequel to Alan Wake. These hints include when "Alan Wake 2" was shown on the Artist Althea Suarez Gata's CV, only for it to be removed on the very same day. Whilst Alan Wake's American Nightmare (though the name was unknown at the time) was revealed not long after this hiccup, fans had been trying to find more evidence of a direct sequel. In Alan Wake's American Nightmare, the credits to the game also then indicated that "Alan Wake's journey through the night will continue".
+
+Also in 2012, Sam Lake tweeted a link to a "Blogspot" called "This House of Dreams." At first, the site seemed like a mere blog for someone refurbishing a house, but one such blog talks about a dream the blogger had about a man "wearing a funny jacket with old-fashioned elbow patches" and that he wanted "to turn all the lights on." This tweet came just days before E3 2012, a gaming expo that reveals and shows brand new content of upcoming releases. People also found that the domain "alanwake2.com" was also reserved by Remedy Entertainment.
+
+At the Xbox Event on May 21, 2013, Remedy revealed Quantum Break, which would be an exclusive to the newest Xbox console at the time, Xbox One. On February 2016, it was confirmed that it would also come to PC. Fans were disappointed that Alan Wake 2 wasn't revealed, but some still supported Remedy in their new franchise. A day after the Quantum Break announcement, Sam Lake took to YouTube to talk to the fans about why Alan Wake 2 wasn't announced. He revealed that the time just wasn't right yet, but mentioned he had not given up on the franchise.
+
+In April 2015, Remedy announced that Alan Wake 2 had previously gone into the early stage of development shortly after Alan Wake was released, where a video of prototype demo was also released. While in the stage of showing this demo to publishers, Remedy went into conversations with Microsoft and the project was put on hold indefinitely while Quantum Break went into development. The sequel would have introduced new features, many of which were used in Alan Wake's American Nightmare. When asked about the possibility of an Alan Wake sequel being released in the future, Sam Lake replied, "It's hard to guess," but that he would "love to do that".
+
+Remedy Connected Universe
+Easter eggs in Remedy's 2019 game Control revealed that the game shared the same universe as Alan Wake. Two typewritten pages found within the game (and which were said to have been written by Alan Wake himself) heavily imply that almost ten years had passed since Alan's experience in Bright Falls, and that it was not an isolated event, but rather what the Federal Bureau of Control classifies as an "Altered World Event" (AWE). In this way, Control revealed additional information about the events involving the Dark Presence, especially given the nature of its own primary enemy, the Hiss.
+
+Furthermore, the second DLC for Control, AWE, was released in August 2020. While the letters can simply stand for "Altered World Event," they also resemble Alan's own name. In addition to this, the top half of the cover art depicted a flashlight-wielding person in a dark forest, while the bottom half depicted a second figure surrounded by red, which figures prominently with the Hiss in Control.
+
+In an interview given on May 14, 2020 with VG24/7, Sam Lake commented on this, explaining, "Through AWE you’ll learn more about the Bureau’s involvement, research, and interest in Alan Wake and the events that took place 10 years ago,” Lake said. “We’re really happy to give fans of the original game a bit more of Alan Wake-related content."[1] This suggested a deeper connection, possibly even a future crossover, between the events of Control and Alan Wake.
+
+The plot of AWE confirmed this, tying up some loose ends from the previous Alan Wake entries while also setting up details which would come in a sequel work. In the ending of AWE, an alarm sounds in the Federal Bureau of Control that another AWE appears to be happening again in Bright Falls. This, along with Alan's narration, seemed to indicate Remedy's next game could be a follow up to Alan Wake.
+
+Official development
+In March 2020, Remedy signed a deal with Epic Games to publish two single-player games under Epic's new publishing initiative. The games were said to be part of "the same franchise". In March 2021, Remedy CEO Tero Virtala confirmed that they were indeed working on two unannounced project with Epic Games that are part of the same franchise, one smaller scale and one AAA in size. In April 2021, GamesBeat reporter Jeff Grubb told viewers that "I've heard that Remedy is going to be making Alan Wake 2," as part of the Remedy-Epic deal. Grubb went on to say that the game "should kind of be the follow-up that fans of that series want," but that there's little extra information and no word on an official announcement.
+
+On the 7 September 2021, Alan Wake Remastered was revealed by Sam Lake, of which some people believed to have been the smaller project mentioned in March 2021, and the other AAA from the same franchise was to be Alan Wake 2. With the reveal of Alan Wake Remastered, which indicated Remedy are trying to generate interest in the franchise, a sequel was looking more and more likely.
+
+At The Game Awards 2021, Alan Wake 2 was officially announced for 2023 and would be Remedy's first survival-horror video game. Like Quantum Break and Control, it was announced that Alan Wake 2 would use the Northlight engine and be a third-person game. On a later interview with IGN, Sam Lake revealed that the game would have a Mature 17+ age rating.
+
+On May 24, 2023, Sony hosted a PlayStation Showcase livestream, in which a gameplay trailer for Alan Wake 2 was revealed, with a release date of October 17, 2023. It was revealed that players would control two protagonists within their own campaigns, Alan Wake himself and a new protagonist, Saga Anderson. At Summer Game Fest on June 8, 2023, Sam Lake shared further information on the ways Alan and Saga's campaigns would be connected to each other. Additionally, more gameplay and combat mechanics were shown.
+
+On August 17, 2023, the game was delayed by 10 days to October 27, 2023 to make way for various other games also releasing in October. At Gamescom 2023, Alan Wake's side of the game in the Dark Place was focused on in a new trailer, which was later followed by a lengthy Alan-centric gameplay featured behind closed doors.
+
+Reception
+Alan Wake 2 received near universal acclaim from video game critics. Itr received five nominations at the 2023 Golden Joystick Awards and won the Critic's Choice Award. It was nominated for eight awards at The Game Awards 2023, and won for Best Game Direction, Best Narrative, and Best Art Direction.
+
+The game went on to win more awards in Finland and around the world.
+
+Trivia
+Ilkka Villi and Matthew Porretta both reprise their role as Alan Wake in the sequel. James McCaffrey reprises his role as Alex Casey, who he previously voiced in the manuscript pages of The Sudden Stop.
+Brett Madden, who played Alice Wake in the first game, sadly passed away in September 2020. She was memorialized in the credits of the game. Alice was recast in the sequel, now played by Christina Cole.
+While the first game was an action-adventure game that implemented horror elements, Alan Wake 2 is a full-blown survival-horror game.
+Unlike the first game that was published by Microsoft Studios, the sequel is published by Epic Games Publishing.
+The game was initially a digital-only release due to various shifts towards a digital-only market. This was also done to keep the price of the game down at launch. However despite initially saying there were no plans for a physical release, in June 2024 along with a trailer and release date announcement of the first DLC it was revealed that a physical version would be released that October, a year after the digital release. Both a physical version of the digital deluxe version (inclusive of the DLC) and a limited run collector's edition were announced.
+The second entry in Remedy's Max Payne series, Max Payne 2: The Fall of Max Payne, also had two playable protagonists (Max Payne and Mona Sax).

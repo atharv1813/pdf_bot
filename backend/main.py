@@ -1,33 +1,41 @@
-from dotenv import load_dotenv
-import os
 from typing import List
 
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.documents.base import Document
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.retrievers import BM25Retriever
-from langchain_classic.retrievers import EnsembleRetriever
-from langchain_core.documents import Document
 from langgraph.graph import StateGraph, START, END
-from utils.state import RAGState
-from sentence_transformers import CrossEncoder
+from utils.state import Candidate_answer, RAGState, Support_state, Usefulness_state, Retrieved_docs
 
-import logging
-logging.basicConfig(level=logging.INFO)
-logging.getLogger("langchain.retrievers.multi_query").setLevel(logging.INFO)
-
-# ===================== SETUP =====================
+from dotenv import load_dotenv
 load_dotenv()
-llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
-    google_api_key=os.getenv("GEMINI_API_KEY")
+
+from langchain_aws import ChatBedrockConverse
+from langchain_community.document_loaders import DirectoryLoader, TextLoader
+
+#=========== LLM MODEL SETUP =====================
+llm = ChatBedrockConverse(
+    model="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    region_name="us-east-1"
 )
+
+# from langchain_groq import ChatGroq
+
+# llm = ChatGroq(
+#     model="openai/gpt-oss-120b",   # good tool-calling support, solid quality
+#     temperature=0
+# )
+
+import hashlib 
+# ===================== PER-FILE IDENTITY =====================
+def get_file_hash(content: str) -> str:
+    """Stable ID based on file content — same content = same hash."""
+    return hashlib.md5(content.encode("utf-8")).hexdigest()[:12]
+
 
 # ===================== VECTOR DB =====================
 CHROMA_DIR = "./chroma_db"
-COLLECTION_NAME = "pdf_chunks"
+COLLECTION_NAME = "file_chunked_docs"
 embeddings = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
@@ -36,216 +44,392 @@ VECTOR_DB = Chroma(
     embedding_function=embeddings,
     persist_directory=CHROMA_DIR
 )
+        
+# ===================== Docuemnt loader =====================
+loader = DirectoryLoader(
+    "../data/documents",
+    glob="*.txt",
+    loader_cls=TextLoader
+)
+raw_docs: List[Document] = loader.load()
 
-# ===================== CROSS-ENCODER (for reranking) =====================
-RERANKER = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+for doc in raw_docs:
+    doc.metadata["file_id"] = get_file_hash(doc.page_content)
+    
 
+# ===================== TEXT SPLITTER =====================
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+chunked_docs: List[Document] = text_splitter.split_documents(raw_docs)
+    
+# ===================== ONE-TIME INGESTION =====================
+# Goal: only add chunks to the vector DB for files that AREN'T already
+# stored there — so re-running this script never duplicates data.
 
-# ===================== PDF Identity maker =====================
-import hashlib
-def get_pdf_hash(pdf_path: str) -> str:
-    """Stable ID based on file content — same file = same hash, different file = different hash."""
-    with open(pdf_path, "rb") as f:
-        return hashlib.md5(f.read()).hexdigest()[:12]
+# Will hold the pdf_id of every FILE (not chunk) already present in the DB,
+# collected from a previous run. Starts empty.
+existing_ids: set = set()
 
+try:
+    # Ask Chroma for everything currently in the collection.
+    # On the very first run (empty DB), this may behave oddly depending on
+    # the Chroma version — hence wrapping it in try/except below.
+    existing = VECTOR_DB.get()
+    if existing and existing.get('metadatas'):
+        # existing["metadatas"] is a list with ONE dict per chunk already
+        # stored, e.g. [{"pdf_id": "abc123", "source": "0.txt"}, {"pdf_id": "abc123", ...}, ...]
+        #
+        # Many chunks share the same pdf_id (all chunks from the same file).
+        # Using a set comprehension automatically de-duplicates those down
+        # to one entry per FILE, not per chunk.
+        existing_ids = {
+            m["file_id"]
+            for m in existing["metadatas"]
+            if m.get("file_id") # skip any chunk missing a file ids just in case
+        }
+except Exception:
+    # If VECTOR_DB.get() fails (e.g. brand-new empty DB), fall back to
+    # treating everything as new — existing_ids just stays empty.
+    pass
 
-# ===================== NODES =====================
-def rag_node_hybrid(state: RAGState):
-    """Retrieval stage: loads/chunks PDF, ingests if new, then runs TRUE hybrid
-    search — BM25 (lexical/keyword) + vector (semantic) in parallel, fused via
-    EnsembleRetriever (Reciprocal Rank Fusion). Over-fetches so the reranker
-    downstream has a wide, diverse candidate pool to work with."""
+# chunked_docs = ALL chunks from ALL files loaded this run (every chunk
+# carries its parent file's pdf_id in its metadata, from earlier tagging).
+#
+# Keep only the chunks whose pdf_id is NOT already in existing_ids —
+# i.e., chunks belonging to files we haven't ingested before.
+# - First ever run: existing_ids is empty -> every chunk is "new".
+# - Re-run with no new files: every pdf_id is already known -> new_chunks = [].
+# - Re-run after adding file #21: only that file's chunks pass the filter.
+new_chunks: List[Document] = [
+    c for c in chunked_docs
+    if c.metadata["file_id"] not in existing_ids
+]
 
-    print("\n" + "="*60)
-    print("🔵 [RAG NODE] Starting...")
-    print(f"   Query    : {state.query}")
-    print(f"   PDF Path : {state.pdf_path}")
+if new_chunks:
+    # Only touch the DB if there's actually something new to embed/add —
+    # avoids a pointless call when nothing changed.
+    VECTOR_DB.add_documents(new_chunks)
+    
+    # Just for a friendly log message: how many DISTINCT files did these
+    # new chunks come from (de-duplicated via set(), same trick as above).
+    new_file_count = len(set(c.metadata["file_id"] for c in new_chunks))
+    print(f"💾 Ingested {len(new_chunks)} new chunks across {new_file_count} file(s)")
+else:
+    # Every file's pdf_id was already found in the DB -> nothing to add.
+    print("💾 All files already ingested — skipping")
+    
+    
+    
+    
+# ===================== GRAPH NODES and ROUTING FUNCTIONS =====================
+from pydantic import BaseModel, Field
+from typing import Literal, List
 
-    # 1. Load + chunk
-    loader = PyPDFLoader(state.pdf_path)
-    docs = loader.load()
-    splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
-    chunks = splitter.split_documents(docs)
-    print(f"\n📄 {len(docs)} pages → {len(chunks)} chunks")
+class Decision_retrieval(BaseModel):
+    decision: bool = Field(description = "decide whether if query needs retriever or not? ")
+    
 
-    # 2. Hash-based dedup ingestion
-    pdf_hash = get_pdf_hash(state.pdf_path)
-    print(f"🔑 PDF hash: {pdf_hash}")
+def decide_retrieval_node(state: RAGState) -> dict:
+    query = state.query
+    prompt = f"""
+        Assume you are a professinal LLM redirecter and for given query you can decide whether this query needs external data before generating an answer
+        query: {query}
+    """
+    decider_llm = llm.with_structured_output(Decision_retrieval)
+    
+    decision_res = decider_llm.invoke(prompt)
+    
+    return {"query_retrieval_decision" : decision_res.decision}
 
-    existing = VECTOR_DB.get(where={"pdf_id": pdf_hash})
-    if existing["ids"]:
-        print(f"💾 Already ingested ({len(existing['ids'])} chunks) — skipping")
+def route_retrieval_decision(state:RAGState) -> Literal['retrieve', 'dont_retrieve']:
+    decision = state.query_retrieval_decision
+    if (decision == True):
+        return 'retrieve'
     else:
-        for chunk in chunks:
-            chunk.metadata["pdf_id"] = pdf_hash
-        VECTOR_DB.add_documents(chunks)
-        print(f"💾 Ingested {len(chunks)} chunks with pdf_id={pdf_hash}")
+        return 'dont_retrieve'
+    
+def retrieve_node(state: RAGState) -> dict:
+    # file_hash = get_file_hash(state.file_path)
+    # existing = VECTOR_DB.get(where={"file_id": file_hash})
+    # if existing["ids"]:
+    #     print(f"💾 Already ingested ({len(existing['ids'])} chunked_docs) — skipping")
+    # else:
+    #     for chunk in chunked_docs:
+    #         chunk.metadata["file_id"] = file_hash
+    #     VECTOR_DB.add_documents(chunked_docs)
+    #     print(f"💾 Ingested {len(chunked_docs)} chunked_docs with file_id={file_hash}")
 
-    # 3. Resolve active pdf_ids
-    active_pdf_ids = state.pdf_ids if state.pdf_ids else [pdf_hash]
-    print(f"\n🗂️  Searching across pdf_ids: {active_pdf_ids}")
-
+    # 3. Resolve active file_ids
+    active_file_ids = state.file_ids if state.file_ids else None
+    
     RETRIEVAL_K = 15   # wider net; reranker will trim this down later
+    
+    search_kwargs: dict[str, int | str] = {"k": RETRIEVAL_K}
+    if active_file_ids:
+        search_kwargs["filter"] = {"file_id": {"$in": active_file_ids}}
+        
+    
 
     # 4a. Vector retriever — semantic similarity (Chroma)
     vector_retriever = VECTOR_DB.as_retriever(
         search_type="similarity",
-        search_kwargs={
-            "k": RETRIEVAL_K,
-            "filter": {"pdf_id": {"$in": active_pdf_ids}}
-        }
+        search_kwargs=search_kwargs
     )
-
-    # 4b. BM25 retriever — lexical/keyword search
-    # BM25Retriever works in-memory over a fixed doc list, so pull ALL chunks
-    # belonging to the active pdf_ids straight out of Chroma to build it from.
-    raw = VECTOR_DB.get(
-        where={"pdf_id": {"$in": active_pdf_ids}},
-        include=["documents", "metadatas"]
-    )
-    bm25_corpus = [
-        Document(page_content=text, metadata=meta)
-        for text, meta in zip(raw["documents"], raw["metadatas"])
+    retrieved = vector_retriever.invoke(state.query)
+    
+    converted: List[Retrieved_docs] = [
+    Retrieved_docs(
+            doc_id=d.metadata.get("file_id", ""),   # pull file_id out of LangChain's metadata dict
+            content=d.page_content,                 # map page_content -> your `content` field
+            metadata=d.metadata                     # carry the whole metadata dict along too
+        )
+        for d in retrieved   # loop over each LangChain Document returned by the retriever
     ]
-    print(f"\n📖 BM25 corpus built from {len(bm25_corpus)} chunks (pdf_ids={active_pdf_ids})")
+    
+    return {"context": converted}
+    
+    
 
-    bm25_retriever = BM25Retriever.from_documents(bm25_corpus)
-    bm25_retriever.k = RETRIEVAL_K
+def generate_directly_node(state: RAGState) -> dict:
+    query = state.query
+    
+    prompt = f"""
+        Given the query: {query}. Answer the following query.  
+    """
+    
+    result = llm.with_structured_output(Candidate_answer).invoke(prompt)
+    
+    return {"final_answer": result}
 
-    # 4c. Fuse both via EnsembleRetriever (Reciprocal Rank Fusion)
-    # weights: [bm25, vector] — tune these based on how much you trust
-    # keyword matches vs semantic matches for your use case.
-    hybrid_retriever = EnsembleRetriever(
-        retrievers=[bm25_retriever, vector_retriever],
-        weights=[0.4, 0.6]
-    )
+class Is_relevant(BaseModel):
+    is_relevant: bool = Field(description="is the docuemnt relevant to the query")
+    
+def is_relevant_node(state: RAGState) -> dict:
+    relevancy_llm = llm.with_structured_output(Is_relevant)
+    relevant = []
+    for doc in state.context:
+        ans = relevancy_llm.invoke(
+        f"""
+            Determine whether the document is relevant to answering the query.
 
-    retrieved_docs = hybrid_retriever.invoke(state.query)
-    print(f"\n📚 {len(retrieved_docs)} candidate docs retrieved via hybrid (BM25 + vector)")
+            Query:
+            {state.query}
 
-    for i, doc in enumerate(retrieved_docs, 1):
-        print(f"\n   [Doc {i}] page={doc.metadata.get('page','?')} pdf_id={doc.metadata.get('pdf_id','?')}")
-        print(f"            {doc.page_content[:120].strip()}...")
+            Document:
+            {doc.content}
 
-    context = [
-        {"content": doc.page_content, "metadata": doc.metadata}
-        for doc in retrieved_docs
-    ]
-
-    print(f"\n✅ [RAG NODE] Done.")
-    print("="*60)
-
-    return {
-        "context": context,
-        "pdf_ids": active_pdf_ids
-    }
-
-
-def rerank_node(state: RAGState):
-    """Reranking stage: cross-encoder scores each (query, chunk) pair jointly —
-    especially useful now, since BM25 + vector fusion can surface candidates
-    that are individually strong on one axis (keyword or semantic) but not
-    jointly relevant. The cross-encoder re-evaluates true relevance directly."""
-
-    print("\n" + "="*60)
-    print("🟠 [RERANK NODE] Starting...")
-    print(f"   Query           : {state.query}")
-    print(f"   Candidates in   : {len(state.context)}")
-
-    TOP_N = 5
-
-    if not state.context:
-        print("⚠️  No candidates to rerank — skipping")
-        return {"context": []}
-
-    pairs = [(state.query, c["content"]) for c in state.context]
-    scores = RERANKER.predict(pairs)
-
-    scored_context = [
-        {**c, "rerank_score": float(score)}
-        for c, score in zip(state.context, scores)
-    ]
-    scored_context.sort(key=lambda x: x["rerank_score"], reverse=True)
-    reranked = scored_context[:TOP_N]
-
-    print(f"\n📊 Reranked scores (all candidates):")
-    for i, c in enumerate(scored_context, 1):
-        marker = "✅" if i <= TOP_N else "  "
-        page = c["metadata"].get("page", "?")
-        print(f"   {marker} [{i:2}] score={c['rerank_score']:.4f}  page={page}  {c['content'][:80].strip()}...")
-
-    print(f"\n✅ [RERANK NODE] Kept top {len(reranked)} of {len(scored_context)}")
-    print("="*60)
-
-    return {"context": reranked}
+            Return ONLY the structured field indicating whether the document is relevant.
+            """
+            )
+        if ans.is_relevant:
+            relevant.append(doc)
+            
+    return {"relevant_context": relevant}
+        
+def is_relevant_decision(state: RAGState) -> Literal['yes_rel', 'not_rel']:
+    return 'yes_rel' if state.relevant_context else 'not_rel'
+    
 
 
-def generate_node(state: RAGState):
+def generate_from_context_node(state: RAGState) -> dict:
+    query = state.query
+    relevant_context: List[Retrieved_docs] = state.relevant_context
+    relevant_context_docs: str = "\n\n".join(d.content for d in relevant_context)
+    prompt = f"""
+        Given the user query: {query}.
+        and the retrieved context: {relevant_context_docs}
+        I want you to generate answer from the given query and context. Make sure to 
+        stick to the context to gather or interpret facts and write answer 
+    """
+    
+    result = llm.with_structured_output(Candidate_answer).invoke(prompt)
+    
+    return {"candidate_answer": result}
 
-    print("\n" + "="*60)
-    print("🟢 [GENERATE NODE] Starting...")
-    print(f"   Query          : {state.query}")
-    print(f"   Context chunks : {len(state.context)}")
+def is_supported_node(state: RAGState) -> dict:
+    query = state.query
+    candidate_ans = state.candidate_answer
+    relevant_docs = state.relevant_context
 
-    context_text = "\n\n".join(c["content"] for c in state.context)
+    support_llm = llm.with_structured_output(Support_state)
 
-    prompt = f"""You are a helpful assistant. Answer the question using ONLY the context below.
-If the context does not contain enough information, say so honestly.
+    prompt = f"""
+        You have given a query: {query}
+        and a candidate answer for the query: {candidate_ans.answer}
+        Now you have to determine whether this answer is supported by the retrieved
+        documents or not. Documents used for answer: {[d.content for d in relevant_docs]}
+    """
 
-Context:
-{context_text}
+    result: Support_state = support_llm.invoke(prompt)   # ONE call, ONE object back
 
-Question: {state.query}
+    updated_answer:Candidate_answer = candidate_ans.model_copy(update={"support_state": result}) 
+    # because llm only return parts of level0 state key not entire so first update 
+    # that key then return that key in a dict 
 
-Answer:"""
+    return {"candidate_answer": updated_answer}   # return a dict, key = state field name
 
-    print(f"\n🤖 Sending to Gemini ({len(prompt)} chars)...")
-    response = llm.invoke(prompt)
-    answer = response.content.strip()
+def is_supported_decision(state: RAGState) -> Literal['fully', 'not_fully']:
+    decision: Literal['fully'] | Literal['partially'] | Literal['no'] = state.candidate_answer.support_state.is_supported
+    if decision == 'fully':
+        return 'fully'
+    if state.retries >= 5:
+        return 'fully'   # give up retrying, proceed with best-effort answer
+    return 'not_fully' # can be no or partially supported in both go to revise answer
 
-    print(f"\n💬 Answer ({len(answer)} chars):\n   {answer[:300]}...")
-    print("="*60)
+def revise_answer_node(state: RAGState) -> dict:
+    query: str = state.query
+    candidate_answer: Candidate_answer | None = state.candidate_answer
+    feedback = state.candidate_answer.support_state.is_supported_feedback
+    docs: List[Retrieved_docs] = state.relevant_context
+    
+    prompt: str = f""""
+        You are a answer reveiwer based on the feedback of the previous answer.
+        query was: {query}.
+        previous answer was: {candidate_answer.answer}.
+        Now after judgement for above answer it wasnt matching with retrieved docs so the
+        feedback for that response is: {feedback}.
+        for reference docs cotext is: {docs}
+    """
+    
+    retries: int = state.retries + 1
+    
+    result: Candidate_answer = llm.with_structured_output(Candidate_answer).invoke(prompt)
+    
+    return {"candidate_answer" : result, "retries": retries}
+  
+    
+def is_useful_node(state: RAGState) -> dict:
+    query: str = state.query
+    final_ans: str = state.candidate_answer.answer
+    
+    prompt: str = f"""
+        You are LLM answer reviewer. You will be given query given to them LLM 
+        and its answer given by the LLM. You have provide score between 1 to 5 
+        for that answer and feedback for that answer.
+        query : {query}
+        final_ans: {final_ans}
+        
+        make sure to give both the score and the feedback
+    """
+    
+    usefulness_llm = llm.with_structured_output(Usefulness_state)
+    
+    result: Usefulness_state = usefulness_llm.invoke(prompt)
+    
+    updated_ans: Candidate_answer = state.candidate_answer.model_copy(update={"usefulness_state": result})
+    
+    
+    return {"candidate_answer" : updated_ans, "final_answer": updated_ans}
+    
+def is_useful_decision(state: RAGState) -> Literal['yes_useful', 'not_useful']:
+    decision: Literal['1'] | Literal['2'] | Literal['3'] | Literal['4'] | Literal['5'] = state.candidate_answer.usefulness_state.is_useful
+    if(int(decision) >= 4):
+        return 'yes_useful'
+    else:
+        return 'not_useful'
 
-    return {"answer": answer}
+def no_doc_useful_node(state: RAGState) -> dict:
+    query: str = state.query
+    prompt: str = f"""
+        You have to tell the user that for your query:{query} and retriever DB.
+        we couldnt find any relevant context so can you reqrite the query or do you 
+        want to call web search to get the results
+    """
+    result:Candidate_answer = llm.with_structured_output(Candidate_answer).invoke(prompt)
+    
+    return {"final_answer": result}
 
 
-# ===================== GRAPH =====================
 
+# ===================== FUNCTION BUILDING GRAPH AND ITS ROUTING PATTERNS =====================
+    
 def build_graph():
     graph = StateGraph(RAGState)
+    
+    graph.add_node("decide_retrieval", decide_retrieval_node)
+    graph.add_node("retrieve", retrieve_node)
+    graph.add_node("generate_directly", generate_directly_node)
+    graph.add_node("is_relevant", is_relevant_node)
+    graph.add_node("generate_from_context", generate_from_context_node)
+    graph.add_node("is_supported", is_supported_node)
+    graph.add_node("revise_answer", revise_answer_node)
+    graph.add_node("is_useful", is_useful_node)
+    graph.add_node("no_doc_useful", no_doc_useful_node)
+    
+    graph.add_edge(START, "decide_retrieval")
+    graph.add_conditional_edges(
+        "decide_retrieval", 
+        route_retrieval_decision,
+        {
+            "retrieve": "retrieve",
+            "dont_retrieve": "generate_directly"
+        }
+        )
+    graph.add_edge("generate_directly", END)
+    graph.add_edge("retrieve", "is_relevant")
+    graph.add_conditional_edges(
+        "is_relevant",
+        is_relevant_decision,
+        {
+            "yes_rel": "generate_from_context",
+            "not_rel": "no_doc_useful"
+        }
+    )
+    graph.add_edge("generate_from_context", "is_supported")
+    graph.add_conditional_edges(
+        "is_supported",
+        is_supported_decision,
+        {
+            "fully": "is_useful",
+            "not_fully": "revise_answer"
+        }
+        )
+    graph.add_edge("revise_answer", "is_supported")
+    graph.add_conditional_edges(
+        "is_useful",
+        is_useful_decision,
+        {
+            "yes_useful": END,
+            "not_useful": "no_doc_useful"
+        }
+    )
+    graph.add_edge("no_doc_useful", END)
+    
+    return graph
+    
+  
+    
+if __name__ == "__main__":
+    
+    graph  = build_graph()
+    
+    compiled_graph = graph.compile()
+    
+    png_bytes = compiled_graph.get_graph().draw_mermaid_png()
 
-    graph.add_node("rag", rag_node_hybrid)
-    graph.add_node("rerank", rerank_node)
-    graph.add_node("generate", generate_node)
+    with open("graph.png", "wb") as f:
+        f.write(png_bytes)
+        
+    test_queries = [
+        "What is relativity?",
+        "What do keybullet kin drop?"
+    ]
 
-    graph.add_edge(START, "rag")
-    graph.add_edge("rag", "rerank")
-    graph.add_edge("rerank", "generate")
-    graph.add_edge("generate", END)
+    for q in test_queries:
+        print(f"\n--- Query: {q} ---")
+        initial_state = RAGState(query=q)
+        result = compiled_graph.invoke(initial_state)
 
-    return graph.compile()
+        print(f"Used retrieval: {result['query_retrieval_decision']}")
 
-
-langgraph_app = build_graph()
-
-initial_state = {
-    "query": "what happened to Germany after WW1",
-    "expanded_query": "",
-    "answer": "",
-    "pdf_ids": None,
-    "pdf_path": "data/ww2.pdf",
-    "context": []
-}
-
-result = langgraph_app.invoke(initial_state)
-
-print("=" * 60)
-print("QUERY:", result["query"])
-print("=" * 60)
-print("\nANSWER:\n", result["answer"])
-print("\nCONTEXT CHUNKS USED HERE:")
-for i, chunk in enumerate(result["context"], 1):
-    print(f"\n[Chunk {i}]")
-    print("Content:", chunk["content"][:300], "...")
-    print("Metadata:", chunk["metadata"])
-    print("Rerank score:", chunk.get("rerank_score"))
+        final_answer = result.get("final_answer")
+        if final_answer:
+            print(f"Answer: {final_answer.answer}")
+            if final_answer.support_state:
+                print(f"Support: {final_answer.support_state.is_supported}")
+            if final_answer.usefulness_state:
+                print(f"Usefulness: {final_answer.usefulness_state.is_useful}/5")
+        else:
+            print("No final answer was produced.")
+    
+    
+    
