@@ -1,728 +1,84 @@
 /home/atharv/GenAI/genenv/lib/python3.10/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.
   from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
-Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 9957.67it/s]
-/home/atharv/GenAI/study_vedya/langgraph/projects/chat_pdf/backend/eval.py:7: DeprecationWarning: Importing Faithfulness from 'ragas.metrics' is deprecated and will be removed in v1.0. Please use 'ragas.metrics.collections' instead. Example: from ragas.metrics.collections import Faithfulness
-  from ragas.metrics import (
-/home/atharv/GenAI/study_vedya/langgraph/projects/chat_pdf/backend/eval.py:7: DeprecationWarning: Importing AnswerRelevancy from 'ragas.metrics' is deprecated and will be removed in v1.0. Please use 'ragas.metrics.collections' instead. Example: from ragas.metrics.collections import AnswerRelevancy
-  from ragas.metrics import (
-/home/atharv/GenAI/study_vedya/langgraph/projects/chat_pdf/backend/eval.py:7: DeprecationWarning: Importing ContextPrecision from 'ragas.metrics' is deprecated and will be removed in v1.0. Please use 'ragas.metrics.collections' instead. Example: from ragas.metrics.collections import ContextPrecision
-  from ragas.metrics import (
-/home/atharv/GenAI/study_vedya/langgraph/projects/chat_pdf/backend/eval.py:7: DeprecationWarning: Importing ContextRecall from 'ragas.metrics' is deprecated and will be removed in v1.0. Please use 'ragas.metrics.collections' instead. Example: from ragas.metrics.collections import ContextRecall
-  from ragas.metrics import (
-/home/atharv/GenAI/study_vedya/langgraph/projects/chat_pdf/backend/eval.py:40: DeprecationWarning: LangchainEmbeddingsWrapper is deprecated and will be removed in a future version. Use the modern embedding providers instead: embedding_factory('openai', model='text-embedding-3-small', client=openai_client) or from ragas.embeddings import OpenAIEmbeddings, GoogleEmbeddings, HuggingFaceEmbeddings
-  ragas_evaluator_embeddings = LangchainEmbeddingsWrapper(hf_embeddings)
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8068.98it/s]
+DuckDuckGo MCP Server initialized:
+  SafeSearch: MODERATE (kp=-1)
+  Default Region: none
+  Search backend: auto
+  Fetch backend: httpx
+  Allow private URLs: False
+[09/10/26 09:50:12] INFO     Processing request of type            server.py:720
+                             ListToolsRequest                                   
+DuckDuckGo MCP Server initialized:
+  SafeSearch: MODERATE (kp=-1)
+  Default Region: none
+  Search backend: auto
+  Fetch backend: httpx
+  Allow private URLs: False
+[09/10/26 09:50:28] INFO     Processing request of type            server.py:720
+                             CallToolRequest                                    
+[09/10/26 09:50:29] INFO     HTTP Request: POST                  _client.py:1740
+                             https://html.duckduckgo.com/html                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     Processing request of type            server.py:720
+                             ListToolsRequest                                   
 💾 All files already ingested — skipping
-
-=== Running single.json ===
-Evaluating:   0%|          | 0/160 [00:00<?, ?it/s]Exception raised in Job[3]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[6]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[2]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[7]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:   1%|          | 1/160 [00:10<26:32, 10.02s/it]Exception raised in Job[11]: ValidationError(1 validation error for ContextRecallClassifications
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "classific...: 0\n    }\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[0]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[4]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[8]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[10]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[12]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:   4%|▍         | 7/160 [00:13<04:01,  1.58s/it]Exception raised in Job[15]: ValidationError(1 validation error for ContextRecallClassifications
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "classific...: 0\n    }\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:   7%|▋         | 11/160 [00:15<02:35,  1.05s/it]Exception raised in Job[9]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[19]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:   8%|▊         | 13/160 [00:22<04:02,  1.65s/it]Exception raised in Job[5]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[1]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[13]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  11%|█         | 17/160 [00:22<02:28,  1.04s/it]Exception raised in Job[18]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[16]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  11%|█▏        | 18/160 [00:25<02:51,  1.21s/it]Exception raised in Job[26]: ValidationError(1 validation error for Verification
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n    "reason"...   "verdict": 1\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[17]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[24]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[23]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  14%|█▍        | 23/160 [00:28<02:13,  1.03it/s]Exception raised in Job[20]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[21]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[22]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  18%|█▊        | 28/160 [00:29<01:25,  1.54it/s]Exception raised in Job[27]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[28]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  18%|█▊        | 29/160 [00:34<02:15,  1.03s/it]Exception raised in Job[36]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[32]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[25]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  21%|██        | 33/160 [00:35<01:36,  1.32it/s]Exception raised in Job[42]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[30]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  22%|██▏       | 35/160 [00:36<01:33,  1.34it/s]Exception raised in Job[35]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  23%|██▎       | 37/160 [00:38<01:32,  1.33it/s]Exception raised in Job[41]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[29]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[40]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  24%|██▍       | 39/160 [00:39<01:32,  1.31it/s]Exception raised in Job[33]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[31]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[39]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[48]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  26%|██▋       | 42/160 [00:44<02:06,  1.08s/it]Exception raised in Job[43]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  28%|██▊       | 45/160 [00:45<01:37,  1.17it/s]Exception raised in Job[37]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[51]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[47]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  29%|██▉       | 47/160 [00:49<02:06,  1.12s/it]Exception raised in Job[50]: ValidationError(1 validation error for Verification
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n    "reason"...   "verdict": 0\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[44]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[45]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[49]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[52]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  33%|███▎      | 53/160 [00:52<01:25,  1.26it/s]Exception raised in Job[54]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[59]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[56]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[58]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  34%|███▍      | 55/160 [00:56<01:46,  1.01s/it]Exception raised in Job[55]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  36%|███▋      | 58/160 [00:58<01:31,  1.11it/s]Exception raised in Job[53]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[62]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  37%|███▋      | 59/160 [00:59<01:37,  1.04it/s]Exception raised in Job[57]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[60]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[64]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[61]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  39%|███▉      | 62/160 [01:03<01:40,  1.02s/it]Exception raised in Job[67]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[63]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[66]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  42%|████▏     | 67/160 [01:05<01:14,  1.25it/s]Exception raised in Job[72]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[68]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  43%|████▎     | 69/160 [01:08<01:23,  1.09it/s]Exception raised in Job[65]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[70]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[76]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  45%|████▌     | 72/160 [01:10<01:09,  1.26it/s]Exception raised in Job[69]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  46%|████▋     | 74/160 [01:10<00:58,  1.48it/s]Exception raised in Job[71]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  47%|████▋     | 75/160 [01:12<01:11,  1.19it/s]Exception raised in Job[74]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  48%|████▊     | 76/160 [01:16<01:57,  1.40s/it]Exception raised in Job[80]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[75]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[73]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[81]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[77]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[88]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[83]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[79]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  51%|█████▏    | 82/160 [01:19<01:02,  1.25it/s]Exception raised in Job[86]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  53%|█████▎    | 85/160 [01:19<00:48,  1.55it/s]Exception raised in Job[84]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[87]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[92]: EndpointConnectionError(Could not connect to the endpoint URL: "https://bedrock-runtime.us-east-1.amazonaws.com/model/us.anthropic.claude-sonnet-4-5-20250929-v1%3A0/converse")
-Exception raised in Job[91]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  54%|█████▍    | 86/160 [01:46<04:42,  3.81s/it]Exception raised in Job[82]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[94]: ValidationError(1 validation error for Verification
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n    "reason"...   "verdict": 0\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[98]: ValidationError(1 validation error for Verification
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n    "reason"...   "verdict": 0\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[99]: ValidationError(1 validation error for ContextRecallClassifications
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "classific...: 1\n    }\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:  57%|█████▋    | 91/160 [01:54<03:10,  2.76s/it]Exception raised in Job[93]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[103]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[90]: ValidationError(1 validation error for Verification
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n    "reason"...   "verdict": 1\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:  60%|██████    | 96/160 [01:57<02:01,  1.89s/it]Exception raised in Job[104]: ValidationError(1 validation error for StatementGeneratorOutput
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "statement...d tokens."\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[85]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[101]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[89]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[96]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  64%|██████▍   | 102/160 [01:58<01:09,  1.19s/it]Exception raised in Job[100]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[95]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  65%|██████▌   | 104/160 [02:02<01:15,  1.35s/it]Exception raised in Job[107]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[97]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[106]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  66%|██████▋   | 106/160 [02:05<01:14,  1.38s/it]Exception raised in Job[108]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  68%|██████▊   | 108/160 [02:06<01:03,  1.22s/it]Exception raised in Job[111]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[118]: ValidationError(1 validation error for Verification
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n    "reason"...   "verdict": 1\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:  68%|██████▊   | 109/160 [02:07<00:57,  1.13s/it]Exception raised in Job[105]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[114]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  70%|███████   | 112/160 [02:09<00:45,  1.06it/s]Exception raised in Job[113]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[112]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[116]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[110]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  71%|███████▏  | 114/160 [02:10<00:43,  1.07it/s]Exception raised in Job[109]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  73%|███████▎  | 117/160 [02:12<00:34,  1.25it/s]Exception raised in Job[115]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[123]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[128]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[120]: ValidationError(1 validation error for StatementGeneratorOutput
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "statement...d prefer."\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:  74%|███████▍  | 119/160 [02:16<00:46,  1.14s/it]Exception raised in Job[119]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  76%|███████▋  | 122/160 [02:17<00:32,  1.18it/s]Exception raised in Job[126]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  77%|███████▋  | 123/160 [02:18<00:32,  1.13it/s]Exception raised in Job[124]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[117]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  78%|███████▊  | 125/160 [02:20<00:31,  1.10it/s]Exception raised in Job[122]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[121]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[129]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  79%|███████▉  | 127/160 [02:21<00:25,  1.32it/s]Exception raised in Job[127]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  81%|████████  | 129/160 [02:23<00:25,  1.20it/s]Exception raised in Job[134]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[125]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[130]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  82%|████████▎ | 132/160 [02:25<00:19,  1.42it/s]Exception raised in Job[131]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  83%|████████▎ | 133/160 [02:27<00:24,  1.10it/s]Exception raised in Job[135]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[132]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  84%|████████▍ | 135/160 [02:28<00:21,  1.19it/s]Exception raised in Job[133]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[136]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  86%|████████▌ | 137/160 [02:30<00:19,  1.19it/s]Exception raised in Job[137]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[138]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  86%|████████▋ | 138/160 [02:32<00:25,  1.15s/it]Exception raised in Job[140]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[143]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  88%|████████▊ | 141/160 [02:34<00:16,  1.18it/s]Exception raised in Job[139]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[147]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  89%|████████▉ | 142/160 [02:36<00:18,  1.03s/it]Exception raised in Job[144]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  91%|█████████ | 145/160 [02:36<00:09,  1.51it/s]Exception raised in Job[142]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  91%|█████████▏| 146/160 [02:38<00:12,  1.09it/s]Exception raised in Job[152]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[145]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[141]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[146]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  94%|█████████▍| 150/160 [02:39<00:05,  1.82it/s]Exception raised in Job[150]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  94%|█████████▍| 151/160 [02:39<00:04,  2.03it/s]Exception raised in Job[151]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  95%|█████████▌| 152/160 [02:41<00:05,  1.36it/s]Exception raised in Job[148]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  96%|█████████▌| 153/160 [02:42<00:06,  1.16it/s]Exception raised in Job[149]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  96%|█████████▋| 154/160 [02:43<00:04,  1.41it/s]Exception raised in Job[153]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[155]: ValidationError(1 validation error for ContextRecallClassifications
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "classific...: 1\n    }\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:  98%|█████████▊| 156/160 [02:43<00:02,  1.88it/s]Exception raised in Job[157]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  98%|█████████▊| 157/160 [02:47<00:03,  1.18s/it]Exception raised in Job[156]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  99%|█████████▉| 158/160 [02:47<00:02,  1.03s/it]Exception raised in Job[159]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  99%|█████████▉| 159/160 [02:47<00:00,  1.22it/s]Exception raised in Job[154]: ValidationError(1 validation error for Verification
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n    "reason"...   "verdict": 0\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating: 100%|██████████| 160/160 [02:49<00:00,  1.13s/it]Evaluating: 100%|██████████| 160/160 [02:49<00:00,  1.06s/it]
-{'faithfulness': nan, 'answer_relevancy': nan, 'context_precision': 0.1429, 'context_recall': nan}
-                                           user_input  ...  document_index
-0                         What do keybullet kin drop?  ...               0
-1   What kind of gun does the bandana bullet kin use?  ...               0
-2                       What do the giants look like?  ...               1
-3                              What happens on day 2?  ...               1
-4         What were the requirements for the project?  ...               2
-5       What data did was used to test the prototype?  ...               2
-6            How do the data storage options compare?  ...               3
-7   When was UTF-8 support added for European lang...  ...               3
-8                             How do I make a button?  ...               4
-9                           When might I use caching?  ...               4
-10           What are the key topics of this article?  ...               5
-11  Do I have to do something all by myself to be ...  ...               5
-12  What kinds of models would need to be official...  ...               6
-13         What kinds of AI carry "systematic risks"?  ...               6
-14      Which quest does the emperor give the player?  ...               7
-15          Who ambushes the party at Wyrm's lookout?  ...               7
-16               What did I drink at the pintxo bars?  ...               8
-17        Which part of the trip did I like the most?  ...               8
-18    What is the meaning behind the infrared scenes?  ...               9
-19  How do the people who commit atrocious acts an...  ...               9
-20                     What is the policy on Tai Chi?  ...              10
-21  What is the proposed change for the British mu...  ...              10
-22  How much faster is the Tesla A100 compared to ...  ...              11
-23  For what work did I receive criticism for my r...  ...              11
-24  How does function exporting differ between Gle...  ...              12
-25                        What is the syntax for pipe  ...              12
-26  Why are the top-right values in the raw attent...  ...              13
-27  How can I freeze a variable during training in...  ...              13
-28               How is the narrator related to Perry  ...              14
-29          How long has the narrator been sober for?  ...              14
-30             What is the name of the space station?  ...              15
-31  What languages do the people of Pacifico del R...  ...              15
-32             In which patch was pet adoption added?  ...              16
-33        When did mushroom trees stop dropping wood?  ...              16
-34        Where was Alan Wake 2 officially announced?  ...              17
-35                             When is this game set?  ...              17
-36                         Who wrote 'Divine Rivals'?  ...              18
-37  Who was resurrected with a group of other murd...  ...              18
-38  What categories does this paper split the RAG ...  ...              19
-39  In what way can including unrelated documents ...  ...              19
-
-[40 rows x 6 columns]
-
-=== Running multi.json ===
-Failed on question: What are the four steps to become more impact-focused? - ThrottlingException: An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.
- 1/40 question failed ans were excluded from scoring
-Evaluating:   0%|          | 0/156 [00:00<?, ?it/s]Exception raised in Job[7]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[3]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[2]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[8]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:   1%|          | 1/156 [00:09<24:44,  9.58s/it]Exception raised in Job[10]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[0]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:   3%|▎         | 5/156 [00:10<04:10,  1.66s/it]Exception raised in Job[4]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[5]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[9]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[6]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[11]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[16]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:   6%|▋         | 10/156 [00:14<02:38,  1.09s/it]Exception raised in Job[12]: ValidationError(1 validation error for StatementGeneratorOutput
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "statement... journey."\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[15]: ValidationError(1 validation error for ContextRecallClassifications
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "classific...: 0\n    }\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[14]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  10%|▉         | 15/156 [00:14<01:28,  1.60it/s]Exception raised in Job[19]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[20]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[18]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  10%|█         | 16/156 [00:21<03:01,  1.30s/it]Exception raised in Job[1]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[13]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  12%|█▏        | 19/156 [00:21<02:01,  1.12it/s]Exception raised in Job[22]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[26]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  14%|█▍        | 22/156 [00:23<01:59,  1.12it/s]Exception raised in Job[17]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[23]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[21]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[31]: ValidationError(1 validation error for ContextRecallClassifications
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "classific...: 0\n    }\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:  16%|█▌        | 25/156 [00:27<02:03,  1.06it/s]Exception raised in Job[24]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[25]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[27]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[32]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  19%|█▉        | 30/156 [00:31<01:58,  1.06it/s]Exception raised in Job[38]: ValidationError(1 validation error for Verification
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n    "reason"...   "verdict": 0\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[36]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[29]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  21%|██        | 33/156 [00:32<01:29,  1.37it/s]Exception raised in Job[30]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[39]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[35]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[28]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  23%|██▎       | 36/156 [00:33<01:13,  1.64it/s]Exception raised in Job[40]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  25%|██▌       | 39/156 [00:37<01:40,  1.17it/s]Exception raised in Job[33]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[43]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  26%|██▌       | 40/156 [00:42<02:37,  1.36s/it]Exception raised in Job[47]: ValidationError(1 validation error for ContextRecallClassifications
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "classific...: 1\n    }\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[37]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[44]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[45]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[46]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  28%|██▊       | 44/156 [00:46<02:15,  1.21s/it]Exception raised in Job[42]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[41]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[52]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[50]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  31%|███▏      | 49/156 [00:48<01:33,  1.14it/s]Exception raised in Job[48]: ValidationError(1 validation error for StatementGeneratorOutput
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "statement...purposes."\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[56]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[49]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  33%|███▎      | 52/156 [00:49<01:18,  1.32it/s]Exception raised in Job[51]: ValidationError(1 validation error for ContextRecallClassifications
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "classific...: 1\n    }\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:  35%|███▍      | 54/156 [00:53<01:32,  1.10it/s]Exception raised in Job[55]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[53]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  36%|███▌      | 56/156 [00:53<01:15,  1.32it/s]Exception raised in Job[59]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[63]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  37%|███▋      | 57/156 [00:55<01:32,  1.07it/s]Exception raised in Job[58]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[57]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[62]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[64]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[60]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[54]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[68]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  39%|███▉      | 61/156 [00:59<01:36,  1.01s/it]Exception raised in Job[61]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[71]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  42%|████▏     | 66/156 [01:04<01:27,  1.03it/s]Exception raised in Job[75]: ValidationError(1 validation error for ContextRecallClassifications
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "classific...: 1\n    }\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[66]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[67]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[78]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[72]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  45%|████▍     | 70/156 [01:07<01:17,  1.10it/s]Exception raised in Job[70]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[65]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[74]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[79]: ValidationError(1 validation error for ContextRecallClassifications
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "classific...: 1\n    }\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:  48%|████▊     | 75/156 [01:09<00:58,  1.38it/s]Exception raised in Job[76]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[73]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[80]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  49%|████▉     | 77/156 [01:12<01:09,  1.14it/s]Exception raised in Job[69]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  51%|█████▏    | 80/156 [01:13<00:54,  1.40it/s]Exception raised in Job[77]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  52%|█████▏    | 81/156 [01:17<01:22,  1.10s/it]Exception raised in Job[84]: ValidationError(1 validation error for StatementGeneratorOutput
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "statement...writings."\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[83]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  53%|█████▎    | 83/156 [01:18<01:04,  1.14it/s]Exception raised in Job[81]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[82]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  54%|█████▍    | 85/156 [01:20<01:04,  1.11it/s]Exception raised in Job[87]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[91]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[90]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  56%|█████▌    | 87/156 [01:22<01:03,  1.08it/s]Exception raised in Job[85]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[86]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  58%|█████▊    | 90/156 [01:24<00:58,  1.12it/s]Exception raised in Job[94]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[88]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  58%|█████▊    | 91/156 [01:24<00:52,  1.25it/s]Exception raised in Job[89]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[96]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  60%|██████    | 94/156 [01:26<00:46,  1.34it/s]Exception raised in Job[92]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  61%|██████    | 95/156 [01:28<00:48,  1.25it/s]Exception raised in Job[99]: ValidationError(1 validation error for ContextRecallClassifications
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "classific...: 0\n    }\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[98]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[93]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[95]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  63%|██████▎   | 99/156 [01:29<00:35,  1.59it/s]Exception raised in Job[104]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[103]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[100]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  65%|██████▍   | 101/156 [01:34<00:57,  1.05s/it]Exception raised in Job[97]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  66%|██████▌   | 103/156 [01:35<00:48,  1.10it/s]Exception raised in Job[110]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[106]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  67%|██████▋   | 105/156 [01:36<00:42,  1.21it/s]Exception raised in Job[101]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  68%|██████▊   | 106/156 [01:37<00:44,  1.11it/s]Exception raised in Job[107]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[111]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  69%|██████▉   | 108/156 [01:38<00:31,  1.54it/s]Exception raised in Job[105]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[102]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[108]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  71%|███████   | 110/156 [01:40<00:34,  1.35it/s]Exception raised in Job[112]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[109]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  73%|███████▎  | 114/156 [01:40<00:17,  2.36it/s]Exception raised in Job[114]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  74%|███████▎  | 115/156 [01:43<00:32,  1.28it/s]Exception raised in Job[118]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[116]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  75%|███████▌  | 117/156 [01:46<00:41,  1.06s/it]Exception raised in Job[120]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[113]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[124]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  77%|███████▋  | 120/156 [01:47<00:28,  1.27it/s]Exception raised in Job[117]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  78%|███████▊  | 121/156 [01:50<00:39,  1.13s/it]Exception raised in Job[115]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[123]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[122]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[121]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  80%|████████  | 125/156 [01:50<00:19,  1.60it/s]Exception raised in Job[132]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[119]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  81%|████████  | 126/156 [01:52<00:24,  1.23it/s]Exception raised in Job[127]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[125]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[131]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  83%|████████▎ | 130/156 [01:52<00:11,  2.19it/s]Exception raised in Job[128]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[139]: ValidationError(1 validation error for ContextRecallClassifications
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "classific...: 1\n    }\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:  85%|████████▍ | 132/156 [01:59<00:26,  1.12s/it]Exception raised in Job[134]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[130]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  86%|████████▌ | 134/156 [02:00<00:20,  1.05it/s]Exception raised in Job[129]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[135]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[142]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[136]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  87%|████████▋ | 136/156 [02:03<00:22,  1.14s/it]Exception raised in Job[144]: ValidationError(1 validation error for StatementGeneratorOutput
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "statement...the past."\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[133]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[138]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[140]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  91%|█████████ | 142/156 [02:07<00:12,  1.16it/s]Exception raised in Job[148]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[141]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[137]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[146]: ValidationError(1 validation error for Verification
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n    "reason"...   "verdict": 0\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:  93%|█████████▎| 145/156 [02:08<00:07,  1.42it/s]Exception raised in Job[145]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  95%|█████████▍| 148/156 [02:09<00:04,  1.72it/s]Exception raised in Job[152]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  96%|█████████▌| 149/156 [02:10<00:04,  1.51it/s]Exception raised in Job[147]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  96%|█████████▌| 150/156 [02:10<00:03,  1.65it/s]Exception raised in Job[143]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  97%|█████████▋| 151/156 [02:10<00:02,  1.73it/s]Exception raised in Job[150]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  97%|█████████▋| 152/156 [02:13<00:03,  1.14it/s]Exception raised in Job[153]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  98%|█████████▊| 153/156 [02:13<00:02,  1.21it/s]Exception raised in Job[155]: ValidationError(1 validation error for ContextRecallClassifications
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "classific...: 0\n    }\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:  99%|█████████▊| 154/156 [02:14<00:01,  1.28it/s]Exception raised in Job[151]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  99%|█████████▉| 155/156 [02:15<00:00,  1.15it/s]Exception raised in Job[149]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating: 100%|██████████| 156/156 [02:16<00:00,  1.20it/s]Evaluating: 100%|██████████| 156/156 [02:16<00:00,  1.15it/s]
-{'faithfulness': nan, 'answer_relevancy': nan, 'context_precision': 0.0000, 'context_recall': nan}
-                                           user_input  ...  document_index
-0                   Which enemy types wield an AK-47?  ...               0
-1                What makes jammed enemies different?  ...               0
-2   What enemies are encountered in the second enc...  ...               1
-3      What monsters are encountered in this journey?  ...               1
-4   What framework was chosen to execute the RAG p...  ...               2
-5   Which large language models and vector databas...  ...               2
-6         What kind of model is the bling-phi-3 model  ...               3
-7     In which versions were the SLIM models updated?  ...               3
-8   What are the ways of grouping UI elements toge...  ...               4
-9   What are the parameters for the mo.ui.text fun...  ...               4
-10  What are the given examples of common challenges?  ...               5
-11          What are the risk classifications for AI?  ...               6
-12  What are the rules for developing general purp...  ...               6
-13                    What are the emperor's aliases?  ...               7
-14                             Who was Duke Stelmane?  ...               7
-15                      Where was I offered desserts?  ...               8
-16                  What forms of exercise did we do?  ...               8
-17      Who is in the family that this film is about?  ...               9
-18  What items do Rudolf's family take from the Je...  ...               9
-19  What are the proposed changes that affect heal...  ...              10
-20         What versions of the Manicfesto are there?  ...              10
-21  Other than this blog post, what has the author...  ...              11
-22                In what contexts is BERT mentioned?  ...              11
-23  What data structures does Gleam natively support?  ...              12
-24  What things will cause a compilation error in ...  ...              12
-25                        Where is broadcasting used?  ...              13
-26                        What is Karpathy known for?  ...              13
-27  What things did Jackie remember differently to...  ...              14
-28               What references to alcohol are there  ...              14
-29  Where does the Doctor say that he is a time lord?  ...              15
-30             Who are the characters in this script?  ...              15
-31                         What can moss be used for?  ...              16
-32  What are all of the sources of battery packs t...  ...              16
-33                       What things does Scratch do?  ...              17
-34   What is Alan tricked into believing by his wife?  ...              17
-35                  Which books have dragons in them?  ...              18
-36           Which books contain multiple narratives?  ...              18
-37  What is the recommended way to index text for ...  ...              19
-38  What are the advantages and disadvantages of t...  ...              19
-
-[39 rows x 6 columns]
-
-=== Running no_answer.json ===
-Evaluating:   0%|          | 0/40 [00:00<?, ?it/s]Exception raised in Job[3]: ValidationError(1 validation error for StatementGeneratorOutput
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "statement...question."\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:   2%|▎         | 1/40 [00:05<03:30,  5.40s/it]Exception raised in Job[4]: ValidationError(1 validation error for StatementGeneratorOutput
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "statement...orkloads."\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:   5%|▌         | 2/40 [00:05<01:36,  2.54s/it]Exception raised in Job[1]: ValidationError(1 validation error for StatementGeneratorOutput
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "statement...dioceses."\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:   8%|▊         | 3/40 [00:07<01:25,  2.32s/it]Exception raised in Job[8]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  10%|█         | 4/40 [00:08<00:59,  1.65s/it]Exception raised in Job[13]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  12%|█▎        | 5/40 [00:10<00:55,  1.60s/it]Exception raised in Job[11]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  15%|█▌        | 6/40 [00:10<00:41,  1.24s/it]Exception raised in Job[14]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[10]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  20%|██        | 8/40 [00:11<00:23,  1.35it/s]Exception raised in Job[16]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  22%|██▎       | 9/40 [00:11<00:22,  1.36it/s]Exception raised in Job[5]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  25%|██▌       | 10/40 [00:12<00:18,  1.66it/s]Exception raised in Job[12]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  28%|██▊       | 11/40 [00:12<00:16,  1.79it/s]Exception raised in Job[7]: ValidationError(1 validation error for StatementGeneratorOutput
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "statement... support."\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Exception raised in Job[15]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  32%|███▎      | 13/40 [00:13<00:17,  1.58it/s]Exception raised in Job[9]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  35%|███▌      | 14/40 [00:14<00:18,  1.42it/s]Exception raised in Job[6]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  38%|███▊      | 15/40 [00:15<00:17,  1.46it/s]Exception raised in Job[23]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  40%|████      | 16/40 [00:16<00:15,  1.59it/s]Exception raised in Job[2]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  42%|████▎     | 17/40 [00:16<00:13,  1.75it/s]Exception raised in Job[0]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  45%|████▌     | 18/40 [00:16<00:09,  2.20it/s]Exception raised in Job[19]: ValidationError(1 validation error for StatementGeneratorOutput
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "statement...question."\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:  48%|████▊     | 19/40 [00:18<00:18,  1.11it/s]Exception raised in Job[17]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[21]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  52%|█████▎    | 21/40 [00:19<00:12,  1.57it/s]Exception raised in Job[20]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  55%|█████▌    | 22/40 [00:21<00:17,  1.01it/s]Exception raised in Job[31]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  57%|█████▊    | 23/40 [00:21<00:13,  1.26it/s]Exception raised in Job[28]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  60%|██████    | 24/40 [00:22<00:11,  1.35it/s]Exception raised in Job[18]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  62%|██████▎   | 25/40 [00:22<00:10,  1.45it/s]Exception raised in Job[33]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  65%|██████▌   | 26/40 [00:23<00:10,  1.29it/s]Exception raised in Job[26]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[29]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  70%|███████   | 28/40 [00:23<00:05,  2.14it/s]Exception raised in Job[36]: ValidationError(1 validation error for StatementGeneratorOutput
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "statement...he novel."\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:  72%|███████▎  | 29/40 [00:24<00:05,  2.05it/s]Exception raised in Job[32]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[35]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  78%|███████▊  | 31/40 [00:25<00:04,  1.84it/s]Exception raised in Job[27]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[22]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Exception raised in Job[24]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  85%|████████▌ | 34/40 [00:27<00:03,  1.64it/s]Exception raised in Job[30]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  88%|████████▊ | 35/40 [00:28<00:02,  1.71it/s]Exception raised in Job[25]: ValidationError(1 validation error for StatementGeneratorOutput
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "statement...he query."\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating:  90%|█████████ | 36/40 [00:31<00:04,  1.10s/it]Exception raised in Job[34]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  92%|█████████▎| 37/40 [00:31<00:02,  1.04it/s]Exception raised in Job[38]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  95%|█████████▌| 38/40 [00:32<00:01,  1.22it/s]Exception raised in Job[37]: ThrottlingException(An error occurred (ThrottlingException) when calling the Converse operation (reached max retries: 4): Too many requests, please wait before trying again.)
-Evaluating:  98%|█████████▊| 39/40 [00:33<00:01,  1.01s/it]Exception raised in Job[39]: ValidationError(1 validation error for StatementGeneratorOutput
-  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='```json\n{\n  "statement...research."\n  ]\n}\n```', input_type=TextAccessor]
-    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid)
-Evaluating: 100%|██████████| 40/40 [00:37<00:00,  1.73s/it]Evaluating: 100%|██████████| 40/40 [00:37<00:00,  1.07it/s]
-{'faithfulness': nan}
-
-=== no_answer.json refusal check ===
-Correctly found 'no relevant context': 26/40
-Questions where SOME context was found (check manually for hallucination):
-  Q: Why was the H100 GPU chosen for computation?
-  A: Based on the provided context, the H100 GPU was chosen for computation due to several key advantages:
-
-1. **8-bit Float (FP8) Support**: The H100 GPU supports FP8, which is described as a "huge advantage." This allows for loading data for matrix multiplication twice as fast and storing twice as many matrix elements in the large caches of the Hopper architecture.
-
-2. **Cost Effectiveness**: The H100 SXM GPU is noted as being "very cost effective" with high memory and very strong performance, making it suitable for academic and startup servers.
-
-3. **Performance**: The H100 demonstrates strong performance across computer vision and natural language understanding tasks, as evidenced by NVIDIA's benchmarks comparing it to A100 and V100 GPUs.
-
-4. **Memory Capacity**: The H100 has more memory compared to previous generation GPUs, allowing for larger batch sizes in computations.
-
-The context suggests that for building small clusters for companies or academic labs, a mix of 20-33% H100 SXM GPUs (alongside 66-80% A6000 Ada GPUs) would be recommended, indicating its value proposition for computational workloads.
-
-  Q: What Tensorflow features are supported?
-  A: I apologize, but I couldn't find any relevant information in the retriever database for your query "What Tensorflow features are supported?"
-
-This could be because:
-1. The query might be too broad or unclear about which context you're asking about (e.g., supported by which platform, tool, or environment?)
-2. The specific documentation about TensorFlow features may not be in our current database
-
-To help you better, you could:
-
-**Option 1: Rewrite your query** to be more specific, such as:
-- "What TensorFlow features are supported in [specific platform/tool]?"
-- "Which TensorFlow operations are compatible with [specific framework]?"
-- "What TensorFlow versions are supported by [specific service]?"
-
-**Option 2: Use web search** - I can search the web to find current information about TensorFlow features and support.
-
-Which option would you prefer?
-
-  Q: What is step 5?
-  A: I apologize, but I couldn't find any relevant context in the retriever database for your query "What is step 5?". 
-
-This question is too general without additional context. To help you better, you could:
-
-1. **Rewrite your query** with more specific information, such as:
-   - "What is step 5 of the installation process?"
-   - "What is step 5 in the tutorial about...?"
-   - "What is step 5 of [specific procedure/document name]?"
-
-2. **Use web search** - Would you like me to search the web for information about step 5? If so, please provide more context about which process or procedure you're referring to.
-
-Please either rephrase your question with more details or let me know if you'd like to proceed with a web search.
-
-  Q: What is the advice for data scientists in finance companies?
-  A: Based on the retrieved documents, I cannot provide advice specifically tailored to data scientists in finance companies, as the documents do not contain any finance-specific guidance or context. 
-
-However, if you're looking for general data science best practices that would apply across industries (including finance), the documents provide the following advice:
-
-**1. Focus on Business Impact Over Technical Metrics**
-Stop measuring success by productivity metrics like "I launched 5 experiments" or "I built this model." Instead, hold yourself accountable to driving real business impact.
-
-**2. Understand Two Levels of Impact**
-- **Partner-level impact**: Did your work make things better for your business partners? (e.g., Did your analysis change strategy? Did your model improve forecast accuracy? Does your dashboard save the team hours every week?)
-- **Business-level impact**: Did your work help move the needle on downstream business metrics? Take partial credit when your analysis leads to significant outcomes.
-
-**3. Solve Real Business Problems**
-When someone asks for a specific deliverable (an analysis, model, or dashboard), don't blindly execute. Act like an owner by understanding the actual problem behind the request and ensuring it supports real business priorities.
-
-**4. Provide Clear Recommendations**
-Always give a clear recommendation rather than presenting "metrics dumps." Help your business partners interpret results and explain what findings mean for them specifically. You're the subject matter expert—take a stance rather than expecting non-analytical audiences to interpret raw data themselves.
-
-**5. Ensure Adoption and Buy-in**
-Projects often fail close to the finish line when work doesn't get adopted. Get key stakeholders onboard from the beginning and address their concerns early. For predictive models, build trust by clearly communicating methodology and results interpretation.
-
-**6. Prioritize High-Impact Work**
-Focus the majority of your time on the most important thing that directly supports company-level priorities, rather than juggling multiple low-priority tasks.
-
-**Important Note:** To get advice specifically for data scientists in finance companies, you would need different source materials that address the unique challenges, regulations, risk management considerations, and business contexts specific to the finance industry.
-
-  Q: What needs to be done to kiss the Emperor?
-  A: To kiss the Emperor (and engage in romantic activities), you need to complete the following steps:
-
-1. **Complete the quest "Visit the Emperor's Old Hideout"** - This quest becomes available after reaching the Elfsong Tavern in Act Three. This is where the primary romantic scene occurs.
-
-2. **Be receptive to the Emperor's advances** - During conversations, choose dialogue options that treat the Emperor like any other person and avoid showing explicit hostility towards its actions or illithid characteristics.
-
-3. **Avoid certain actions that lock out romance**:
-   - Do NOT kill the Dream Guardian if you visit Crèche Y'llek prior to the start of Act 3, as this will lock you out of romancing the Emperor entirely
-   - Avoid choosing hostile dialogue options like "Absolutely not, you freak!" when the Emperor makes advances
-
-4. **Key considerations**:
-   - You do NOT need to accept the powers of the Astral-Touched Tadpole to unlock romance options
-   - The Emperor may take offense to destroying the tadpole, though its exact effect on romance availability needs more testing
-   - Successfully completing the primary romantic scene after "Visit the Emperor's Old Hideout" will allow you to engage in more intimate activities with the Emperor
-   - This romance does not affect other ongoing romances, even with companions like Lae'zel who are generally hostile to illithids
-
-Once you've followed these steps and been receptive during the primary scene, you'll unlock the romantic interactions, including the achievement "Mind Blown" for romancing the Emperor.
-
-  Q: Did the author prefer Madrid or San Sebastian?
-  A: Based on the context provided, the author clearly preferred San Sebastián. They describe it as "the coolest town — worth a trip to Spain all on its own" and express that they "loved every minute" of their three-night stay there. The author's enthusiasm is evident in their detailed, positive description of the coastal town's charm, its blend of old and new, and specific highlights of their experience. While Madrid is mentioned briefly in reference to the Chueca neighborhood's "charming, windy streets," there is no comparable level of detail or enthusiastic endorsement given to Madrid in the provided context.
-
-  Q: Which TPU is recommended?
-  A: Based on the provided context, I cannot determine which specific TPU is recommended. The context only mentions that there was an "Updated TPU section" in a blog post dated 2018-11-05, but it does not provide any details about the actual TPU recommendations or which TPU model is suggested. The context primarily focuses on GPU recommendations (various NVIDIA cards like RTX 2070, RTX 2080, GTX 1080 Ti, etc.) rather than TPU recommendations.
-
-  Q: What is the rest temperature of the RTX 4090 GPU?
-  A: I apologize, but I couldn't find any relevant information in the database to answer your query: "What is the rest temperature of the RTX 4090 GPU?"
-
-This could be because:
-1. The information isn't available in the current database
-2. The query terms might not match the indexed content
-3. The specific terminology used might differ from what's stored
-
-I have two options to help you get the information you need:
-
-**Option 1: Rewrite your query**
-You could try rephrasing your question, for example:
-- "What is the idle temperature of the RTX 4090 GPU?"
-- "RTX 4090 GPU temperature at rest"
-- "RTX 4090 base temperature specifications"
-- "NVIDIA RTX 4090 idle/rest temperature range"
-
-**Option 2: Web Search**
-I can perform a web search to find current information about the RTX 4090's rest/idle temperature from online sources.
-
-Would you like me to search the web for this information, or would you prefer to rephrase your query?
-
-  Q: How many parameters does the transformer model have?
-  A: I apologize, but I couldn't find any relevant information in the database to answer your query about "How many parameters does the transformer model have?"
-
-This could be because:
-1. The specific transformer model you're asking about isn't specified (there are many transformer models with different parameter counts)
-2. The information isn't available in the current database
-
-To help you better, you have two options:
-
-**Option 1: Rewrite your query** - Please clarify which specific transformer model you're interested in, such as:
-- "How many parameters does GPT-3 have?"
-- "How many parameters does BERT-base have?"
-- "How many parameters does the original Transformer model from 'Attention is All You Need' have?"
-- "How many parameters does T5-large have?"
-
-**Option 2: Web search** - I can perform a web search to find current information about transformer model parameters.
-
-Which option would you prefer?
-
-  Q: What brand of bourbon did the narrator drink?
-  A: Based on the retrieved documents, the narrator drank Jack Daniels, not bourbon. While the text mentions "a forty of Jack Daniels," it's important to note that Jack Daniels is Tennessee whiskey, not bourbon. The document does not identify what the narrator drank as bourbon, so the question about what brand of bourbon the narrator drank cannot be answered from the provided context, as the beverage mentioned (Jack Daniels) is not bourbon.
-
-  Q: Who is Perry and Jackie's sibling?
-  A: I apologize, but I couldn't find any relevant information in the retriever database for your query: "Who is Perry and Jackie's sibling?"
-
-To help you better, I have two options:
-
-1. **Rewrite your query**: Could you provide more context or details? For example:
-   - What are Perry and Jackie's full names?
-   - Are they characters from a TV show, movie, book, or real people?
-   - Any additional context about who they are would be helpful.
-
-2. **Web search**: I can perform a web search to find the answer if you'd like me to look for this information online.
-
-Please let me know which option you'd prefer, or provide additional details so I can assist you better!
-
-  Q: What was added in version 1.5.7?
-  A: Based on the context provided, version 1.5.7 added several new features and improvements to the game:
-
-**New Gameplay Features:**
-- Ability to place most furniture outside
-- Ability to talk to people while mounted on a horse
-- Option to donate items of different qualities for the same community bundle ingredient
-- Prevention of planting fruit trees on tiles where they won't be able to grow
-
-**Game Menus and HUD Improvements:**
-- Social tab now shows whether you talked to an NPC today
-- Cooking tab now displays the recipe when hovering over an item
-- Cooking tab now fades icons for recipes you know but haven't made yet
-- Cooking/crafting tooltips now show the number of items produced
-- Inventory menu's organize button now combines partial item stacks
-- Chest inventory menu now shows the Community Center button
-- Shipment screen now shows the unit price of shipped items instead of displaying the shipped quantity twice
-- Quest log now shows an arrow in the morning when you have pending completed quests
-- Buff icons now subtly pulse when they're close to expiring
-
-**Shop Menu Improvements:**
-- Shop menus were improved (though specific details are not provided in the context)
-
-These updates focused on enhancing user interface elements, improving quality of life features, and adding new gameplay mechanics.
-
-  Q: Why did Saga stab Scratch?
-  A: According to the context, Saga **shot** Scratch with the Bullet of Light, not stabbed him. The query asks about "stabbing," but the actual event described in the documents is that Saga shot Scratch. 
-
-Here's what happened: After Alan used the Clicker to banish Scratch from Casey's body, Scratch returned to possessing Alan. At that point, Saga shot Scratch with the Bullet of Light that she had obtained (with help from an anonymous woman in the Dark Place). This was done to stop Scratch, who was in possession of the Clicker and posed a significant threat.
-
-To clarify: there is no "stabbing" mentioned in the source material - the action was a shooting with the Bullet of Light.
-
-  Q: Why was hardware such a limiting factor in this research?
-  A: Hardware was a limiting factor in this research primarily due to memory bandwidth and speed constraints rather than computational power. The context explains that while Tensor Cores can perform matrix multiplication operations in just 1 cycle, the bottleneck lies in accessing memory - with global memory access taking 200 cycles and shared memory taking 34 cycles. This makes memory access the dominant cost in GPU computations.
-
-Additionally, the traditional method of improving hardware performance by shrinking transistors is reaching its limits. SRAM improvements no longer enhance performance and may even negatively impact it. GPU RAM speed improvements through high-bandwidth memory modules (HBM3+) are too expensive for consumer applications. The main remaining option to improve GPU speed has been increasing power consumption and cooling requirements (as seen in RTX 30s and 40s series), but this approach is unsustainable long-term.
-
-The key limitation is that getting data to the processing units (Tensor Cores) is far more time-consuming than the actual computation itself, making memory bandwidth and latency the critical constraining factors rather than raw computational capability.
-
+[mcp] Using DuckDuckGo MCP for web_search
+
+==================================================
+Query: What documents do you have?
+--- Agent Trace ---
+[1] TOOL CALL  -> list_documents({})
+[2] TOOL RESULT -> {"documents": ["0.txt", "1.txt", "10.txt", "11.txt", "12.txt", "13.txt", "14.txt", "15.txt", "16.txt", "17.txt", "18.txt", "19.txt", "2.txt", "3.txt", "4.txt", "5.txt", "6.txt", "7.txt", "8.txt", "9.t...
+[3] FINAL      -> I have access to **20 documents** in the knowledge base, numbered from 0.txt through 19.txt. 
+
+Would you like me to search for specific information within these documents, or would you like to know what topics or content they contain?
+
+==================================================
+Query: What is relativity?
+--- Agent Trace ---
+[1] FINAL      -> Relativity refers to the revolutionary theories of physics developed by Albert Einstein in the early 20th century. There are two main theories:
+
+## Special Relativity (1905)
+This theory deals with objects moving at constant speeds, particularly at speeds close to the speed of light. Key principles include:
+- **The speed of light is constant** in all reference frames, regardless of the motion of the light source or observer
+- **Time dilation**: Time passes more slowly for objects moving at high speeds relative to a stationary observer
+- **Length contraction**: Objects appear shorter in the direction of motion when moving at high speeds
+- **Mass-energy equivalence**: Expressed in the famous equation E=mc², showing that mass and energy are interchangeable
+
+## General Relativity (1915)
+This theory extends special relativity to include gravity and acceleration. Key concepts include:
+- **Gravity is not a force** but rather a curvature of spacetime caused by mass and energy
+- Massive objects like stars and planets bend the fabric of spacetime around them
+- Objects follow curved paths (geodesics) through this curved spacetime, which we perceive as gravitational attraction
+- Predictions include gravitational time dilation, gravitational lensing, and the existence of black holes
+
+Both theories fundamentally changed our understanding of space, time, gravity, and the universe. They've been confirmed by numerous experiments and observations and form the foundation of modern physics.
+
+Would you like me to search for more detailed information about any specific aspect of relativity?
+
+==================================================
+Query: What is the weather in Mumbai today?
+--- Agent Trace ---
+[1] TOOL CALL  -> web_search({'query': 'weather in Mumbai today'})
+[2] TOOL RESULT -> Found 10 search results:
+
+1. Mumbai, Maharashtra, India Hourly Weather | AccuWeather
+   URL: https://www.accuweather.com/en/in/mumbai/204842/hourly-weather-forecast/204842
+   Summary: Hourlyweatherfor...
+[3] FINAL      -> Based on the web search results, I can see that there are several weather sources for Mumbai, but the search results show snippets from various dates. According to the India Meteorological Department (IMD) result, which is the official weather service, Mumbai currently has:
+
+- **Temperature**: 29°C
+- **Humidity**: 74%
+- **Wind Speed**: 13 km/h
+
+However, I should note that the exact current conditions may vary slightly depending on when you're checking, as these results include data from different time stamps. For the most up-to-date and detailed information, I'd recommend checking the India Meteorological Department's Mumbai page (mausam.imd.gov.in/mumbai/) or other weather services like AccuWeather or Weather.com.
+
+**Tool used**: web_search to find current weather information for Mumbai.
+
+==================================================
+Query: Tell me a joke
+--- Agent Trace ---
+[1] FINAL      -> Why don't scientists trust atoms?
+
+Because they make up everything! 😄

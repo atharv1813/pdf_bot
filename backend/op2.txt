@@ -1,0 +1,90 @@
+/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.
+  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 10207.05it/s]
+DuckDuckGo MCP Server initialized:
+  SafeSearch: MODERATE (kp=-1)
+  Default Region: none
+  Search backend: auto
+  Fetch backend: httpx
+  Allow private URLs: False
+[09/10/26 09:51:58] INFO     Processing request of type            server.py:720
+                             ListToolsRequest                                   
+DuckDuckGo MCP Server initialized:
+  SafeSearch: MODERATE (kp=-1)
+  Default Region: none
+  Search backend: auto
+  Fetch backend: httpx
+  Allow private URLs: False
+[09/10/26 09:53:30] INFO     Processing request of type            server.py:720
+                             CallToolRequest                                    
+[09/10/26 09:53:31] INFO     HTTP Request: POST                  _client.py:1740
+                             https://html.duckduckgo.com/html                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     Processing request of type            server.py:720
+                             ListToolsRequest                                   
+💾 All files already ingested — skipping
+[mcp] Using DuckDuckGo MCP for web_search
+
+==================================================
+Query: What documents do you have?
+--- Agent Trace ---
+[1] TOOL CALL  -> list_documents({})
+[2] TOOL RESULT -> {"documents": ["0.txt", "1.txt", "2.txt", "3.txt", "4.txt", "5.txt", "6.txt", "7.txt", "8.txt", "9.txt", "10.txt", "11.txt", "12.txt", "13.txt", "14.txt", "15.txt", "16.txt", "17.txt", "18.txt", "19.t...
+[3] FINAL      -> I have access to 20 documents in the knowledge base, numbered from 0.txt through 19.txt. 
+
+**Tool used:** list_documents
+
+Would you like me to search for specific information within these documents?
+
+==================================================
+Query: What do keybullet kin drop?
+--- Agent Trace ---
+[1] TOOL CALL  -> retrieve_documents({'query': 'keybullet kin drop'})
+[2] TOOL RESULT -> {"status": "ok", "answer": "Based on the context provided, Keybullet Kin drop **1 key upon death** under normal circumstances. However, there are important exceptions and details:\n\n**Key Drop Inform...
+[3] FINAL      -> **Keybullet Kin drop keys when killed:**
+
+- **Normal Keybullet Kin**: Drop **1 key** upon death
+- **Jammed Keybullet Kin**: Drop **2 keys** upon death
+
+**Important notes:**
+- If you knock a Keybullet Kin into a pit, it will **NOT** drop a key
+- Keybullet Kin run away from the player and will disappear if not killed quickly enough
+- Unlike regular Bullet Kin, they don't deal contact damage if they bump into you
+- Jammed versions run faster and teleport away more quickly
+
+**Spawn chances per floor:**
+- 50% chance: 0 Keybullet Kin
+- 30% chance: 1 Keybullet Kin  
+- 20% chance: 2 Keybullet Kin
+
+*This information was retrieved using the retrieve_documents tool from the knowledge base.*
+
+==================================================
+Query: What is the weather in Mumbai today?
+--- Agent Trace ---
+[1] TOOL CALL  -> web_search({'query': 'weather in Mumbai today'})
+[2] TOOL RESULT -> Found 10 search results:
+
+1. Mumbai, Maharashtra, India Hourly Weather | AccuWeather
+   URL: https://www.accuweather.com/en/in/mumbai/204842/hourly-weather-forecast/204842
+   Summary: Hourlyweatherfor...
+[3] FINAL      -> Based on the web search results, I can see that there are several weather sources available for Mumbai, but the search results don't provide the specific current weather details in the summaries. However, I noticed from the India Meteorological Department (IMD) result that it shows:
+
+**Weather in Mumbai Today:**
+- **Temperature**: 29°C
+- **Humidity**: 74%
+- **Wind Speed**: 13 km/h
+- **Observation time**: September 10, 2026, 8:30 IST
+
+Please note that for the most current and detailed weather information, I recommend visiting one of the weather websites like AccuWeather, The Weather Channel, or the India Meteorological Department's official website.
+
+**Tool used**: web_search (to get current weather data for Mumbai)
+
+==================================================
+Query: Tell me a joke
+--- Agent Trace ---
+[1] FINAL      -> Why don't scientists trust atoms?
+
+Because they make up everything! 😄
+
+(This was answered directly without tools since you asked for a joke, which is social/entertainment rather than factual information.)
