@@ -1,0 +1,57 @@
+[
+  {
+    "file": "0.txt",
+    "title": "Agents",
+    "source": "https://docs.langchain.com/oss/python/langchain/agents"
+  },
+  {
+    "file": "1.txt",
+    "title": "Tool calling",
+    "source": "https://docs.langchain.com/oss/python/langchain/frontend/tool-calling"
+  },
+  {
+    "file": "2.txt",
+    "title": "Tools",
+    "source": "https://docs.langchain.com/oss/python/deepagents/tools"
+  },
+  {
+    "file": "3.txt",
+    "title": "Long-term memory",
+    "source": "https://docs.langchain.com/oss/python/langchain/long-term-memory"
+  },
+  {
+    "file": "4.txt",
+    "title": "Short-term memory",
+    "source": "https://docs.langchain.com/oss/python/langchain/short-term-memory"
+  },
+  {
+    "file": "5.txt",
+    "title": "Retrieval",
+    "source": "https://docs.langchain.com/oss/python/deepagents/retrieval"
+  },
+  {
+    "file": "6.txt",
+    "title": "Model Context Protocol (MCP)",
+    "source": "https://docs.langchain.com/oss/python/langchain/mcp"
+  },
+  {
+    "file": "7.txt",
+    "title": "Multi-agent",
+    "source": "https://docs.langchain.com/oss/python/langchain/multi-agent/index"
+  },
+  {
+    "file": "8.txt",
+    "title": "Build a custom RAG agent with LangGraph",
+    "source": "https://docs.langchain.com/oss/python/langgraph/agentic-rag"
+  },
+  {
+    "file": "9.txt",
+    "title": "Workflows and agents",
+    "source": "https://docs.langchain.com/oss/python/langgraph/workflows-agents"
+  },
+  {
+    "file": "10.txt",
+    "title": "Context engineering in agents",
+    "source": "https://docs.langchain.com/oss/python/langchain/context-engineering"
+  }
+]
