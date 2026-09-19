@@ -6,7 +6,7 @@ from langchain_core.documents.base import Document
 from pathlib import Path
 from config import VECTOR_DB
 
-BASE_DIR = Path(__file__).parent.parent / "langchain_dataset_starter"
+BASE_DIR = Path(__file__).resolve().parent.parent.parent / "langchain_dataset_starter"
 CORPORA = {
     "langgraph": BASE_DIR / "langgraph",
     "langchain": BASE_DIR / "langchain",

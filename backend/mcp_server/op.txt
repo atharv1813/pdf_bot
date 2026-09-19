@@ -1,0 +1,170 @@
+(genenv) atharv@atharv-Latitude-3450:~/GenAI/study_vedya/langgraph/projects/chat_pdf/backend$ cd backend
+python -m mcp_server.debug_client
+bash: cd: backend: No such file or directory
+[debug_client] spawning: /home/atharv/GenAI/genenv/bin/python -m mcp_server.server (cwd=/home/atharv/GenAI/study_vedya/langgraph/projects/chat_pdf/backend)
+[debug_client] server does ingestion + graph compile before it's ready — this may take a few seconds
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 103/103 [00:00<00:00, 7717.42it/s]
+/home/atharv/GenAI/genenv/lib/python3.10/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.
+  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
+[mcp_server] running ingestion...
+[mcp_server] compiling Self-RAG graph...
+[09/20/26 00:43:48] INFO     Processing request of type ListToolsRequest                                                                                          server.py:720
+Available tools: ['ask_documents', 'list_documents']
+                    INFO     Processing request of type CallToolRequest                                                                                           server.py:720
+
+=== list_documents({}) — 0.0s ===
+{
+  "count": 28,
+  "documents": {
+    "langgraph": [
+      {
+        "title": "concepts/why-langgraph.md",
+        "source": "concepts/why-langgraph.md"
+      },
+      {
+        "title": "concepts/low_level.md",
+        "source": "concepts/low_level.md"
+      },
+      {
+        "title": "how-tos/graph-api.md",
+        "source": "how-tos/graph-api.md"
+      },
+      {
+        "title": "concepts/agentic_concepts.md",
+        "source": "concepts/agentic_concepts.md"
+      },
+      {
+        "title": "concepts/tools.md",
+        "source": "concepts/tools.md"
+      },
+      {
+        "title": "how-tos/tool-calling.md",
+        "source": "how-tos/tool-calling.md"
+      },
+      {
+        "title": "concepts/memory.md",
+        "source": "concepts/memory.md"
+      },
+      {
+        "title": "concepts/persistence.md",
+        "source": "concepts/persistence.md"
+      },
+      {
+        "title": "concepts/human_in_the_loop.md",
+        "source": "concepts/human_in_the_loop.md"
+      },
+      {
+        "title": "concepts/multi_agent.md",
+        "source": "concepts/multi_agent.md"
+      },
+      {
+        "title": "how-tos/multi_agent.md",
+        "source": "how-tos/multi_agent.md"
+      },
+      {
+        "title": "concepts/subgraphs.md",
+        "source": "concepts/subgraphs.md"
+      },
+      {
+        "title": "how-tos/subgraph.md",
+        "source": "how-tos/subgraph.md"
+      },
+      {
+        "title": "concepts/streaming.md",
+        "source": "concepts/streaming.md"
+      },
+      {
+        "title": "how-tos/streaming.md",
+        "source": "how-tos/streaming.md"
+      },
+      {
+        "title": "concepts/mcp.md",
+        "source": "concepts/mcp.md"
+      },
+      {
+        "title": "concepts/server-mcp.md",
+        "source": "concepts/server-mcp.md"
+      }
+    ],
+    "langchain": [
+      {
+        "title": "Agents",
+        "source": "https://docs.langchain.com/oss/python/langchain/agents"
+      },
+      {
+        "title": "Tool calling",
+        "source": "https://docs.langchain.com/oss/python/langchain/frontend/tool-calling"
+      },
+      {
+        "title": "Tools",
+        "source": "https://docs.langchain.com/oss/python/deepagents/tools"
+      },
+      {
+        "title": "Long-term memory",
+        "source": "https://docs.langchain.com/oss/python/langchain/long-term-memory"
+      },
+      {
+        "title": "Short-term memory",
+        "source": "https://docs.langchain.com/oss/python/langchain/short-term-memory"
+      },
+      {
+        "title": "Retrieval",
+        "source": "https://docs.langchain.com/oss/python/deepagents/retrieval"
+      },
+      {
+        "title": "Model Context Protocol (MCP)",
+        "source": "https://docs.langchain.com/oss/python/langchain/mcp"
+      },
+      {
+        "title": "Multi-agent",
+        "source": "https://docs.langchain.com/oss/python/langchain/multi-agent/index"
+      },
+      {
+        "title": "Build a custom RAG agent with LangGraph",
+        "source": "https://docs.langchain.com/oss/python/langgraph/agentic-rag"
+      },
+      {
+        "title": "Workflows and agents",
+        "source": "https://docs.langchain.com/oss/python/langgraph/workflows-agents"
+      },
+      {
+        "title": "Context engineering in agents",
+        "source": "https://docs.langchain.com/oss/python/langchain/context-engineering"
+      }
+    ]
+  }
+}
+                    INFO     Processing request of type CallToolRequest                                                                                           server.py:720
+                    INFO     Using Bedrock Converse API to generate response                                                                            bedrock_converse.py:896
+[09/20/26 00:43:50] INFO     Using Bedrock Converse API to generate response                                                                            bedrock_converse.py:896
+[09/20/26 00:43:51] INFO     Using Bedrock Converse API to generate response                                                                            bedrock_converse.py:896
+[09/20/26 00:44:01] INFO     Using Bedrock Converse API to generate response                                                                            bedrock_converse.py:896
+[09/20/26 00:44:07] INFO     Using Bedrock Converse API to generate response                                                                            bedrock_converse.py:896
+[09/20/26 00:44:18] INFO     Using Bedrock Converse API to generate response                                                                            bedrock_converse.py:896
+[09/20/26 00:44:23] INFO     Using Bedrock Converse API to generate response                                                                            bedrock_converse.py:896
+
+=== ask_documents({'query': 'What is human-in-the-loop in LangGraph?'}) — 39.4s ===
+{
+  "status": "ok",
+  "answer": "**Human-in-the-loop** in LangGraph is a feature that enables human oversight and intervention within AI agent workflows. Based on the available documentation, here is what is known:\n\n1. **Routing Complex Queries to Humans**: LangGraph supports the ability to **route complex queries to a human for review**, ensuring that situations requiring human judgment are not handled autonomously by the AI agent.\n\n2. **Interruption and Resumption**: LangGraph provides mechanisms for **how interruptions are resumed in human-in-the-loop workflows**, allowing workflows to be paused and then continued after human input. The specific mechanics of this process are detailed in LangGraph's dedicated [human-in-the-loop concepts documentation](../concepts/human_in_the_loop.md).\n\n3. **Integration with Checkpointing (Persistence)**: Human-in-the-loop workflows are connected to LangGraph's **checkpointing system**, which handles how state updates are saved \u2014 enabling workflows to be safely interrupted and resumed.\n\n4. **Reliability and Controllability**: LangGraph explicitly highlights human-in-the-loop as part of its **reliability and controllability** features. It allows developers to \"steer agent actions with moderation checks and human-in-the-loop approvals,\" and LangGraph persists context for long-running workflows to keep agents on course.\n\n5. **Part of Core LangGraph Concepts**: Human-in-the-loop controls are treated as a fundamental LangGraph concept, covered as a dedicated step in the LangGraph basics tutorial series (*\"Add human-in-the-loop controls\"*).\n\nIn summary, human-in-the-loop in LangGraph is a built-in capability for introducing **human oversight** into AI agent pipelines \u2014 enabling routing of complex decisions to humans, supporting workflow interruption and resumption, and working in tandem with LangGraph's persistence/checkpointing system to make AI agents more **reliable, safe, and controllable**.",
+  "sources": [
+    {
+      "title": "concepts/why-langgraph.md",
+      "source": "concepts/why-langgraph.md",
+      "corpus": "langgraph"
+    },
+    {
+      "title": "how-tos/graph-api.md",
+      "source": "how-tos/graph-api.md",
+      "corpus": "langgraph"
+    },
+    {
+      "title": "concepts/why-langgraph.md",
+      "source": "concepts/why-langgraph.md",
+      "corpus": "langgraph"
+    }
+  ],
+  "support": "fully",
+  "usefulness": "5"
+}
+(genenv) atharv@atharv-Latitude-3450:~/GenAI/study_vedya/langgraph/projects/chat_pdf/backend$ 

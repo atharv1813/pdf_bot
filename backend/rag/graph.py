@@ -39,7 +39,7 @@ def retrieve_node(state: RAGState) -> dict:
     # 3. Resolve active file_ids
     active_file_ids = state.file_ids if state.file_ids else None
     
-    RETRIEVAL_K = 15   # wider net; reranker will trim this down later
+    RETRIEVAL_K = 15   # wider net; relevance grading is now one batched call, not one per doc
     
     search_kwargs: dict[str, int | str] = {"k": RETRIEVAL_K}
     if active_file_ids:
@@ -78,29 +78,42 @@ def generate_directly_node(state: RAGState) -> dict:
     
     return {"final_answer": result}
 
-class Is_relevant(BaseModel):
-    is_relevant: bool = Field(description="is the docuemnt relevant to the query")
-    
+class Is_relevant_batch(BaseModel):
+    relevant_indices: List[int] = Field(
+        description="Indices (0-based, from the numbered document list) of every document that is relevant to the query. Empty list if none are relevant."
+    )
+
 def is_relevant_node(state: RAGState) -> dict:
-    relevancy_model = model.with_structured_output(Is_relevant)
-    relevant = []
-    for doc in state.context:
-        ans = relevancy_model.invoke(
+    # One structured-output call graded over every retrieved doc at once,
+    # instead of one Bedrock round-trip per doc — the same k=15 docs that
+    # used to cost 15 sequential calls now cost exactly 1.
+    if not state.context:
+        return {"relevant_context": []}
+
+    relevancy_model = model.with_structured_output(Is_relevant_batch)
+    numbered_docs = "\n\n".join(
+        f"Document {i}:\n{doc.content}" for i, doc in enumerate(state.context)
+    )
+    ans = relevancy_model.invoke(
         f"""
-            Determine whether the document is relevant to answering the query.
+            Given the query below and a numbered list of candidate documents, determine
+            which documents (if any) are relevant to answering the query.
 
             Query:
             {state.query}
 
-            Document:
-            {doc.content}
+            {numbered_docs}
 
-            Return ONLY the structured field indicating whether the document is relevant.
+            Return the 0-based indices of every relevant document. Return an empty
+            list if none of the documents are relevant.
             """
-            )
-        if ans.is_relevant:
-            relevant.append(doc)
-            
+    )
+
+    relevant = [
+        state.context[i]
+        for i in ans.relevant_indices
+        if 0 <= i < len(state.context)
+    ]
     return {"relevant_context": relevant}
         
 def is_relevant_decision(state: RAGState) -> Literal['yes_rel', 'not_rel']:

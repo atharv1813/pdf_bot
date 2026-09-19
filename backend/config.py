@@ -1,10 +1,16 @@
+from dotenv import load_dotenv
+
+# Must run before ChatBedrockConverse is constructed below — otherwise AWS
+# credentials from .env aren't in the environment yet when boto3 resolves them.
+load_dotenv()
+
 from langchain_aws import ChatBedrockConverse
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 
 #=========== LLM MODEL SETUP =====================
 model = ChatBedrockConverse(
-    model="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    model="us.anthropic.claude-sonnet-4-6",
     region_name="us-east-1"
 )
 
