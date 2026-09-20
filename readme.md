@@ -114,4 +114,4 @@ edges, left as-is deliberately or as next steps:
 - Retrieval sometimes cites a broadly-relevant overview page instead of the
   most specific one available — an embedding-quality tuning question, not a
   correctness bug (answers are still grounded and checked before being
-  returned).
+  returned to the user).
