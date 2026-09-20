@@ -33,3 +33,6 @@ Thumbs.db
 *.log
 
 archive/
+
+# Claude Code personal settings
+.claude/settings.local.json
