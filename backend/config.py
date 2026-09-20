@@ -7,6 +7,7 @@ load_dotenv()
 from langchain_aws import ChatBedrockConverse
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
+from sentence_transformers import CrossEncoder
 
 #=========== LLM MODEL SETUP =====================
 model = ChatBedrockConverse(
@@ -27,4 +28,7 @@ VECTOR_DB = Chroma(
     embedding_function=embeddings,
     persist_directory=CHROMA_DIR
 )
+
+# ===================== CROSS-ENCODER (for reranking) =====================
+RERANKER = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
 

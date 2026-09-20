@@ -7,6 +7,7 @@ class Retrieved_docs(BaseModel):
     content: str = Field(description="Content of the retrieved document")
     metadata: dict = Field(default_factory=dict, description="Metadata associated with the document")
     is_relevant: bool = Field(default=True, description="Indicates if the document is relevant to the query")
+    rerank_score: Optional[float] = Field(default=None, description="Cross-encoder relevance score from reranking")
     
 class Support_state(BaseModel):
     is_supported: Literal["fully", "partially", "no"] = Field(
