@@ -1,6 +1,7 @@
 import asyncio
 import json
 import re
+import sys
 
 from langchain_core.messages import ToolMessage
 from langgraph.graph import StateGraph, START
@@ -24,6 +25,10 @@ async def build_agent():
     async def call_model(state: AgentState) -> dict:
         messages = [SYSTEM_PROMPT] + state["messages"]
         response = await llm_with_tools.ainvoke(messages)
+
+        for tc in getattr(response, "tool_calls", None) or []:
+            print(f"[AGENT] calling tool: {tc['name']}({tc['args']})", file=sys.stderr)
+
         return {"messages": [response]}
 
     graph = StateGraph(AgentState)

@@ -1,26 +1,16 @@
 import asyncio
 import json
-import sys
 import time
 from datetime import timedelta
-from pathlib import Path
 
-from mcp import ClientSession, StdioServerParameters
-from mcp.client.stdio import stdio_client
+from mcp import ClientSession
+from mcp.client.streamable_http import streamablehttp_client
 
-BACKEND_DIR = Path(__file__).resolve().parent.parent
-
-# Spawns server.py itself as a subprocess over stdio — same transport a real
-# agent will use later. No inspector UI, no fixed 60s cutoff: the timeout
-# below is explicit and generous, so a genuinely slow (not hung) tool call
-# still completes instead of getting cut off mid-run.
-# sys.executable (not the bare string "python") guarantees the subprocess
-# uses the exact same interpreter/venv this script is running under.
-SERVER_PARAMS = StdioServerParameters(
-    command=sys.executable,
-    args=["-m", "mcp_server.server"],
-    cwd=str(BACKEND_DIR),
-)
+# Connects to an already-running server (`python -m mcp_server.server` in
+# its own terminal), instead of spawning one — same persistent-server model
+# the agent now uses, so you're debugging the actual thing you'll talk to,
+# not a fresh one-off subprocess.
+SERVER_URL = "http://127.0.0.1:8000/mcp"
 
 CALL_TIMEOUT = timedelta(seconds=180)
 
@@ -42,10 +32,10 @@ async def call_tool(session: ClientSession, name: str, arguments: dict | None = 
 
 
 async def main():
-    print(f"[debug_client] spawning: {SERVER_PARAMS.command} {' '.join(SERVER_PARAMS.args)} (cwd={SERVER_PARAMS.cwd})")
-    print("[debug_client] server does ingestion + graph compile before it's ready — this may take a few seconds")
+    print(f"[debug_client] connecting to {SERVER_URL}")
+    print("[debug_client] make sure `python -m mcp_server.server` is already running in another terminal")
 
-    async with stdio_client(SERVER_PARAMS) as (read, write):
+    async with streamablehttp_client(SERVER_URL) as (read, write, _):
         async with ClientSession(read, write, read_timeout_seconds=CALL_TIMEOUT) as session:
             await session.initialize()
 

@@ -22,5 +22,14 @@ SYSTEM_PROMPT = SystemMessage(
         Always prefer ask_documents over search for LangChain/LangGraph
         questions. Only fall back to search when the local corpus genuinely
         doesn't cover it.
+
+        Call ask_documents at most once per question. It already runs a full
+        retrieval-and-answer pipeline internally (retrieval, grading, and a
+        groundedness check with automatic revision), so a single call is
+        expected to be sufficient — each call is expensive (tens of seconds).
+        Only call it a second time if the first call's response was empty or
+        explicitly said no relevant documents were found; never call it
+        multiple times just to gather additional angles on an already-
+        answered question.
     """
 )

@@ -30,13 +30,17 @@ _compiled_graph = build_graph().compile()
 @mcp.tool()
 def ask_documents(query: str) -> str:
     """Answer a question using the local LangChain/LangGraph documentation corpus."""
+    print(f"[MCP-SERVER] ask_documents called: {query}", file=sys.stderr)
+
     try:
         result = _compiled_graph.invoke(RAGState(query=query))
     except Exception as exc:
+        print(f"[MCP-SERVER] ask_documents error: {exc}", file=sys.stderr)
         return json.dumps({"status": "error", "message": str(exc)})
 
     final_answer = result.get("final_answer")
     if not final_answer:
+        print("[MCP-SERVER] ask_documents returning: no_answer", file=sys.stderr)
         return json.dumps({"status": "no_answer", "message": "No answer found in documents."})
 
     sources = [
@@ -57,6 +61,8 @@ def ask_documents(query: str) -> str:
         payload["support"] = final_answer.support_state.is_supported
     if final_answer.usefulness_state:
         payload["usefulness"] = final_answer.usefulness_state.is_useful
+
+    print(f"[MCP-SERVER] ask_documents returning: status={payload['status']} support={payload.get('support')} usefulness={payload.get('usefulness')}", file=sys.stderr)
 
     return json.dumps(payload)
 
@@ -84,4 +90,8 @@ def list_documents() -> str:
 
 
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    # streamable-http, not stdio: runs as a standalone, long-lived process
+    # (its own terminal) that the agent connects to over HTTP, instead of
+    # being spawned fresh — and re-ingesting/reloading models — on every
+    # single tool call.
+    mcp.run(transport="streamable-http")

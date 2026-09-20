@@ -1,11 +1,8 @@
 import sys
 from datetime import timedelta
-from pathlib import Path
 
 from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
-
-BACKEND_DIR = Path(__file__).resolve().parent.parent
 
 # Self-RAG tool calls are several sequential LLM round-trips (~40-60s) — well
 # past langchain-mcp-adapters' default read timeout, so every server here
@@ -14,13 +11,12 @@ CALL_TIMEOUT = timedelta(seconds=180)
 
 MCP_SERVERS = {
     "chat_pdf_rag": {
-        "transport": "stdio",
-        # sys.executable, not a bare "python" string — guarantees the
-        # subprocess uses this same interpreter/venv (bit us once already
-        # in debug_client.py).
-        "command": sys.executable,
-        "args": ["-m", "mcp_server.server"],
-        "cwd": str(BACKEND_DIR),
+        # Persistent server, run separately (`python -m mcp_server.server`
+        # in its own terminal) — not spawned per call. That means it only
+        # ingests and loads its models once, ever, instead of on every
+        # single tool call.
+        "transport": "streamable_http",
+        "url": "http://127.0.0.1:8000/mcp",
         "session_kwargs": {"read_timeout_seconds": CALL_TIMEOUT},
     },
     "duckduckgo": {

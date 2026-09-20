@@ -1,7 +1,11 @@
+import sys
 from typing import List
 from langgraph.graph import StateGraph, START, END
+from langchain_community.retrievers import BM25Retriever
+from langchain_classic.retrievers import EnsembleRetriever
+from langchain_core.documents import Document
 from rag.state import Candidate_answer, RAGState, Support_state, Usefulness_state, Retrieved_docs
-from config import model, VECTOR_DB
+from config import model, VECTOR_DB, RERANKER
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -24,7 +28,9 @@ def decide_retrieval_node(state: RAGState) -> dict:
     decider_model = model.with_structured_output(Decision_retrieval)
     
     decision_res = decider_model.invoke(prompt)
-    
+
+    print(f"[DECIDE] retrieval needed: {decision_res.decision}", file=sys.stderr)
+
     return {"query_retrieval_decision" : decision_res.decision}
 
 def route_retrieval_decision(state:RAGState) -> Literal['retrieve', 'dont_retrieve']:
@@ -35,25 +41,64 @@ def route_retrieval_decision(state:RAGState) -> Literal['retrieve', 'dont_retrie
         return 'dont_retrieve'
     
 def retrieve_node(state: RAGState) -> dict:
+    """Hybrid retrieval: BM25 (lexical/keyword) + vector (semantic) run in
+    parallel and get fused via EnsembleRetriever (Reciprocal Rank Fusion).
+    Over-fetches so rerank_node downstream has a wide, diverse candidate
+    pool to work with — same approach as the earlier version3 prototype."""
 
     # 3. Resolve active file_ids
     active_file_ids = state.file_ids if state.file_ids else None
-    
-    RETRIEVAL_K = 15   # wider net; relevance grading is now one batched call, not one per doc
-    
+
+    RETRIEVAL_K = 15   # wider net; rerank_node trims this down next
+
     search_kwargs: dict[str, int | str] = {"k": RETRIEVAL_K}
+    where_filter = None
     if active_file_ids:
-        search_kwargs["filter"] = {"file_id": {"$in": active_file_ids}}
-        
-    
+        where_filter = {"file_id": {"$in": active_file_ids}}
+        search_kwargs["filter"] = where_filter
 
     # 4a. Vector retriever — semantic similarity (Chroma)
     vector_retriever = VECTOR_DB.as_retriever(
         search_type="similarity",
         search_kwargs=search_kwargs
     )
-    retrieved = vector_retriever.invoke(state.query)
-    
+
+    # 4b. BM25 retriever — lexical/keyword search. BM25Retriever works
+    # in-memory over a fixed doc list, so it's rebuilt per query straight
+    # from whatever's currently in Chroma rather than persisted separately.
+    raw = VECTOR_DB.get(
+        where=where_filter,
+        include=["documents", "metadatas"]
+    )
+    bm25_corpus = [
+        Document(page_content=text, metadata=meta)
+        for text, meta in zip(raw["documents"], raw["metadatas"])
+    ]
+    bm25_retriever = BM25Retriever.from_documents(bm25_corpus)
+    bm25_retriever.k = RETRIEVAL_K
+
+    # 4c. Fuse both via EnsembleRetriever (Reciprocal Rank Fusion).
+    # weights: [bm25, vector] — how much to trust keyword vs semantic matches.
+    hybrid_retriever = EnsembleRetriever(
+        retrievers=[bm25_retriever, vector_retriever],
+        weights=[0.4, 0.6]
+    )
+
+    # Call each retriever directly (exactly what .invoke() would do
+    # internally anyway) instead of hybrid_retriever.invoke(), so we can log
+    # each one's own ranking before fusion — same number of retriever calls,
+    # just not hidden behind the wrapper. weighted_reciprocal_rank is the
+    # ensemble's own public fusion method, so the math is unchanged.
+    bm25_docs = bm25_retriever.invoke(state.query)
+    vector_docs = vector_retriever.invoke(state.query)
+
+    print(f"[RETRIEVE] BM25 top-5: {[d.metadata.get('title', d.metadata.get('source_path', '?')) for d in bm25_docs[:5]]}", file=sys.stderr)
+    print(f"[RETRIEVE] vector top-5: {[d.metadata.get('title', d.metadata.get('source_path', '?')) for d in vector_docs[:5]]}", file=sys.stderr)
+
+    retrieved = hybrid_retriever.weighted_reciprocal_rank([bm25_docs, vector_docs])
+
+    print(f"[RETRIEVE] fused top-15: {[d.metadata.get('title', d.metadata.get('source_path', '?')) for d in retrieved[:15]]}", file=sys.stderr)
+
     converted: List[Retrieved_docs] = [
     Retrieved_docs(
             doc_id=d.metadata.get("file_id", ""),   # pull file_id out of LangChain's metadata dict
@@ -62,10 +107,37 @@ def retrieve_node(state: RAGState) -> dict:
         )
         for d in retrieved   # loop over each LangChain Document returned by the retriever
     ]
-    
+
     return {"context": converted}
-    
-    
+
+
+def rerank_node(state: RAGState) -> dict:
+    """Cross-encoder scores each (query, chunk) pair jointly — useful here
+    since BM25 + vector fusion can surface candidates strong on one axis
+    (keyword or semantic) but not jointly relevant. Trims the k=15 hybrid
+    candidates down before the LLM-based is_relevant_node grades them."""
+    TOP_N = 5
+
+    if not state.context:
+        return {"context": []}
+
+    pairs = [(state.query, doc.content) for doc in state.context]
+    scores = RERANKER.predict(pairs)
+
+    scored = [
+        doc.model_copy(update={"rerank_score": float(score)})
+        for doc, score in zip(state.context, scores)
+    ]
+    scored.sort(key=lambda d: d.rerank_score, reverse=True)
+
+    for i, doc in enumerate(scored):
+        title = doc.metadata.get("title", doc.metadata.get("source_path", "?"))
+        marker = "KEEP" if i < TOP_N else "drop"
+        print(f"[RERANK] {doc.rerank_score:.3f}  {title}  ({marker})", file=sys.stderr)
+
+    return {"context": scored[:TOP_N]}
+
+
 
 def generate_directly_node(state: RAGState) -> dict:
     query = state.query
@@ -152,7 +224,9 @@ def is_supported_node(state: RAGState) -> dict:
 
     result: Support_state = support_model.invoke(prompt)   # ONE call, ONE object back
 
-    updated_answer:Candidate_answer = candidate_ans.model_copy(update={"support_state": result}) 
+    print(f"[SUPPORT] verdict={result.is_supported}  feedback={result.is_supported_feedback}", file=sys.stderr)
+
+    updated_answer:Candidate_answer = candidate_ans.model_copy(update={"support_state": result})
     # because llm only return parts of level0 state key not entire so first update 
     # that key then return that key in a dict 
 
@@ -182,9 +256,11 @@ def revise_answer_node(state: RAGState) -> dict:
     """
     
     retries: int = state.retries + 1
-    
+
+    print(f"[REVISE] retry #{retries} — regenerating answer", file=sys.stderr)
+
     result: Candidate_answer = model.with_structured_output(Candidate_answer).invoke(prompt)
-    
+
     return {"candidate_answer" : result, "retries": retries}
   
     
@@ -238,6 +314,7 @@ def build_graph():
     
     graph.add_node("decide_retrieval", decide_retrieval_node)
     graph.add_node("retrieve", retrieve_node)
+    graph.add_node("rerank", rerank_node)
     graph.add_node("generate_directly", generate_directly_node)
     graph.add_node("is_relevant", is_relevant_node)
     graph.add_node("generate_from_context", generate_from_context_node)
@@ -256,7 +333,8 @@ def build_graph():
         }
         )
     graph.add_edge("generate_directly", END)
-    graph.add_edge("retrieve", "is_relevant")
+    graph.add_edge("retrieve", "rerank")
+    graph.add_edge("rerank", "is_relevant")
     graph.add_conditional_edges(
         "is_relevant",
         is_relevant_decision,
