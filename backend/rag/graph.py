@@ -1,3 +1,4 @@
+import sys
 from typing import List
 from langgraph.graph import StateGraph, START, END
 from langchain_community.retrievers import BM25Retriever
@@ -27,7 +28,9 @@ def decide_retrieval_node(state: RAGState) -> dict:
     decider_model = model.with_structured_output(Decision_retrieval)
     
     decision_res = decider_model.invoke(prompt)
-    
+
+    print(f"[DECIDE] retrieval needed: {decision_res.decision}", file=sys.stderr)
+
     return {"query_retrieval_decision" : decision_res.decision}
 
 def route_retrieval_decision(state:RAGState) -> Literal['retrieve', 'dont_retrieve']:
@@ -81,7 +84,20 @@ def retrieve_node(state: RAGState) -> dict:
         weights=[0.4, 0.6]
     )
 
-    retrieved = hybrid_retriever.invoke(state.query)
+    # Call each retriever directly (exactly what .invoke() would do
+    # internally anyway) instead of hybrid_retriever.invoke(), so we can log
+    # each one's own ranking before fusion — same number of retriever calls,
+    # just not hidden behind the wrapper. weighted_reciprocal_rank is the
+    # ensemble's own public fusion method, so the math is unchanged.
+    bm25_docs = bm25_retriever.invoke(state.query)
+    vector_docs = vector_retriever.invoke(state.query)
+
+    print(f"[RETRIEVE] BM25 top-5: {[d.metadata.get('title', d.metadata.get('source_path', '?')) for d in bm25_docs[:5]]}", file=sys.stderr)
+    print(f"[RETRIEVE] vector top-5: {[d.metadata.get('title', d.metadata.get('source_path', '?')) for d in vector_docs[:5]]}", file=sys.stderr)
+
+    retrieved = hybrid_retriever.weighted_reciprocal_rank([bm25_docs, vector_docs])
+
+    print(f"[RETRIEVE] fused top-15: {[d.metadata.get('title', d.metadata.get('source_path', '?')) for d in retrieved[:15]]}", file=sys.stderr)
 
     converted: List[Retrieved_docs] = [
     Retrieved_docs(
@@ -113,6 +129,11 @@ def rerank_node(state: RAGState) -> dict:
         for doc, score in zip(state.context, scores)
     ]
     scored.sort(key=lambda d: d.rerank_score, reverse=True)
+
+    for i, doc in enumerate(scored):
+        title = doc.metadata.get("title", doc.metadata.get("source_path", "?"))
+        marker = "KEEP" if i < TOP_N else "drop"
+        print(f"[RERANK] {doc.rerank_score:.3f}  {title}  ({marker})", file=sys.stderr)
 
     return {"context": scored[:TOP_N]}
 
@@ -203,7 +224,9 @@ def is_supported_node(state: RAGState) -> dict:
 
     result: Support_state = support_model.invoke(prompt)   # ONE call, ONE object back
 
-    updated_answer:Candidate_answer = candidate_ans.model_copy(update={"support_state": result}) 
+    print(f"[SUPPORT] verdict={result.is_supported}  feedback={result.is_supported_feedback}", file=sys.stderr)
+
+    updated_answer:Candidate_answer = candidate_ans.model_copy(update={"support_state": result})
     # because llm only return parts of level0 state key not entire so first update 
     # that key then return that key in a dict 
 
@@ -233,9 +256,11 @@ def revise_answer_node(state: RAGState) -> dict:
     """
     
     retries: int = state.retries + 1
-    
+
+    print(f"[REVISE] retry #{retries} — regenerating answer", file=sys.stderr)
+
     result: Candidate_answer = model.with_structured_output(Candidate_answer).invoke(prompt)
-    
+
     return {"candidate_answer" : result, "retries": retries}
   
     
