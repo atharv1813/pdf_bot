@@ -1,6 +1,8 @@
 /home/atharv/GenAI/genenv/lib/python3.10/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.
   from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
-Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8068.98it/s]
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8068.98it/s]
 DuckDuckGo MCP Server initialized:
   SafeSearch: MODERATE (kp=-1)
   Default Region: none
@@ -25,7 +27,6 @@ DuckDuckGo MCP Server initialized:
 💾 All files already ingested — skipping
 [mcp] Using DuckDuckGo MCP for web_search
 
-==================================================
 Query: What documents do you have?
 --- Agent Trace ---
 [1] TOOL CALL  -> list_documents({})
@@ -34,7 +35,6 @@ Query: What documents do you have?
 
 Would you like me to search for specific information within these documents, or would you like to know what topics or content they contain?
 
-==================================================
 Query: What is relativity?
 --- Agent Trace ---
 [1] FINAL      -> Relativity refers to the revolutionary theories of physics developed by Albert Einstein in the early 20th century. There are two main theories:
@@ -57,7 +57,6 @@ Both theories fundamentally changed our understanding of space, time, gravity, a
 
 Would you like me to search for more detailed information about any specific aspect of relativity?
 
-==================================================
 Query: What is the weather in Mumbai today?
 --- Agent Trace ---
 [1] TOOL CALL  -> web_search({'query': 'weather in Mumbai today'})
@@ -76,7 +75,6 @@ However, I should note that the exact current conditions may vary slightly depen
 
 **Tool used**: web_search to find current weather information for Mumbai.
 
-==================================================
 Query: Tell me a joke
 --- Agent Trace ---
 [1] FINAL      -> Why don't scientists trust atoms?
