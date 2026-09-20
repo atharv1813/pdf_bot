@@ -84,4 +84,8 @@ def list_documents() -> str:
 
 
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    # streamable-http, not stdio: runs as a standalone, long-lived process
+    # (its own terminal) that the agent connects to over HTTP, instead of
+    # being spawned fresh — and re-ingesting/reloading models — on every
+    # single tool call.
+    mcp.run(transport="streamable-http")

@@ -1,5 +1,6 @@
 import hashlib
 import json
+import sys
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from typing import List
 from langchain_core.documents.base import Document
@@ -74,6 +75,8 @@ def run_ingestion():
     if new_chunks:
         VECTOR_DB.add_documents(new_chunks)
         new_file_count = len(set(c.metadata["file_id"] for c in new_chunks))
-        print(f"💾 Ingested {len(new_chunks)} new chunks across {new_file_count} file(s)")
+        # stderr, not stdout — this runs inside mcp_server/server.py, whose
+        # stdout IS the JSON-RPC channel; a stray print there corrupts it.
+        print(f"💾 Ingested {len(new_chunks)} new chunks across {new_file_count} file(s)", file=sys.stderr)
     else:
-        print("💾 All files already ingested — skipping")
+        print("💾 All files already ingested — skipping", file=sys.stderr)
