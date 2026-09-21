@@ -137,10 +137,10 @@ system, with every `[TAG]`ged log line kept intact:
 
 1. A well-covered question that still triggers 2 rounds of self-correction
    before the groundedness checker is satisfied.
-2. A question half-covered by the local corpus (`AgentExecutor` never
-   appears in it) — the agent tries 3 local retrieval phrasings, then falls
-   back to web search for the uncovered half, and synthesizes both sources
-   into one answer.
+2. A question half-covered by the local corpus — the agent tries local
+   retrieval first, correctly gets no relevant matches for the uncovered
+   half, then falls back to web search and synthesizes both sources into
+   one answer.
 3. A "check the web" question the agent correctly routes to `search`/
    `fetch_content` without ever touching `ask_documents` — proof the routing
    decision is real, not just a static preference.
