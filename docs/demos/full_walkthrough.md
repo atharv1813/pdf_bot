@@ -122,11 +122,11 @@ sources:
 
 ---
 
-## Query 2 — forcing self-correction AND cross-MCP-server routing in one turn
+## Query 2 — a relevance gate correctly saying "not this," then the agent falling back to web
 
 > *"Compare LangGraph's human-in-the-loop interrupt with LangChain's old `AgentExecutor` callback system and tell me which is better for production."*
 
-`AgentExecutor` never appears anywhere in this project's corpus — deliberately, to see what happens when half a question is simply outside the local docs. It did more than expected: the agent tried **three separate `ask_documents` calls** with different phrasings before giving up on local grounding for that half, then **fell back to `search` + `fetch_content`** to answer the `AgentExecutor` side from the web — combining both MCP servers' results into one final synthesis.
+`AgentExecutor` never appears anywhere in this project's corpus — deliberately, to see what happens when half a question is simply outside the local docs. The agent made three separate `ask_documents` calls: one for the LangGraph half (well-grounded, 3 revision rounds, ends fully supported), and two rephrasings for the `AgentExecutor` half. Both of those correctly got zero relevant candidates from `is_relevant_node` — not "weak evidence," genuinely **no relevant documents at all** — and returned the pipeline's built-in "I couldn't find anything, want me to search the web?" fallback. The agent, reading that, then called `search` + `fetch_content` itself and synthesized both sources into one final answer.
 
 **Server side (all three `ask_documents` calls in this turn):**
 ```
@@ -157,17 +157,59 @@ sources:
 [DECIDE] retrieval needed: True
 [RETRIEVE] BM25 top-5: ['Build a custom RAG agent with LangGraph', 'Model Context Protocol (MCP)', 'how-tos/graph-api.md', 'Model Context Protocol (MCP)', 'Model Context Protocol (MCP)']
 [RETRIEVE] vector top-5: ['Short-term memory', 'Model Context Protocol (MCP)', 'concepts/tools.md', 'how-tos/multi_agent.md', 'how-tos/multi_agent.md']
-[RETRIEVE] fused top-15: [mostly Short-term memory / MCP / tools.md / multi_agent.md — nothing about AgentExecutor, because nothing in the corpus mentions it]
-[RERANK] top score only 2.042 (concepts/tools.md) — much weaker than query 1's top score of 5.373, reflecting genuinely poor topical match
+[RETRIEVE] fused top-15: ['Short-term memory', 'Model Context Protocol (MCP)', 'concepts/tools.md', 'how-tos/multi_agent.md', 'how-tos/multi_agent.md', 'Context engineering in agents', 'Short-term memory', 'Tools', 'how-tos/multi_agent.md', 'Short-term memory', 'concepts/multi_agent.md', 'how-tos/multi_agent.md', 'Build a custom RAG agent with LangGraph', 'how-tos/streaming.md', 'how-tos/multi_agent.md']
+
+[RERANK] 2.042  concepts/tools.md  (KEEP)
+[RERANK] 1.533  Model Context Protocol (MCP)  (KEEP)
+[RERANK] 0.867  Context engineering in agents  (KEEP)
+[RERANK] 0.715  Model Context Protocol (MCP)  (KEEP)
+[RERANK] 0.354  Model Context Protocol (MCP)  (KEEP)
+[RERANK] 0.268  how-tos/multi_agent.md  (drop)
+[RERANK] -0.428  Build a custom RAG agent with LangGraph  (drop)
+[RERANK] -0.626  Agents  (drop)
+[RERANK] -0.668  how-tos/multi_agent.md  (drop)
+[RERANK] -1.106  Tools  (drop)
+[RERANK] -1.145  Model Context Protocol (MCP)  (drop)
+[RERANK] -1.299  Short-term memory  (drop)
+[RERANK] -1.399  concepts/multi_agent.md  (drop)
+[RERANK] -1.409  Short-term memory  (drop)
+[RERANK] -1.458  how-tos/multi_agent.md  (drop)
+[RERANK] -1.534  how-tos/tool-calling.md  (drop)
+[RERANK] -1.747  Model Context Protocol (MCP)  (drop)
+[RERANK] -1.811  Short-term memory  (drop)
+[RERANK] -2.415  how-tos/streaming.md  (drop)
+[RERANK] -2.418  how-tos/multi_agent.md  (drop)
+[RERANK] -2.794  Build a custom RAG agent with LangGraph  (drop)
+[RERANK] -2.834  how-tos/multi_agent.md  (drop)
+[RERANK] -2.929  how-tos/multi_agent.md  (drop)
+[RERANK] -2.946  Model Context Protocol (MCP)  (drop)
+[RERANK] -8.042  Long-term memory  (drop)
+[RERANK] -8.786  Model Context Protocol (MCP)  (drop)
+[RERANK] -10.925  Retrieval  (drop)
+[RERANK] -11.045  how-tos/multi_agent.md  (drop)
+[RERANK] -11.375  Model Context Protocol (MCP)  (drop)
+[RERANK] -11.457  how-tos/graph-api.md  (drop)
+
 [MCP-SERVER] ask_documents returning: status=ok support=no usefulness=4
 
 [MCP-SERVER] ask_documents called: LangChain AgentExecutor callbacks on_agent_action on_tool_start
 [DECIDE] retrieval needed: True
-[RETRIEVE] fused top-15: [same story — tools.md, multi_agent.md, MCP docs; still nothing about AgentExecutor specifically]
+[RETRIEVE] BM25 top-5: ['how-tos/streaming.md', 'Model Context Protocol (MCP)', 'how-tos/tool-calling.md', 'Long-term memory', 'Agents']
+[RETRIEVE] vector top-5: ['concepts/tools.md', 'Model Context Protocol (MCP)', 'Short-term memory', 'Agents', 'concepts/multi_agent.md']
+[RETRIEVE] fused top-15: ['concepts/tools.md', 'Model Context Protocol (MCP)', 'Short-term memory', 'Agents', 'concepts/multi_agent.md', 'how-tos/streaming.md', 'how-tos/multi_agent.md', 'how-tos/multi_agent.md', 'concepts/multi_agent.md', 'how-tos/multi_agent.md', 'Context engineering in agents', 'how-tos/multi_agent.md', 'Short-term memory', 'Short-term memory', 'Tool calling']
+
+[RERANK] 2.672  concepts/tools.md  (KEEP)
+[RERANK] 2.293  how-tos/multi_agent.md  (KEEP)
+[RERANK] 1.841  Context engineering in agents  (KEEP)
+[RERANK] 1.731  concepts/multi_agent.md  (KEEP)
+[RERANK] 1.706  how-tos/multi_agent.md  (KEEP)
+  ... 22 more, all below 1.7, dropped ...
+
 [MCP-SERVER] ask_documents returning: status=ok support=no usefulness=4
 ```
+*Note on `support=no usefulness=4` above: neither call reached `is_supported_node` or `is_useful_node` at all — `is_relevant_node` routed straight to the "no relevant docs" fallback node instead. That fallback node asks the LLM for the same `Candidate_answer` schema used everywhere else (which includes optional support/usefulness fields), so the model fills them in with its own ungrounded guess even though no actual groundedness or usefulness check ran. The `status`/`sources: []` fields are the reliable signal here, not those two.*
 
-**Agent side (note the fallback to web search after local retrieval failed twice):**
+**Agent side (note the fallback to web search after both local retrieval attempts came back empty):**
 ```
 you> [AGENT] calling tool: ask_documents({'query': 'LangGraph human-in-the-loop interrupt'})
 [AGENT] calling tool: ask_documents({'query': 'LangChain AgentExecutor callback system'})
@@ -274,13 +316,17 @@ sources:
 | Query | `ask_documents` calls | Revisions | Fell back to web? | Final support |
 |---|---|---|---|---|
 | 1 | 1 | 2 | No | fully |
-| 2 | 3 | 3 (on call 1 only) | Yes — for the half the corpus doesn't cover | fully (synthesized across both sources) |
+| 2 | 3 | 3 (on the LangGraph-half call only) | Yes — for the half the corpus doesn't cover | fully (synthesized across both sources) |
 | 3 | 0 | — | Yes — by design, never touched RAG | — |
 
 Across three turns: hybrid retrieval (BM25 + vector) diverging and fusing
-correctly, cross-encoder reranking visibly trimming 15 candidates to 5,
-the groundedness checker genuinely rejecting over-confident drafts and
-forcing revisions (up to 3 in a row), the agent recognizing when its own
-corpus doesn't cover a topic and switching to a second MCP server without
-being told to, and citations that are pulled from real tool output rather
-than trusted to the model's memory.
+correctly, cross-encoder reranking visibly trimming 15 candidates to 5, the
+groundedness checker genuinely rejecting over-confident drafts and forcing
+multiple rounds of revision before being satisfied, a relevance gate
+correctly recognizing when *no* retrieved candidate actually answers the
+question (not just weak grounding) and routing to a fallback instead of
+guessing, the agent picking up that fallback's offer and switching to web
+search on its own, and — on a query that explicitly asked for current
+information — routing straight to web search without even trying the RAG
+server first. Citations throughout are pulled from real tool output, never
+trusted to the model's memory.
